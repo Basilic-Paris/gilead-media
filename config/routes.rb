@@ -14,7 +14,9 @@ Rails.application.routes.draw do
   authenticate :user, ->(user) { user.admin } do
     namespace :admin do
       resources :users, only: %i[index create]
-      resources :documents, only: %i[new create edit update]
+      resources :documents, only: %i[show new create edit update] do
+        patch :validate
+      end
     end
   end
 end
