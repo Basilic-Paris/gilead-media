@@ -1,0 +1,8 @@
+<%= simple_form_for user, url: admin_users_path, method: :post, html: { class: "table-users-inputs" }, remote: true do |f| %>
+  <%= f.input :first_name, label: false, wrapper_html: { class: "table-users-new-line" } %>
+  <%= f.input :last_name, label: false %>
+  <%= f.input :email, label: false %>
+  <%= f.input :password, label: false %>
+  <!-- Replace <%#= f.submit %> to allow using font-awesome icon -->
+  <button type="submit"><i class="fa fa-check"></i></button>
+<% end %>

@@ -1,0 +1,16 @@
+.table {
+  display: grid;
+  &-users {
+    grid-template-columns: repeat(5, auto);
+    grid-gap: 1rem;
+    &-new-line {
+      grid-column: 1
+    }
+    &-inputs {
+      display: contents;
+      > .form-group {
+        margin-bottom: 0;
+      }
+    }
+  }
+}

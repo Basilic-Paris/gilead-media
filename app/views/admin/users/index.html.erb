@@ -1,0 +1,17 @@
+<div class="container">
+  <div class="table table-users">
+    <div class="table-users-new-line">Prénom</div>
+    <div>Nom</div>
+    <div>E-mail</div>
+    <div>Mot de passe</div>
+
+    <% @users.each do |user| %>
+      <div class="table-users-new-line"><%= user.first_name %></div>
+      <div><%= user.last_name %></div>
+      <div><%= user.email %></div>
+      <div><%= user.encrypted_password %></div>
+    <% end %>
+
+    <%= render 'form', user: @user %>
+  </div>
+</div>
