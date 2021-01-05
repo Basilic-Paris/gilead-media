@@ -1,0 +1,4 @@
+.container
+  .cards
+    - @documents.each do |document|
+      = render 'card', document: document

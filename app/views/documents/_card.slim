@@ -1,0 +1,13 @@
+.card
+  img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/greece.jpg"
+  .card-content.d-flex-column-between
+    .card-infos
+      p.cut-text = document.title
+      p.cut-text = document.language
+      - if document.validated?
+        p.cut-text = display_date_for(document.validation_at)
+      - else
+        p.cut-text Non validé
+    .card-actions
+      = link_to document_path(document) do
+        i.btn.fa.fa-search
