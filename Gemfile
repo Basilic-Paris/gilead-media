@@ -38,6 +38,7 @@ gem 'slim-rails'
 gem 'turbolinks_render'
 gem 'rails-i18n'
 gem 'devise-i18n'
+gem 'devise-security'
 
 group :development, :test do  gem 'pry-byebug'
   gem 'pry-rails'

@@ -1,0 +1,28 @@
+<div class="container py-5 d-flex flex-column">
+  <h4 class="text-center pb-5">Modifer votre mot de passe</h4>
+
+  <div class="border p-5">
+    <%#= form_for(resource, as: resource_name, url: [resource_name, :password_expired], html: { method: :put }) do |f| %>
+    <%= simple_form_for(resource, as: resource_name, url: [resource_name, :password_expired], html: { method: :put }) do |f| %>
+      <%= render partial: 'devise/shared/error_messages' %>
+
+      <div class="form-inputs">
+        <!-- <p><%#= f.label :current_password %><br />
+        <%#= f.password_field :current_password %></p>
+        <p><%#= f.label :password %><br />
+        <%#= f.password_field :password %></p>
+        <p><%#= f.label :password_confirmation %><br />
+        <%#= f.password_field :password_confirmation %></p> -->
+        <%= f.input :current_password %>
+        <%= f.input :password %>
+        <%= f.input :password_confirmation %>
+      </div>
+
+      <div class="d-flex">
+        <div class="form-actions">
+          <%= f.button :submit, "Valider" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
