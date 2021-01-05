@@ -1,4 +1,7 @@
 .container
   .cards
+    - if current_user.admin?
+      .card.d-flex.justify-content-center.align-items-center
+        = link_to "+", new_admin_document_path, style: "font-size: 6rem"
     - @documents.each do |document|
       = render 'card', document: document
