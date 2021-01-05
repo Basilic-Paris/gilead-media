@@ -4,3 +4,9 @@ fr:
       user:
         first_name: Prénom
         last_name: Nom
+      document:
+        title: Titre
+        language: Langue
+        usage: Droits d'utilisation
+        validation_at: Mise en ligne
+        format: Format
