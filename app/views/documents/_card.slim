@@ -1,6 +1,34 @@
 .card
   - case document.format
   - when "image"
+    = image_tag "Gilead_MotionDesign_OnBoarding_Screenshot.jpg", style: "width: auto; object-fit: contain;"
+  - when "video"
+    = video_tag "whats_politique_episode_un.mp4#t=500", controls: true, style: "width: auto; object-fit: contain;"
+  - when "pdf"
+    = image_tag "Picto_pdf.png", style: "object-fit: contain;", class: "p-5"
+  - when "xls"
+    = image_tag "Picto_excel.png", style: "object-fit: contain;", class: "p-5"
+  - when "ppt"
+    = image_tag "Picto_ppt.png", style: "object-fit: contain;", class: "p-5"
+  - when "word"
+    = image_tag "Picto_word.png", style: "object-fit: contain;", class: "p-5"
+  - else
+    = image_tag "Picto_generique.png", style: "object-fit: contain;", class: "p-5"
+  .card-content.d-flex-column-between
+    .card-infos
+      p.cut-text.font-weight-bold.mb-0 = document.title
+      p.cut-text.mb-0 style="color:gray" = document.language
+      - if document.validated?
+        p.cut-text.mb-0 style="color:gray" = display_date_for(document.validation_at)
+      - else
+        p.cut-text.mb-0 style="color:gray" Non validé
+    .card-actions
+      = link_to document_path(document) do
+        i.btn.fa.fa-search
+
+//div
+  - case document.format
+  - when "image"
     = image_tag document.attachment
   - when "video"
     = video_tag (url_for(document.attachment) + "#t=0.5")
@@ -14,14 +42,3 @@
     i.d-flex-default.far.fa-file-word style="color: blue"
   - else
     img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/greece.jpg"
-  .card-content.d-flex-column-between
-    .card-infos
-      p.cut-text = document.title
-      p.cut-text = document.language
-      - if document.validated?
-        p.cut-text = display_date_for(document.validation_at)
-      - else
-        p.cut-text Non validé
-    .card-actions
-      = link_to document_path(document) do
-        i.btn.fa.fa-search

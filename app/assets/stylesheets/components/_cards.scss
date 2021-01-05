@@ -16,12 +16,14 @@
   }
   .card {
     > img, video {
+      background-color: lightgray;
       padding: 1rem;
-      height: 16rem;
+      height: 12rem;
       width: 100%;
       object-fit: contain;
     }
     > i {
+      background-color: lightgray;
       padding: 4rem;
       font-size: 8rem;
     }
