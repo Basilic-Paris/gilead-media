@@ -1,5 +1,19 @@
 .card
-  img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/greece.jpg"
+  - case document.format
+  - when "image"
+    = image_tag document.attachment
+  - when "video"
+    = video_tag (url_for(document.attachment) + "#t=0.5")
+  - when "pdf"
+    i.d-flex-default.far.fa-file-pdf style="color: red"
+  - when "xls"
+    i.d-flex-default.far.fa-file-excel style="color: green"
+  - when "ppt"
+    i.d-flex-default.far.fa-file-powerpoint style="color: red"
+  - when "word"
+    i.d-flex-default.far.fa-file-word style="color: blue"
+  - else
+    img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/greece.jpg"
   .card-content.d-flex-column-between
     .card-infos
       p.cut-text = document.title
