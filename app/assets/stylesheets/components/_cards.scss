@@ -15,10 +15,15 @@
     grid-template-columns: repeat(4, 1fr);
   }
   .card {
-    > img {
-      height: 200px;
+    > img, video {
+      padding: 1rem;
+      height: 16rem;
       width: 100%;
-      object-fit: cover;
+      object-fit: contain;
+    }
+    > i {
+      padding: 4rem;
+      font-size: 8rem;
     }
     &-content{
       height: 100%;
