@@ -9,7 +9,7 @@ fr:
         current_password: Mot de passe actuel
         current_sign_in_at: Date de la connexion actuelle
         current_sign_in_ip: IP de la connexion actuelle
-        email: Courriel
+        email: E-mail
         encrypted_password: Mot de passe chiffré
         failed_attempts: Tentatives échouées
         last_sign_in_at: Date de la dernière connexion

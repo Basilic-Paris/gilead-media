@@ -7,7 +7,7 @@ class Admin::DocumentsController < ApplicationController
     if @document.save
       redirect_to documents_path
     else
-      render :show
+      render "documents/show"
     end
   end
 

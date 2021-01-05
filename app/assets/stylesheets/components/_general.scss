@@ -15,3 +15,31 @@
   justify-content: center;
   align-items: center;
 }
+
+.hover-red {
+  &:hover {
+    color: #C73442 !important;
+    opacity: 1;
+  }
+}
+
+.fa {
+  color: white !important;
+  background-color: #C73442 !important;
+  &:hover {
+    color: #C73442 !important;
+    background-color: white !important;
+    opacity: 1 !important;
+  }
+}
+
+.red-hover-white {
+  background-color: #C73442 !important;
+  color: white !important;
+  border: none;
+  &:hover {
+    color: #C73442 !important;
+    background-color: white !important;
+    opacity: 1 !important;
+  }
+}

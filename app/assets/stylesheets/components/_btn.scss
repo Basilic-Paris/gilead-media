@@ -1,4 +1,9 @@
 .btn {
   border: thin solid;
   margin: 0.5rem 0;
+  &:hover {
+    color: white;
+    background: #C73442;
+    opacity: 1;
+  }
 }
