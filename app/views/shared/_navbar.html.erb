@@ -1,9 +1,9 @@
 <% if user_signed_in? %>
 
-  <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
+  <div class="navbar navbar-expand-sm navbar-light navbar-lewagon navbar-lewagon-black">
     <%#= link_to root_path, class: "navbar-brand" do %>
     <%= link_to root_path, class: "navbar-brand" do %>
-      <%= image_tag "https://www.gilead.com/-/media/gilead-corporate/images/global/logo-gilead-create-possible.png", style: "height: 40px; width: auto" %>
+      <%= image_tag "logo_gilead_media.png", style: "height: 40px; width: auto" %>
       <% end %>
 
     <div>
@@ -15,29 +15,31 @@
     </div>
   </div>
 
-  <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
+  <div class="container">
+    <div class="navbar navbar-expand-sm navbar-light navbar-lewagon navbar-lewagon-white">
 
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-          <%= link_to "Home", root_path, class: "nav-link" %>
-        </li>
-        <li class="nav-item">
-          <%= link_to "Documents", documents_path, class: "nav-link" %>
-        </li>
-        <% if current_user.admin? %>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <%= link_to "Utilisateurs", admin_users_path, class: "nav-link" %>
+            <%= link_to "Home", root_path, class: "nav-link" %>
           </li>
-        <% end %>
-        <li class="nav-item">
-          <%= link_to "Mon compte", edit_user_registration_path, class: "nav-link" %>
-        </li>
-      </ul>
+          <li class="nav-item">
+            <%= link_to "Documents", documents_path, class: "nav-link" %>
+          </li>
+          <% if current_user.admin? %>
+            <li class="nav-item">
+              <%= link_to "Utilisateurs", admin_users_path, class: "nav-link" %>
+            </li>
+          <% end %>
+          <li class="nav-item">
+            <%= link_to "Mon compte", edit_user_registration_path, class: "nav-link" %>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 

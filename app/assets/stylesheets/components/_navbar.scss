@@ -1,6 +1,42 @@
 .navbar-lewagon {
   justify-content: space-between;
-  background: white;
+  // background: white;
+  &-black {
+    background: #262626;
+    .nav-link {
+      color: white !important;
+      &:hover {
+        color: #C73442 !important;
+        opacity: 1;
+      }
+    }
+    .navbar-brand:hover {
+      opacity: 1;
+    }
+  }
+
+  &-white {
+    padding: 1rem;
+    .nav-item {
+      @media(min-width: 576px) {
+        border-right: thin solid lightgray;
+        padding: 0 2rem;
+        &:last-child {
+          border-right: none;
+        }
+        &:hover {
+          background: #C73442;
+        }
+      }
+      .nav-link {
+        color: black;
+        &:hover {
+          color: white;
+          opacity: 1;
+        }
+      }
+    }
+  }
 }
 
 .navbar-lewagon .navbar-collapse {
