@@ -1,0 +1,13 @@
+.container
+  p.mb-0 Titre:
+  p = @document.title
+  p.mb-0 Langue:
+  p = @document.language
+  p.mb-0 Droits d'utilisation:
+  p = simple_format(@document.usage)
+
+  div
+    - if policy([:admin, @document]).validate?
+      = link_to 'Mettre en ligne', admin_document_validate_path(@document), method: :patch, class: "btn"
+    - if policy([:admin, @document]).edit?
+      = link_to 'Modifier', edit_admin_document_path(@document), class: "btn"

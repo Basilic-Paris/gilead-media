@@ -1,0 +1,33 @@
+.cards {
+  display: grid;
+  grid-gap: 1rem;
+  grid-template-columns: repeat(1, 1fr);
+  @media(min-width: 576px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  @media(min-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media(min-width: 992px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  @media(min-width: 1200px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .card {
+    > img {
+      height: 200px;
+      width: 100%;
+      object-fit: cover;
+    }
+    &-content{
+      height: 100%;
+      padding: 1rem;
+    }
+    &-infos {
+    }
+    &-actions {
+      text-align: end;
+    }
+  }
+}
