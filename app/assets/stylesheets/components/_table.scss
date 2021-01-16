@@ -3,6 +3,10 @@
   &-users {
     grid-template-columns: repeat(5, auto);
     grid-gap: 1rem;
+    &-title {
+      color: #C73442;
+      font-weight: bold;
+    }
     &-new-line {
       grid-column: 1
     }

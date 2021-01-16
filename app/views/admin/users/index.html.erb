@@ -1,9 +1,9 @@
-<div class="container py-5">
+<div class="container container-content">
   <div class="table table-users">
-    <div style="color: #C73442" class="table-users-new-line font-weight-bold">Prénom</div>
-    <div class="font-weight-bold" style="color: #C73442">Nom</div>
-    <div class="font-weight-bold" style="color: #C73442">E-mail</div>
-    <div class="font-weight-bold" style="color: #C73442">Mot de passe</div>
+    <div class="table-users-title table-users-new-line">Prénom</div>
+    <div class="table-users-title">Nom</div>
+    <div class="table-users-title">E-mail</div>
+    <div class="table-users-title">Mot de passe</div>
 
     <% @users.each do |user| %>
       <div class="table-users-new-line"><%= user.first_name %></div>
