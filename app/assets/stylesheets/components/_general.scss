@@ -43,3 +43,22 @@
     opacity: 1 !important;
   }
 }
+
+.container-content {
+  @media(min-width: 576px) {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+}
+
+.bg-grey {
+  background-color: lightgray;
+}
+
+.color-white {
+  color: white;
+}
+
+.color-gray {
+  color: gray;
+}

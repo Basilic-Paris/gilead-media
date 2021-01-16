@@ -1,12 +1,11 @@
-<div class="container py-5 d-flex flex-column">
-  <!-- <h4 class="text-center pb-5">Accès à la médiathèque</h4> -->
+<div class="container container-content d-flex flex-column">
   <div class="d-flex-default p-5">
     <%= image_tag "logo_gilead_media.png" %>
   </div>
 
-  <div style="display: grid; grid-template-columns: 1fr 1fr; grid-gap: 2rem; height: 50vh; width: 100%">
-      <div class="w-100 d-flex align-items-center border p-3 p-lg-5">
-        <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: 'w-100' }) do |f| %>
+  <div class="cards-devise">
+      <div class="card-devise w-100 d-flex-default">
+        <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "w-100" }) do |f| %>
           <div class="form-inputs">
             <%= f.input :email,
                         required: false,
@@ -29,8 +28,8 @@
         <% end %>
       </div>
 
-    <div class="border p-3 p-lg-5">
-      <%= image_tag "photo_gilead.jpg", style: "height: 100%; width: 100%; object-fit: cover;" %>
+    <div class="card-devise card-devise-illustration">
+      <%= image_tag "photo_gilead.jpg" %>
     </div>
   </div>
 </div>

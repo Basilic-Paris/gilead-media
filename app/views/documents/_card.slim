@@ -1,27 +1,27 @@
 .card
   - case document.format
   - when "image"
-    = image_tag "Gilead_MotionDesign_OnBoarding_Screenshot.jpg", style: "width: auto; object-fit: contain;"
+    = image_tag "Gilead_MotionDesign_OnBoarding_Screenshot.jpg", class: "p-3"
   - when "video"
-    = video_tag "whats_politique_episode_un.mp4#t=500", controls: true, style: "width: auto; object-fit: contain;"
+    = video_tag "whats_politique_episode_un.mp4#t=500", controls: true, class: "p-3"
   - when "pdf"
-    = image_tag "Picto_pdf.png", style: "object-fit: contain;", class: "p-5"
+    = image_tag "Picto_pdf.png"
   - when "xls"
-    = image_tag "Picto_excel.png", style: "object-fit: contain;", class: "p-5"
+    = image_tag "Picto_excel.png"
   - when "ppt"
-    = image_tag "Picto_ppt.png", style: "object-fit: contain;", class: "p-5"
+    = image_tag "Picto_ppt.png"
   - when "word"
-    = image_tag "Picto_word.png", style: "object-fit: contain;", class: "p-5"
+    = image_tag "Picto_word.png"
   - else
-    = image_tag "Picto_generique.png", style: "object-fit: contain;", class: "p-5"
+    = image_tag "Picto_generique.png"
   .card-content.d-flex-column-between
     .card-infos
       p.cut-text.font-weight-bold.mb-0 = document.title
-      p.cut-text.mb-0 style="color:gray" = document.language
+      p.cut-text.mb-0.color-gray = document.language
       - if document.validated?
-        p.cut-text.mb-0 style="color:gray" = display_date_for(document.validation_at)
+        p.cut-text.mb-0.color-gray = display_date_for(document.validation_at)
       - else
-        p.cut-text.mb-0 style="color:gray" Non validé
+        p.cut-text.mb-0.color-gray Non validé
     .card-actions
       = link_to document_path(document) do
         i.btn.fa.fa-search
