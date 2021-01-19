@@ -1,9 +1,9 @@
 .card
   - case document.format
   - when "image"
-    = image_tag "Gilead_MotionDesign_OnBoarding_Screenshot.jpg", class: "p-3"
+    = image_tag document.attachment, class: "p-3"
   - when "video"
-    = video_tag "whats_politique_episode_un.mp4#t=500", controls: true, class: "p-3"
+    = video_tag (url_for(document.attachment) + "#t=0.5"), class: "p-3"
   - when "pdf"
     = image_tag "Picto_pdf.png"
   - when "xls"
