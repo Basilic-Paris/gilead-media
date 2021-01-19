@@ -1,48 +1,6 @@
-.cards, .cards-one-element {
+.cards {
   display: grid;
   grid-template-columns: repeat(1, 1fr);
-
-  .card, .card-one-element-illustration {
-    > img, video {
-      padding: 3rem;
-      height: 12rem;
-      width: 100%;
-      object-fit: contain;
-    }
-
-    > i {
-      padding: 4rem;
-      font-size: 8rem;
-    }
-
-    &-content{
-      height: 100%;
-      padding: 1rem;
-    }
-
-    &-infos {
-    }
-
-    &-actions {
-      text-align: end;
-    }
-  }
-
-  .card {
-    > img, video {
-      background-color: lightgray !important;
-    }
-  }
-
-  .card-one-element-illustration {
-    padding: 1rem;
-    @media(min-width: 992px) {
-      padding: 3rem;
-    }
-  }
-}
-
-.cards {
   grid-gap: 1rem;
   @media(min-width: 576px) {
     grid-template-columns: repeat(1, 1fr);
@@ -56,16 +14,69 @@
   @media(min-width: 1200px) {
     grid-template-columns: repeat(4, 1fr);
   }
+
+  .card {
+    &-content{
+      height: 100%;
+      padding: 1rem;
+    }
+    &-infos {
+    }
+    &-actions {
+      text-align: end;
+    }
+    &-illustration {
+      padding: 2rem;
+    }
+    &-illustration-picto {
+      padding: 3rem;
+    }
+    &-illustration, &-illustration-picto {
+      height: 12rem;
+      background-color: lightgray !important;
+      > img, video {
+        height: 100%;
+        width: 100%;
+        object-fit: contain;
+      }
+    }
+  }
 }
 
+
 .cards-one-element {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
   grid-gap: 2rem;
   height: auto;
   width: 100%;
   @media(min-width: 768px) {
     grid-template-columns: repeat(2, 1fr);
   }
+  > .card-one-element-illustration {
+    padding: 1rem;
+    @media(min-width: 992px) {
+      padding: 3rem;
+    }
+    > img, video {
+      padding: 3rem;
+      height: 12rem;
+      width: 100%;
+      object-fit: contain;
+    }
+  }
+  > .card-one-element-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 1rem;
+    @media (min-width: 992px) {
+      padding: 3rem;
+    }
+  }
 }
+
 
 .cards-devise {
   display: grid;
@@ -74,14 +85,14 @@
   height: 50vh;
   width: 100%;
 
-  .card-devise {
+  > .card-devise {
     padding: 1rem;
     @media (min-width: 992px) {
       padding: 3rem;
     }
   }
 
-  .card-devise-illustration {
+  > .card-devise-illustration {
     > img {
       height: 100%;
       width: 100%;
@@ -92,15 +103,4 @@
 
 .card, .card-one-element-illustration, .card-one-element-content, .card-devise {
   border: 1px solid #dee2e6;
-}
-
-.card-one-element-content {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 1rem;
-  @media (min-width: 992px) {
-    padding: 3rem;
-  }
 }

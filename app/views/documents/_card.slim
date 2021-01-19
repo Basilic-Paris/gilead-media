@@ -1,19 +1,20 @@
 .card
   - case document.format
   - when "image"
-    = image_tag document.attachment, class: "p-3"
+    .card-illustration = image_tag document.attachment
   - when "video"
-    = video_tag (url_for(document.attachment) + "#t=0.5"), class: "p-3"
+    .card-illustration = video_tag (url_for(document.attachment) + "#t=0.5")
   - when "pdf"
-    = image_tag "Picto_pdf.png"
+    .card-illustration-picto = image_tag "Picto_pdf.png"
   - when "xls"
-    = image_tag "Picto_excel.png"
+    .card-illustration-picto = image_tag "Picto_excel.png"
   - when "ppt"
-    = image_tag "Picto_ppt.png"
+    .card-illustration-picto = image_tag "Picto_ppt.png"
   - when "word"
-    = image_tag "Picto_word.png"
+    .card-illustration-picto = image_tag "Picto_word.png"
   - else
-    = image_tag "Picto_generique.png"
+    .card-illustration-picto = image_tag "Picto_generique.png"
+
   .card-content.d-flex-column-between
     .card-infos
       p.cut-text.font-weight-bold.mb-0 = document.title
