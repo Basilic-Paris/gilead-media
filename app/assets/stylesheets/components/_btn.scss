@@ -1,9 +1,19 @@
 .btn {
   border: thin solid;
   margin: 0.5rem 0;
+  color: white !important;
+  background-color: #C73442 !important;
   &:hover {
-    color: white;
-    background: #C73442;
+    color: #C73442 !important;
+    background-color: white !important;
+    opacity: 1 !important;
+  }
+}
+
+.btn-white-hover-red {
+  color: white;
+  &:hover {
+    color: #C73442 !important;
     opacity: 1;
   }
 }
