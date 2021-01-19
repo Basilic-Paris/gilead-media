@@ -3,9 +3,9 @@
     .card-one-element-illustration.d-flex-default
       - case @document.format
       - when "image"
-        = image_tag "Gilead_MotionDesign_OnBoarding_Screenshot.jpg", class: "p-0"
+        = image_tag @document.attachment, class: "p-0"
       - when "video"
-        = video_tag "whats_politique_episode_un.mp4#t=5", controls: true, class: "p-0"
+        = video_tag (url_for(@document.attachment) + "#t=0.5"), controls: true, class: "p-0"
       - when "pdf"
         .h-100.d-flex-default
           = image_tag "Picto_pdf.png"
@@ -31,9 +31,12 @@
       - else
         p.mt-5 Droits d'utilisation: Aucun
 
-      div.mt-4
+      .mt-4
         - if policy([:admin, @document]).validate?
-          = link_to 'Mettre en ligne', admin_document_validate_path(@document), method: :patch, class: "btn"
+          = link_to 'Mettre en ligne', admin_document_validate_path(@document), method: :patch, class: "btn mr-2"
         - if policy([:admin, @document]).edit?
-          = link_to 'Modifier', edit_admin_document_path(@document), class: "btn ml-2"
+          = link_to 'Modifier', edit_admin_document_path(@document), class: "btn mr-2"
+        - if policy([:admin, @document]).edit?
+          = link_to rails_blob_path(@document.attachment, disposition: "attachment"), class: "btn" do
+            i.fas.fa-file-download
 
