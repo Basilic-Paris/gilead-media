@@ -39,6 +39,7 @@ gem 'turbolinks_render'
 gem 'rails-i18n'
 gem 'devise-i18n'
 gem 'devise-security'
+gem 'aws-sdk-s3', require: false
 
 group :development, :test do  gem 'pry-byebug'
   gem 'pry-rails'
