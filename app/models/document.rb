@@ -2,6 +2,8 @@ class Document < ApplicationRecord
   include DatetimeHelper
 
   has_one_attached :attachment
+  has_many :document_folders
+  has_many :folders, through: :document_folders
 
   LANGUAGES = %w[FR EN]
 
