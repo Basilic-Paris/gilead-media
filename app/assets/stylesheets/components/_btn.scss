@@ -1,3 +1,9 @@
+.btn-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 1.5rem;
+}
+
 .btn {
   border: thin solid;
   margin: 0.5rem 0;
