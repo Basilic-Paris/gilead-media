@@ -1,0 +1,11 @@
+.close {
+  opacity: 1
+}
+
+.close:hover {
+  color: #C73442;
+}
+
+.close:not(:disabled):not(.disabled):hover, .close:not(:disabled):not(.disabled):focus {
+  opacity: 1;
+}
