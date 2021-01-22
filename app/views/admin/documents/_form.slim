@@ -3,4 +3,4 @@
   = f.input :language, as: :radio_buttons, collection: Document::LANGUAGES
   = f.input :usage
   = f.input :attachment, as: :file
-  = f.submit
+  .text-center = f.submit "Modifier", class: "btn"
