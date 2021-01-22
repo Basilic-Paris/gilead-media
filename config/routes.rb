@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   root to: 'pages#home'
 
   resources :documents, only: %i[index show]
+  resources :folders, only: %i[index show]
 
   # -------- ADMIN ROUTES ---------
   authenticate :user, ->(user) { user.admin } do
