@@ -8,7 +8,4 @@ class PagesController < ApplicationController
       @documents = policy_scope(Document).validated
     end
   end
-
-  def folders
-  end
 end
