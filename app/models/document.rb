@@ -20,7 +20,7 @@ class Document < ApplicationRecord
 
   validates :title, presence: true
   validates :language, presence: true, inclusion: { in: LANGUAGES }
-  validates :attachment, presence: true
+  # validates :attachment, presence: true
 
   scope :validated, -> { where.not(validation_at: nil) }
 
