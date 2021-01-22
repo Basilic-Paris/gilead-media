@@ -40,7 +40,7 @@ class Admin::DocumentsController < ApplicationController
   private
 
   def document_params
-    params.require(:document).permit(:title, :language, :usage, :attachment)
+    params.require(:document).permit(:title, :language, :usage, :attachment, folder_ids:[], folders_attributes: [:title])
   end
 
   def find_document

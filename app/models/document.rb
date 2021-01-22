@@ -5,6 +5,17 @@ class Document < ApplicationRecord
   has_many :document_folders
   has_many :folders, through: :document_folders
 
+  # accepts_nested_attributes_for :folders, reject_if: -> (folder) { folder[:title].blank? }
+  ## do the same thing
+  # accepts_nested_attributes_for :folders, reject_if: lambda { |folder| folder[:title].blank? }
+  ## do the same thing
+  # accepts_nested_attributes_for :folders, reject_if: :title_is_nil
+  # def title_is_nil(folder) # à mettre dans private
+  #   folder[:title].blank?
+  # end
+  # => not working in case we enter an already existing folder
+  # => replaced by def folders_attributes=(folder_attributes)
+
   LANGUAGES = %w[FR EN]
 
   validates :title, presence: true
@@ -17,6 +28,15 @@ class Document < ApplicationRecord
 
   def validated?
     validation_at.present?
+  end
+
+  def folders_attributes=(folder_attributes)
+    folder_attributes.values.each do |folder_attribute|
+      if folder_attribute[:title].present?
+        folder = Folder.find_or_create_by(folder_attribute)
+        self.folders << folder
+      end
+    end
   end
 
   private

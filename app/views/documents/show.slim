@@ -31,12 +31,16 @@
       - else
         p.mt-5 Droits d'utilisation: Aucun
 
-      .mt-4
+      .btn-container
         - if policy([:admin, @document]).validate?
           = link_to 'Mettre en ligne', admin_document_validate_path(@document), method: :patch, class: "btn mr-2"
         - if policy([:admin, @document]).edit?
           = link_to 'Modifier', edit_admin_document_path(@document), class: "btn mr-2"
         - if policy([:admin, @document]).edit?
-          = link_to rails_blob_path(@document.attachment, disposition: "attachment"), class: "btn" do
+          = link_to rails_blob_path(@document.attachment, disposition: "attachment"), class: "btn mr-2" do
             i.fas.fa-file-download
+        a.btn data-toggle="modal" data-target="#addToFolderOrSharedList"
+          i.fas.fa-plus
+
+= render 'modal'
 
