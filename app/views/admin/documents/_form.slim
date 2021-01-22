@@ -3,4 +3,12 @@
   = f.input :language, as: :radio_buttons, collection: Document::LANGUAGES
   = f.input :usage
   = f.input :attachment, as: :file
-  .text-center = f.submit "Modifier", class: "btn"
+  .text-center = f.submit class: "btn"
+
+  //.text-center
+    - if params[:action] == "new"
+      = f.submit "Créer", class: "btn"
+    - elsif params[:action] == "edit"
+      = f.submit "Modifier", class: "btn"
+    - else params[:action] == "edit"
+      = f.submit class: "btn"
