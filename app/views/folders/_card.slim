@@ -1,0 +1,11 @@
+.card.rounded
+  .card-illustration-text
+    p.cut-text.mb-0 = folder.title
+  .card-content.d-flex-column-between
+    .card-infos
+      p.cut-text.mb-0.color-gray Date de création: #{display_date_for(folder.created_at)}
+    .card-actions
+      = link_to folder_path(folder) do
+        i.btn.fa.fa-search
+      = link_to rails_blob_path(folder.documents.first.attachment, disposition: "attachment"), class: "btn mr-2" do
+          i.fas.fa-file-download
