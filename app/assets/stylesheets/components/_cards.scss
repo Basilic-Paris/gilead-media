@@ -16,6 +16,7 @@
   }
 
   .card {
+    overflow: hidden;
     &-content{
       height: 100%;
       padding: 1rem;
@@ -33,6 +34,15 @@
     }
     &-illustration, &-illustration-picto {
       height: 12rem;
+    }
+    &-illustration-text {
+      padding: 1rem;
+      height: 9rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    &-illustration, &-illustration-picto, &-illustration-text {
       background-color: lightgray !important;
       > img, video {
         height: 100%;
@@ -42,7 +52,6 @@
     }
   }
 }
-
 
 .cards-one-element {
   display: grid;

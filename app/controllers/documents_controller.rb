@@ -6,11 +6,7 @@ class DocumentsController < ApplicationController
   end
 
   def index
-    if current_user.admin?
-      @documents = policy_scope(Document)
-    else
-      @documents = policy_scope(Document).validated
-    end
+    @documents = policy_scope(Document)
   end
 
 end

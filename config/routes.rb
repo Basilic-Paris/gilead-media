@@ -9,11 +9,9 @@ Rails.application.routes.draw do
   end
 
   root to: 'pages#home'
-  controller :pages do
-    get :folders
-  end
 
   resources :documents, only: %i[index show]
+  resources :folders, only: %i[index show]
 
   # -------- ADMIN ROUTES ---------
   authenticate :user, ->(user) { user.admin } do

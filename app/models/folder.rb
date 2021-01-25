@@ -4,5 +4,8 @@ class Folder < ApplicationRecord
 
   validates :title, presence: true, uniqueness: true
 
-  default_scope { order('lower(title)') }
+  scope :ordered_by_title, -> { order('lower(title)') }
+  scope :with_documents, -> { joins(document_folders: :document).distinct }
+  # scope :with_validated_documents, -> { joins(document_folders: :document).where.not({ documents: { validation_at: nil } }).distinct }
+  scope :with_validated_documents, -> { with_documents.where.not({ documents: { validation_at: nil } }) }
 end

@@ -1,0 +1,4 @@
+.container.container-content
+  .cards
+    - @folders.each do |folder|
+      = render 'card', folder: folder
