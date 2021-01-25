@@ -5,7 +5,7 @@ class DocumentPolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
-      scope.all
+      user.admin? == true ? scope.all : scope.all.validated
     end
   end
 end
