@@ -24,7 +24,9 @@
     &-infos {
     }
     &-actions {
-      text-align: end;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
     }
     &-illustration {
       padding: 2rem;
