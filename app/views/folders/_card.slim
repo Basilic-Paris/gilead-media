@@ -7,5 +7,5 @@
     .card-actions
       = link_to folder_path(folder), class: "btn" do
         i.fa.fa-search
-      = link_to folder_download_path(folder), class: "btn" do
+      = link_to download_folder_path(folder), method: :patch, class: "btn" do
         i.fas.fa-file-download

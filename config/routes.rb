@@ -11,7 +11,9 @@ Rails.application.routes.draw do
   root to: 'pages#home'
 
   resources :documents, only: %i[index show]
-  resources :folders, only: %i[index show]
+  resources :folders, only: %i[index show] do
+    patch :download, on: :member
+  end
 
   # -------- ADMIN ROUTES ---------
   authenticate :user, ->(user) { user.admin } do
