@@ -1,6 +1,7 @@
 class FoldersController < ApplicationController
-  # require 'zip' // seems working without it
-  # require 'tempfile' // seems working without it
+  require 'zip'
+  require 'tempfile'
+
   before_action :find_folder, only: %i[show download]
   before_action :find_documents, only: %i[show download]
 
