@@ -24,8 +24,8 @@
       - else
         p.cut-text.mb-0.color-gray Non validé
     .card-actions
-      = link_to document_path(document) do
-        i.btn.fa.fa-search
+      = link_to document_path(document), class: "btn" do
+        i.fa.fa-search
 
 //div
   - case document.format
