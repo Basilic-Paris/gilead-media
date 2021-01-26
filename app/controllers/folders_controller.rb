@@ -25,15 +25,15 @@ class FoldersController < ApplicationController
       #Add files to the zip
       Zip::File.open(zip_temp_file.path, Zip::File::CREATE) do |zip|
         @documents.each do |document|
-          temp_document_file = Tempfile.new(document.title, Rails.root.join('tmp'))
+          temp_document_file = Tempfile.new([document.title, document.attachment_extension], Rails.root.join('tmp'))
 
           temp_document_files << temp_document_file
-
           temp_document_file.binmode
           temp_document_file.write(document.attachment.download)
           temp_document_file.close
           # temp_document_file.path
-          zip.add(document.title, File.join(temp_document_file.path))
+
+          zip.add("#{document.title}.#{document.attachment_extension}", File.join(temp_document_file.path))
         end
       end
 
