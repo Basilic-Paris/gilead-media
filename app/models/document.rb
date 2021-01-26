@@ -39,6 +39,10 @@ class Document < ApplicationRecord
     end
   end
 
+  def attachment_extension
+    attachment.blob.filename.to_s.split(".").last
+  end
+
   private
 
   def content_type
