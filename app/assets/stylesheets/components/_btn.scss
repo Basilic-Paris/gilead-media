@@ -1,12 +1,12 @@
 .btn-container {
   display: flex;
   flex-wrap: wrap;
-  margin-top: 1.5rem;
+  margin-top: 2rem;
 }
 
 .btn {
   border: thin solid;
-  margin: 0.5rem 0;
+  // margin: 0.5rem 0;
   color: white !important;
   background-color: #C73442 !important;
   &:hover {

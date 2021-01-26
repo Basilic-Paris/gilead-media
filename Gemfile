@@ -40,6 +40,7 @@ gem 'rails-i18n'
 gem 'devise-i18n'
 gem 'devise-security'
 gem 'aws-sdk-s3', require: false
+gem 'rubyzip', '>= 1.0.0'
 
 group :development, :test do  gem 'pry-byebug'
   gem 'pry-rails'
