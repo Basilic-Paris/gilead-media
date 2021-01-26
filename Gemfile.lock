@@ -318,6 +318,7 @@ DEPENDENCIES
   rails-i18n
   redis (~> 4.0)
   rspec-rails
+  rubyzip (>= 1.0.0)
   sass-rails (>= 6)
   selenium-webdriver
   simple_form
