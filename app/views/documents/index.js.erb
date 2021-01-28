@@ -1,0 +1,5 @@
+// $("#documents-cards").html("<%= j render('list', documents:@documents) %>");
+document.getElementById("documents-cards").innerHTML = "<%= j render('list', documents: @documents) %>";
+// <%# if @documents.blank? %>
+//   document.getElementById("documents-cards").insertAdjacentHTML("beforebegin", "<p>Aucun document ne correspond à vos critères de recherches.</p>");
+// <%# end %>

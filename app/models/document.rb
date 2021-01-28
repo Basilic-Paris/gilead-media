@@ -1,5 +1,6 @@
 class Document < ApplicationRecord
   include DatetimeHelper
+  include PgSearch::Model
 
   has_one_attached :attachment
   has_many :document_folders
@@ -16,15 +17,40 @@ class Document < ApplicationRecord
   # => not working in case we enter an already existing folder
   # => replaced by def folders_attributes=(folder_attributes)
 
-  LANGUAGES = %w[FR EN]
+  LANGUAGES = {
+    "FR": "Français",
+    "EN": "Anglais"
+  }
+
+  FORMATS = {
+    "image": "Image",
+    "video": "Vidéo",
+    "pdf": "Pdf",
+    "ppt": "Power-Point",
+    "xls": "Excel",
+    "word": "Word",
+    "autres": "Autres"
+  }
 
   validates :title, presence: true
-  validates :language, presence: true, inclusion: { in: LANGUAGES }
+  validates :language, presence: true, inclusion: { in: LANGUAGES.keys }
   validates :attachment, presence: true
 
   scope :validated, -> { where.not(validation_at: nil) }
+  scope :created_in_day_range_around, ->(datetime) { where('created_at > ? AND created_at < ?', datetime.beginning_of_day, datetime.end_of_day) }
 
   before_save :set_format
+
+  pg_search_scope :advanced_search, lambda { |column_name, query|
+    {
+      against: column_name,
+      ignoring: :accents,
+      using: {
+        tsearch: { any_word: true }
+      },
+      query: query
+    }
+  }
 
   def validated?
     validation_at.present?

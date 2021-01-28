@@ -24,7 +24,7 @@
 
     .card-one-element-content
       p.font-weight-bold.mb-5 = @document.title
-      p.mb-0.color-gray Langue: #{@document.language}
+      p.mb-0.color-gray Langue: #{@document.display_language}
       p.mb-0.color-gray Date de création: #{display_date_for(@document.created_at)}
       - if @document.usage.present?
         p.mt-5.color-gray Droits d'utilisation: #{simple_format(@document.usage)}
