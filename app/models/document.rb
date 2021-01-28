@@ -33,7 +33,7 @@ class Document < ApplicationRecord
   }
 
   validates :title, presence: true
-  validates :language, presence: true, inclusion: { in: LANGUAGES.keys }
+  validates :language, presence: true, inclusion: { in: LANGUAGES.stringify_keys.keys }
   validates :attachment, presence: true
 
   scope :validated, -> { where.not(validation_at: nil) }
