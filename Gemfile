@@ -24,7 +24,6 @@ gem 'redis', '~> 4.0'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
-
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
 
@@ -42,6 +41,7 @@ gem 'devise-security'
 gem 'aws-sdk-s3', require: false
 gem 'rubyzip', '>= 1.0.0'
 gem 'pg_search', '~> 2.3.0'
+gem 'draper'
 
 group :development, :test do  gem 'pry-byebug'
   gem 'pry-rails'
