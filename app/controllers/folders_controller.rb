@@ -63,6 +63,6 @@ class FoldersController < ApplicationController
   end
 
   def find_documents
-    current_user.admin? ? @documents = @folder.documents : @documents = @folder.documents.validated
+    current_user.admin? ? @documents = DocumentDecorator.decorate_collection(@folder.documents) : @documents = DocumentDecorator.decorate_collection(@folder.documents.validated)
   end
 end
