@@ -6,7 +6,7 @@
     </div>
     <div class="justify-content-between d-flex hidden" data-target="search.moreOptions">
       <%= select_tag :fmt, options_for_select(Document::FORMATS.map { |k,v| [v,k] }, selected: params[:fmt]), prompt: "Type de document" %>
-      <%= date_select("date", "created_at", prompt: { day: 'Jour', month: 'Mois', year: 'Année' }) %>
+      <%= text_field_tag :created_at, params[:created_at], placeholder: "Date", data: { target: "search.datesSelection"} %>
       <%= select_tag :language, options_for_select(Document::LANGUAGES.map { |k,v| [v,k] }, selected: params[:language]), prompt: "Langue" %>
       <%= submit_tag "Rechercher", class: "btn" %>
     </div>
