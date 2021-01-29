@@ -8,10 +8,10 @@ class DocumentsController < ApplicationController
     @documents = policy_scope(Document)
     if search_params.present?
       search_params.each do |key, value|
-        if key != "created_at"
+        if key != :created_at
           @documents = @documents.advanced_search(key.to_sym, value)
         else
-          @documents = @documents.created_in_day_range_around(value)
+          @documents = @documents.created_in_range_around(value.first, value.last)
         end
       end
     else
@@ -31,11 +31,7 @@ class DocumentsController < ApplicationController
     search[:title] =  params[:title] if params[:title].present?
     search[:format] = params[:fmt] if params[:fmt].present?
     search[:language] = params[:language] if params[:language].present?
-    if params[:date].present?
-      if params[:date]["created_at(1i)"].present? && params[:date]["created_at(2i)"].present? && params[:date]["created_at(3i)"].present?
-        search[:created_at] = Date.new(params[:date]["created_at(1i)"].to_i, params[:date]["created_at(2i)"].to_i, params[:date]["created_at(3i)"].to_i)
-      end
-    end
+    search[:created_at] = params[:created_at].split(" au ").map { |date| date.to_date } if params[:created_at].present?
     return search
   end
 end
