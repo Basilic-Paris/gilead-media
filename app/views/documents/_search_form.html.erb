@@ -1,14 +1,16 @@
-<%= form_tag documents_path, method: :get, remote: true do %>
-  <div class="container-content" data-controller="search" >
-    <div class="d-flex mb-3">
-      <%= text_field_tag :title, params[:title], class: "form-control", placeholder: "Votre recherche: titre du document, mots clés..." %>
-    <i data-target="search.dropdownIcon" data-action="click->search#toggle" class="fas fa-lg fa-sort-down btn"></i>
+<div class="pb-5">
+  <%= simple_form_for :search, url: documents_path, method: "get", remote: true do |f| %>
+    <div data-controller="search" >
+      <div class="d-flex">
+        <%= f.input :title, label: false, placeholder: "Votre recherche: titre du document, mots clés..." %>
+        <i data-target="search.dropdownIcon" data-action="click->search#toggle" class="fas fa-lg fa-sort-down btn"></i>
+      </div>
+      <div class="d-flex justify-content-between invisible" data-target="search.moreOptions">
+        <%= f.input :fmt, as: :select, collection: Document::FORMATS.map { |k,v| [v,k] }, prompt: "Type de document", label: false %>
+        <%= f.input :created_at, label: false, placeholder: "Date", input_html: { data: { target: "search.datesSelection" } } %>
+        <%= f.input :language, as: :select, collection: Document::LANGUAGES.map { |k,v| [v,k] }, prompt: "Langue", label: false %>
+        <%= f.submit "Rechercher", class: "btn" %>
+      </div>
     </div>
-    <div class="justify-content-between d-flex hidden" data-target="search.moreOptions">
-      <%= select_tag :fmt, options_for_select(Document::FORMATS.map { |k,v| [v,k] }, selected: params[:fmt]), prompt: "Type de document" %>
-      <%= text_field_tag :created_at, params[:created_at], placeholder: "Date", data: { target: "search.datesSelection"} %>
-      <%= select_tag :language, options_for_select(Document::LANGUAGES.map { |k,v| [v,k] }, selected: params[:language]), prompt: "Langue" %>
-      <%= submit_tag "Rechercher", class: "btn" %>
-    </div>
-  </div>
-<% end %>
+  <% end %>
+</div>

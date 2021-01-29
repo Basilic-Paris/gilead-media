@@ -1,0 +1,10 @@
+.visible {
+  opacity: 1;
+  transition: visibility 0s, opacity 0.8s linear;
+  padding-top: 1rem;
+}
+
+.invisible {
+  opacity: 0;
+  height: 0;
+}
