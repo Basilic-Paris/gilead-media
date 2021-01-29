@@ -4,7 +4,7 @@
       <%= text_field_tag :title, params[:title], class: "form-control", placeholder: "Votre recherche: titre du document, mots clés..." %>
     <i data-target="search.dropdownIcon" data-action="click->search#toggle" class="fas fa-lg fa-sort-down btn"></i>
     </div>
-    <div class="justify-content-between d-none" data-target="search.moreOptions">
+    <div class="justify-content-between d-flex hidden" data-target="search.moreOptions">
       <%= select_tag :fmt, options_for_select(Document::FORMATS.map { |k,v| [v,k] }, selected: params[:fmt]), prompt: "Type de document" %>
       <%= date_select("date", "created_at", prompt: { day: 'Jour', month: 'Mois', year: 'Année' }) %>
       <%= select_tag :language, options_for_select(Document::LANGUAGES.map { |k,v| [v,k] }, selected: params[:language]), prompt: "Langue" %>
