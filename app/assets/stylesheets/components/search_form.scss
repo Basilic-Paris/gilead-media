@@ -8,12 +8,11 @@
   [data-target="search.moreOptions"] {
     @media(max-width: 767px) {
       flex-direction: column;
-    }
-    &.visible {
-      .form-group {
-        margin-bottom: 1rem;
+      &.visible {
+        .form-group {
+          margin-bottom: 1rem;
+        }
       }
     }
-
   }
 }
