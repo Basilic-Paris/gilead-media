@@ -11,7 +11,7 @@ class DocumentsController < ApplicationController
         if key != :created_at
           @documents = @documents.advanced_search(key.to_sym, value)
         else
-          @documents = @documents.created_in_range_around(value.first, value.last)
+          @documents = @documents.created_in_days_range(value.first, value.last)
         end
       end
     else
