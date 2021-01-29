@@ -1,5 +1,5 @@
 import { Controller } from "stimulus"
-import flatpickr from 'plugins/flatpickr';
+import flatpickr from 'plugins/flatpickr/flatpickr';
 
 export default class extends Controller {
   static targets = [ "dropdownIcon", "moreOptions", "datesSelection" ]
