@@ -32,15 +32,3 @@
 .color-gray {
   color: gray;
 }
-
-.visible {
-  visibility: visible;
-  opacity: 1;
-  transition: visibility 0s, opacity 1s linear;
-}
-
-.hidden {
-  visibility: hidden;
-  opacity: 0;
-  height: 0;
-}
