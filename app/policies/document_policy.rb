@@ -3,6 +3,10 @@ class DocumentPolicy < ApplicationPolicy
     true
   end
 
+  def add_to_shared_list?
+    true
+  end
+
   class Scope < Scope
     def resolve
       user.admin? == true ? scope.all : scope.all.validated
