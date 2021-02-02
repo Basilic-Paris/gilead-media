@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     patch :download, on: :member
     patch :add_to_shared_list, on: :member
   end
+  resources :shared_lists, only: %i[index show]
 
   # -------- ADMIN ROUTES ---------
   authenticate :user, ->(user) { user.admin } do
