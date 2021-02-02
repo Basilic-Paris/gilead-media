@@ -2,3 +2,4 @@
   .cards
     - @folders.each do |folder|
       = render 'card', folder: folder
+      = render 'add_to_shared_list_modal', folder: folder
