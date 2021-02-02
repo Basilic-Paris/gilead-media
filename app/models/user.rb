@@ -5,6 +5,10 @@ class User < ApplicationRecord
   #        :recoverable, :rememberable, :validatable
   devise :database_authenticatable, :recoverable, :rememberable, :validatable, :password_expirable, :password_archivable
 
+  has_many :shared_lists
+  has_many :shared_documents, through: :shared_lists
+  has_many :shared_folders, through: :shared_lists
+
   validates :first_name, presence: true
   validates :last_name, presence: true
 end

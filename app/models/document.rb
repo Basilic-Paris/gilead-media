@@ -5,6 +5,8 @@ class Document < ApplicationRecord
   has_one_attached :attachment
   has_many :document_folders
   has_many :folders, through: :document_folders
+  has_many :shared_documents
+  has_many :shared_lists, through: :shared_documents
 
   # accepts_nested_attributes_for :folders, reject_if: -> (folder) { folder[:title].blank? }
   ## do the same thing
@@ -55,6 +57,15 @@ class Document < ApplicationRecord
 
   def validated?
     validation_at.present?
+  end
+
+  def shared_lists_attributes=(shared_list_attributes)
+    shared_list_attributes.values.each do |shared_list_attribute|
+      if shared_list_attribute[:title].present? && shared_list_attribute[:user_id].present?
+        shared_list = SharedList.find_or_create_by(shared_list_attribute)
+        self.shared_lists << shared_list unless self.shared_lists.include?(shared_list)
+      end
+    end
   end
 
   def folders_attributes=(folder_attributes)
