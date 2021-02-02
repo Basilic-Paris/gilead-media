@@ -10,9 +10,12 @@ Rails.application.routes.draw do
 
   root to: 'pages#home'
 
-  resources :documents, only: %i[index show]
+  resources :documents, only: %i[index show] do
+    patch :add_to_shared_list, on: :member
+  end
   resources :folders, only: %i[index show] do
     patch :download, on: :member
+    patch :add_to_shared_list, on: :member
   end
 
   # -------- ADMIN ROUTES ---------

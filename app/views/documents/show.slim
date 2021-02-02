@@ -1,4 +1,5 @@
 .container.container-content
+
   .cards-one-element
     .card-one-element-illustration.d-flex-default
       - case @document.format
@@ -38,9 +39,8 @@
           = link_to 'Modifier', edit_admin_document_path(@document), class: "btn"
         = link_to rails_blob_path(@document.attachment, disposition: "attachment"), class: "btn" do
           i.fas.fa-file-download
-        - if policy([:admin, @document]).edit?
-          a.btn data-toggle="modal" data-target="#addToFolderOrSharedList"
-            i.fas.fa-plus
+        a.btn data-toggle="modal" data-target="#addDocumentToFolderOrSharedList"
+          i.fas.fa-plus
 
-= render 'modal'
+= render 'add_to_shared_list_or_folder_modal', document: @document
 
