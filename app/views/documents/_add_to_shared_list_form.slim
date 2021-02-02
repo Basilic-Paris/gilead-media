@@ -1,0 +1,6 @@
+= simple_form_for document, url: add_to_shared_list_document_path(document), remote: true do |f|
+  .mb-3
+    = f.association :shared_lists, as: :check_boxes, collection: current_user.shared_lists.ordered_by_title, label: "Liste(s) de partage"
+    = f.simple_fields_for :shared_lists, document.shared_lists.build do |shared_list|
+      = shared_list.input :title, required: false, label: "Et/ou nouvelle liste de partage:"
+    .text-right = f.submit "Valider", class: "btn"
