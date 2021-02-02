@@ -11,6 +11,10 @@ class Admin::DocumentPolicy < ApplicationPolicy
     user.admin?
   end
 
+  def add_to_folder?
+    user.admin?
+  end
+
   # class Scope < Scope
   #   def resolve
   #     scope.all

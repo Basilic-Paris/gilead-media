@@ -1,5 +1,5 @@
 class Admin::DocumentsController < ApplicationController
-  before_action :find_document, only: %i[edit update]
+  before_action :find_document, only: %i[edit update add_to_folder]
   before_action :find_document_with_document_id, only: %i[validate]
 
   def validate
@@ -37,10 +37,22 @@ class Admin::DocumentsController < ApplicationController
     end
   end
 
+  def add_to_folder
+    if @document.update(folder_params)
+      redirect_to document_path(@document)
+    else
+      render :show
+    end
+  end
+
   private
 
   def document_params
-    params.require(:document).permit(:title, :language, :usage, :attachment, folder_ids:[], folders_attributes: [:title])
+    params.require(:document).permit(:title, :language, :usage, :attachment)
+  end
+
+  def folder_params
+    params.require(:document).permit(folder_ids:[], folders_attributes: [:title])
   end
 
   def find_document

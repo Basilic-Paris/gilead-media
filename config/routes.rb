@@ -23,6 +23,7 @@ Rails.application.routes.draw do
     namespace :admin do
       resources :users, only: %i[index create]
       resources :documents, only: %i[new create edit update] do
+        patch :add_to_folder, on: :member
         patch :validate
       end
     end
