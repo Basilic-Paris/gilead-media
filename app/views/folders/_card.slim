@@ -1,6 +1,6 @@
 .card.rounded
-  .card-illustration-text
-    p.cut-text.mb-0 = folder.title
+  .card-illustration
+    .card-illustration-text = folder.title
   .card-content.d-flex-column-between
     .card-infos
       p.cut-text.mb-0.color-gray Date de création: #{display_date_for(folder.created_at)}
@@ -9,5 +9,5 @@
         i.fa.fa-search
       = link_to download_folder_path(folder), method: :patch, class: "btn" do
         i.fas.fa-file-download
-      = link_to folder_path(folder), data: { toggle: "modal", target: "#addFolderToSharedList" }, class: "btn" do
+      = link_to folder_path(folder), data: { toggle: "modal", target: "#addFolder#{folder.id}ToSharedList" }, class: "btn" do
         i.fas.fa-plus

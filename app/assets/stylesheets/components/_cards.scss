@@ -27,6 +27,7 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: flex-end;
+      margin-top: 2rem;
     }
     &-illustration {
       padding: 2rem;
@@ -38,8 +39,7 @@
       height: 12rem;
     }
     &-illustration-text {
-      padding: 1rem;
-      height: 9rem;
+      height: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
