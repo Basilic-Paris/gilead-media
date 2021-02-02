@@ -1,0 +1,4 @@
+.container.container-content
+  .cards
+    - @shared_lists.each do |shared_list|
+      = render 'card', shared_list: shared_list
