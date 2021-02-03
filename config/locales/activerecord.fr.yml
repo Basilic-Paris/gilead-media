@@ -11,3 +11,7 @@ fr:
         validation_at: Mise en ligne
         format: Format
         attachment: Pièce jointe
+      contact:
+        email: E-mail
+      shared_list:
+        title: Titre

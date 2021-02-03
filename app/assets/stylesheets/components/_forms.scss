@@ -16,3 +16,22 @@
     }
   }
 }
+
+.simple_form.label-input-in-line {
+  label {
+    margin-bottom: 0;
+    display: flex;
+    align-items: center;
+  }
+  .form-group {
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    .disabled {
+      background: none;
+      border: none;
+    }
+  }
+  .form-group.disabled {
+    padding-right: 0;
+  }
+}

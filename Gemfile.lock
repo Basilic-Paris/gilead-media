@@ -120,6 +120,8 @@ GEM
       activemodel-serializers-xml (>= 1.0)
       activesupport (>= 5.0)
       request_store (>= 1.0)
+    email_validator (2.2.2)
+      activemodel
     erubi (1.10.0)
     execjs (2.7.0)
     factory_bot (6.1.0)
@@ -321,6 +323,7 @@ DEPENDENCIES
   devise-security
   dotenv-rails
   draper
+  email_validator
   factory_bot_rails
   font-awesome-sass
   jbuilder (~> 2.7)

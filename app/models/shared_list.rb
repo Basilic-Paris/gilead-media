@@ -4,6 +4,7 @@ class SharedList < ApplicationRecord
   has_many :documents, through: :shared_documents
   has_many :shared_folders
   has_many :folders, through: :shared_folders
+  has_many :contacts
 
   validates :title, presence: true, uniqueness: { scope: :user }
 
