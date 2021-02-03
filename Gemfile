@@ -42,6 +42,7 @@ gem 'aws-sdk-s3', require: false
 gem 'rubyzip', '>= 1.0.0'
 gem 'pg_search', '~> 2.3.0'
 gem 'draper'
+gem 'email_validator', require: 'email_validator/strict'
 
 group :development, :test do  gem 'pry-byebug'
   gem 'pry-rails'
