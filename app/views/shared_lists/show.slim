@@ -3,7 +3,7 @@
     .mb-3
       = f.input :title, label: "Nom de la liste", required: false, disabled: true
       = f.association :contacts do |c|
-        = c.input :email, label: "Destinataires", required: false, input_html: { value: @shared_list.contacts.pluck(:email).join(", ") }
+        = c.input :email, label: "Destinataires", required: false
 
     .cards
       - DocumentDecorator.decorate_collection(@shared_list.documents).each do |document|
