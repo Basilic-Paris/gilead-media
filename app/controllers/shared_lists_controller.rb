@@ -1,5 +1,5 @@
 class SharedListsController < ApplicationController
-  before_action :find_shared_list, only: %i[show add_contacts]
+  before_action :find_shared_list, only: %i[show add_contacts send_to_contacts]
 
   def index
     @shared_lists = policy_scope(SharedList)
@@ -21,11 +21,16 @@ class SharedListsController < ApplicationController
       end
     end
     if @errors.empty?
-      redirect_to shared_lists_path
+      flash[:emails_added_to_shared_list] = true
+      render :show
     else
       flash.now.alert = @errors.join("<br>").html_safe
       render :show
     end
+  end
+
+  def send_to_contacts
+    redirect_to shared_list_path(@shared_list), flash: { shared_list_sent_to_contacts: true }
   end
 
   private

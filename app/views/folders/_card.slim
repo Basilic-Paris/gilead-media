@@ -9,5 +9,6 @@
         i.fa.fa-search
       = link_to download_folder_path(folder), method: :patch, class: "btn" do
         i.fas.fa-file-download
-      = link_to folder_path(folder), data: { toggle: "modal", target: "#addFolder#{folder.id}ToSharedList" }, class: "btn" do
-        i.fas.fa-plus
+      - if params[:controller] == "folders" && params[:action] == "index"
+        = link_to folder_path(folder), data: { toggle: "modal", target: "#addFolder#{folder.id}ToSharedList" }, class: "btn" do
+          i.fas.fa-plus
