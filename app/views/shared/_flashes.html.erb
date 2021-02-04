@@ -15,9 +15,6 @@
   </div>
 <% end %>
 
-<% if flash[:emails_added_to_shared_list] %>
-  <%= render 'shared_lists/emails_added_modal' %>
-<% end %>
 <% if flash[:shared_list_sent_to_contacts] %>
   <%= render 'shared_lists/sent_to_contacts_modal' %>
 <% end %>

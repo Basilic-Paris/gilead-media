@@ -11,4 +11,4 @@
       - @shared_list.folders.each do |folder|
         = render 'folders/card', folder: folder
 
-    .text-right.mt-3 = f.submit "Envoyer", class: "btn"
+    .text-right.mt-3 = f.submit "Envoyer", class: "btn", data: {confirm: "Vous êtes sur le point d'envoyer votre liste de partage.\nSouhaitez-vous confirmer?", verify: 'Valider', verify_text: 'Tapez "Valider" pour confirmer'}
