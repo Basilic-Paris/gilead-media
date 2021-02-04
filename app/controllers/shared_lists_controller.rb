@@ -21,7 +21,7 @@ class SharedListsController < ApplicationController
       end
     end
     if @errors.empty?
-      flash[:emails_added_to_shared_list] = true
+      flash[:emails_added_to_shared_list] = true unless @shared_list.contacts.empty?
       render :show
     else
       flash.now.alert = @errors.join("<br>").html_safe
