@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   end
   resources :shared_lists, only: %i[index show] do
     patch :add_contacts, on: :member
+    patch :send_to_contacts, on: :member
   end
 
   # -------- ADMIN ROUTES ---------
