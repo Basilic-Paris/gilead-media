@@ -1,9 +1,9 @@
 .container.container-content
   = simple_form_for @shared_list, url: add_contacts_shared_list_path(@shared_list), remote: true, html: { class: "label-input-in-line" } do |f|
-    .mb-3
+    .pb-5
       = f.input :title, label: "Nom de la liste", required: false, disabled: true
       = f.association :contacts do |c|
-        = c.input :email, label: "Destinataires", required: false
+        = c.input :email, label: "Destinataires", required: false, disabled: !@shared_list.initial?, input_html: { value: @shared_list.contacts.pluck(:email).join(", ") }
 
     .cards
       - DocumentDecorator.decorate_collection(@shared_list.documents).each do |document|
@@ -11,4 +11,5 @@
       - @shared_list.folders.each do |folder|
         = render 'folders/card', folder: folder
 
-    .text-right.mt-3 = f.submit "Envoyer", class: "btn", data: {confirm: "Vous êtes sur le point d'envoyer votre liste de partage.\nSouhaitez-vous confirmer?", verify: 'Valider', verify_text: 'Tapez "Valider" pour confirmer'}
+    - if @shared_list.initial?
+      .text-right.mt-3 = f.submit "Envoyer", class: "btn", data: {confirm: "Vous êtes sur le point d'envoyer votre liste de partage.\nSouhaitez-vous confirmer?", verify: 'Valider', verify_text: 'Tapez "Valider" pour confirmer'}
