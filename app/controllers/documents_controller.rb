@@ -1,5 +1,5 @@
 class DocumentsController < ApplicationController
-  before_action :find_document, only: %i[show add_to_shared_list]
+  before_action :find_document, only: %i[show]
 
   def show
   end
@@ -20,13 +20,14 @@ class DocumentsController < ApplicationController
     end
   end
 
-  def add_to_shared_list
-    if @document.update(shared_list_params)
-      redirect_to document_path(@document)
-    else
-      render :show
-    end
-  end
+  # TO KEEP: initial version to add folders or documents to shared list directly
+  # def add_to_shared_list
+  #   if @document.update(shared_list_params)
+  #     redirect_to document_path(@document)
+  #   else
+  #     render :show
+  #   end
+  # end
 
   private
 
@@ -39,10 +40,11 @@ class DocumentsController < ApplicationController
     params.fetch(:search, {}).permit(:title, :fmt, :language, :created_at)
   end
 
-  def shared_list_params
-    params[:document][:shared_lists_attributes].keys.each do |key|
-      params[:document][:shared_lists_attributes][key]["user_id"] = current_user.id.to_s
-    end
-    params.require(:document).permit(shared_list_ids: [], shared_lists_attributes: [:title, :user_id])
-  end
+  # TO KEEP: initial version to add folders or documents to shared list directly
+  # def shared_list_params
+  #   params[:document][:shared_lists_attributes].keys.each do |key|
+  #     params[:document][:shared_lists_attributes][key]["user_id"] = current_user.id.to_s
+  #   end
+  #   params.require(:document).permit(shared_list_ids: [], shared_lists_attributes: [:title, :user_id])
+  # end
 end

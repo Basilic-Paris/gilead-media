@@ -59,14 +59,15 @@ class Document < ApplicationRecord
     validation_at.present?
   end
 
-  def shared_lists_attributes=(shared_list_attributes)
-    shared_list_attributes.values.each do |shared_list_attribute|
-      if shared_list_attribute[:title].present? && shared_list_attribute[:user_id].present?
-        shared_list = SharedList.find_or_create_by(shared_list_attribute)
-        self.shared_lists << shared_list unless self.shared_lists.include?(shared_list)
-      end
-    end
-  end
+  # TO KEEP: initial version to add folders or documents to shared list directly
+  # def shared_lists_attributes=(shared_list_attributes)
+  #   shared_list_attributes.values.each do |shared_list_attribute|
+  #     if shared_list_attribute[:title].present? && shared_list_attribute[:user_id].present?
+  #       shared_list = SharedList.find_or_create_by(shared_list_attribute)
+  #       self.shared_lists << shared_list unless self.shared_lists.include?(shared_list)
+  #     end
+  #   end
+  # end
 
   def folders_attributes=(folder_attributes)
     folder_attributes.values.each do |folder_attribute|
