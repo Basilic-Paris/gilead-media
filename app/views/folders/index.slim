@@ -1,6 +1,5 @@
 .container.container-content
   .cards
     - @folders.each do |folder|
-      = render 'card', folder: folder
-      // TO KEEP: initial version to add folders or documents to shared list directly
-      // = render 'add_to_shared_list_modal', folder: folder
+      = render 'folders/card', folder: folder
+      = render 'folders/add_to_shared_list_modal', folder: folder, shared_list: @shared_list

@@ -1,0 +1,3 @@
+= simple_form_for [folder, shared_list], url: create_and_attach_folder_folder_shared_lists_path(folder), html: { id: "create_and_attach_folder_#{folder.id}" }, remote: true do |f|
+  = f.input :title
+  = f.submit "Valider", class: "btn"
