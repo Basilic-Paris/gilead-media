@@ -22,7 +22,7 @@ class SharedListsController < ApplicationController
     end
     if @errors.empty?
       if @shared_list.contacts.present?
-        flash[:shared_list_sent_to_contacts] = true
+        flash.now[:shared_list_sent_to_contacts] = true
         render :show
       else
         flash.now.alert = "Votre liste de partage ne contient pas de destinataire."
