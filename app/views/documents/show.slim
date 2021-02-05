@@ -1,5 +1,4 @@
 .container.container-content
-
   .cards-one-element
     .card-one-element-illustration.d-flex-default
       - case @document.format
@@ -42,5 +41,4 @@
         a.btn data-toggle="modal" data-target="#addDocumentToFolderOrSharedList"
           i.fas.fa-plus
 
-= render 'add_to_shared_list_or_folder_modal', document: @document
-
+= render 'documents/add_to_shared_list_or_folder_modal', document: @document, shared_list: @shared_list

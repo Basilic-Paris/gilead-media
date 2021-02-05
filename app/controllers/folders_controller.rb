@@ -2,23 +2,25 @@ class FoldersController < ApplicationController
   require 'zip'
   require 'tempfile'
 
-  before_action :find_folder, only: %i[show download add_to_shared_list]
+  before_action :find_folder, only: %i[show download]
   before_action :find_documents, only: %i[show download]
 
   def index
     @folders = policy_scope(Folder)
+    @shared_list = SharedList.new
   end
 
   def show
   end
 
-  def add_to_shared_list
-    if @folder.update(shared_list_params)
-      redirect_to folders_path
-    else
-      render :show
-    end
-  end
+  # TO KEEP: initial version to add folders or documents to shared list directly
+  # def add_to_shared_list
+  #   if @folder.update(shared_list_params)
+  #     redirect_to folders_path
+  #   else
+  #     render :show
+  #   end
+  # end
 
   def download
     # create folder that will contain documents
@@ -74,10 +76,11 @@ class FoldersController < ApplicationController
     current_user.admin? ? @documents = DocumentDecorator.decorate_collection(@folder.documents) : @documents = DocumentDecorator.decorate_collection(@folder.documents.validated)
   end
 
-  def shared_list_params
-    params[:folder][:shared_lists_attributes].keys.each do |key|
-      params[:folder][:shared_lists_attributes][key]["user_id"] = current_user.id.to_s
-    end
-    params.require(:folder).permit(shared_list_ids: [], shared_lists_attributes: [:title, :user_id])
-  end
+  # TO KEEP: initial version to add folders or documents to shared list directly
+  # def shared_list_params
+  #   params[:folder][:shared_lists_attributes].keys.each do |key|
+  #     params[:folder][:shared_lists_attributes][key]["user_id"] = current_user.id.to_s
+  #   end
+  #   params.require(:folder).permit(shared_list_ids: [], shared_lists_attributes: [:title, :user_id])
+  # end
 end
