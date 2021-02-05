@@ -2,6 +2,7 @@ class DocumentsController < ApplicationController
   before_action :find_document, only: %i[show]
 
   def show
+    @shared_list = SharedList.new
   end
 
   def index
