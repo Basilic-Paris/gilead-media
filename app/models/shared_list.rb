@@ -1,4 +1,6 @@
 class SharedList < ApplicationRecord
+  include SharedListStateMachine
+
   belongs_to :user
   has_many :shared_documents
   has_many :documents, through: :shared_documents

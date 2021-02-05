@@ -1,4 +1,8 @@
 puts 'Destroying'
+Contact.destroy_all
+SharedDocument.destroy_all
+SharedFolder.destroy_all
+SharedList.destroy_all
 # User.destroy_all
 DocumentFolder.destroy_all
 Folder.destroy_all
