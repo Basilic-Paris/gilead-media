@@ -15,20 +15,21 @@
   </div>
 <% end %>
 
-<% if flash[:shared_list_sent_to_contacts] %>
+
+<% if flash[:validation_message] %>
   <div data-controller = "show-modal">
-    <%= render 'shared_lists/sent_to_contacts_modal' %>
+    <%= render 'shared/validation_modal', message: flash[:message] %>
   </div>
 <% end %>
 
-<% if flash[:errors_on_create_shared_list_and_attach_document] %>
+<% if flash[:errors_attach_document] %>
   <div data-controller = "show-modal">
-    <%= render 'documents/add_to_shared_list_or_folder_modal', document: @document, shared_list: @shared_list %>
+    <%= render 'documents/add_to_shared_list_or_folder_modal', document: @document, shared_list: @shared_list, shared_document: @shared_document %>
   </div>
 <% end %>
 
-<% if flash[:errors_on_create_shared_list_and_attach_folder] %>
+<% if flash[:errors_attach_folder] %>
   <div data-controller = "show-modal">
-    <%= render 'folders/add_to_shared_list_modal', folder: @folder, shared_list: @shared_list %>
+    <%= render 'folders/add_to_shared_list_modal', folder: @folder, shared_list: @shared_list, shared_folder: @shared_folder %>
   </div>
 <% end %>

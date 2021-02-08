@@ -16,7 +16,7 @@ class SharedListsController < ApplicationController
     if @shared_list.save
       redirect_to document_path(@document)
     else
-      flash.now[:errors_on_create_shared_list_and_attach_document] = true
+      flash.now[:errors_attach_document] = true
       render 'documents/show'
     end
   end
@@ -27,7 +27,7 @@ class SharedListsController < ApplicationController
     if @shared_list.save
       redirect_to folder_path(@folder)
     else
-      flash.now[:errors_on_create_shared_list_and_attach_folder] = true
+      flash.now[:errors_attach_folder] = true
       render 'folders/index'
     end
   end
@@ -47,8 +47,7 @@ class SharedListsController < ApplicationController
     if @errors.empty?
       if @shared_list.contacts.present?
         @shared_list.add_contacts!
-        flash.now[:shared_list_sent_to_contacts] = true
-        redirect_to shared_list_path(@shared_list)
+        redirect_to shared_list_path(@shared_list), flash: { validation_message: true, message: "Votre liste de partage a bien été envoyée." }
       else
         flash.now.alert = "Votre liste de partage ne contient pas de destinataire."
         render :show
