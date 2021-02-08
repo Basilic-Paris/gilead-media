@@ -15,3 +15,9 @@ fr:
         email: E-mail
       shared_list:
         title: Titre
+      shared_document:
+        shared_list: Liste de partage
+        document: Document
+      shared_folder:
+        shared_list: Liste de partage
+        folder: Dossier
