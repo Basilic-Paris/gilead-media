@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     resources :shared_lists do
       post :create_and_attach_document, on: :collection
     end
+    resources :shared_documents, only: %i[create]
   end
   resources :folders, only: %i[index show] do
     patch :download, on: :member
