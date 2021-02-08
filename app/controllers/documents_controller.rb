@@ -3,6 +3,7 @@ class DocumentsController < ApplicationController
 
   def show
     @shared_list = SharedList.new
+    @shared_document = SharedDocument.new
   end
 
   def index
