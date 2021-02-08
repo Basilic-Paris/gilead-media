@@ -11,9 +11,6 @@
       <div class="modal-body">
         <% if policy(shared_document).create? %>
           <%= render 'shared_documents/form', document: document, shared_document: shared_document %>
-        <% else %>
-          <legend class="col-form-label pt-0">Liste de partage</legend>
-          <p>Ce document est déjà rattaché à la liste de partage.</p>
         <% end %>
         <% if policy(shared_list).create_and_attach_document? %>
           <%= render 'shared_lists/create_and_attach_document_form', document: document, shared_list: shared_list %>
