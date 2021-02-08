@@ -8,6 +8,7 @@ class FoldersController < ApplicationController
   def index
     @folders = policy_scope(Folder)
     @shared_list = SharedList.new
+    @shared_folder = SharedFolder.new
   end
 
   def show
