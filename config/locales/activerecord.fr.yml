@@ -21,3 +21,10 @@ fr:
       shared_folder:
         shared_list: Liste de partage
         folder: Dossier
+
+    errors:
+      models:
+        shared_document:
+          taken: contient déjà ce document
+        shared_folder:
+          taken: contient déjà ce dossier
