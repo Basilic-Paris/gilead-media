@@ -25,7 +25,7 @@ class SharedListsController < ApplicationController
     @folders = policy_scope(Folder)
     @shared_folder = @shared_list.shared_folders.new(folder: @folder)
     if @shared_list.save
-      redirect_to folder_path(@folder), flash: { validation_message: true, message: "Votre liste de partage a bien été créée et votre dossier a bien été ajouté." }
+      redirect_to folders_path, flash: { validation_message: true, message: "Votre liste de partage a bien été créée et votre dossier a bien été ajouté." }
     else
       flash.now[:errors_attach_folder] = true
       render 'folders/index'
