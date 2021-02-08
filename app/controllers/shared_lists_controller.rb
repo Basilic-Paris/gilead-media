@@ -12,9 +12,9 @@ class SharedListsController < ApplicationController
   end
 
   def create_and_attach_document
-    shared_document = @shared_list.shared_documents.build(document: @document)
+    @shared_document = @shared_list.shared_documents.new(document: @document)
     if @shared_list.save
-      redirect_to document_path(@document)
+      redirect_to document_path(@document), flash: { validation_message: true, message: "Votre liste de partage a bien été créée et votre document a bien été ajouté." }
     else
       flash.now[:errors_attach_document] = true
       render 'documents/show'
@@ -23,9 +23,9 @@ class SharedListsController < ApplicationController
 
   def create_and_attach_folder
     @folders = policy_scope(Folder)
-    shared_folder = @shared_list.shared_folders.build(folder: @folder)
+    @shared_folder = @shared_list.shared_folders.new(folder: @folder)
     if @shared_list.save
-      redirect_to folder_path(@folder)
+      redirect_to folder_path(@folder), flash: { validation_message: true, message: "Votre liste de partage a bien été créée et votre dossier a bien été ajouté." }
     else
       flash.now[:errors_attach_folder] = true
       render 'folders/index'
@@ -61,7 +61,7 @@ class SharedListsController < ApplicationController
   private
 
   def find_shared_list
-    @shared_list = SharedList.find(params[:id]).decorate
+    @shared_list = SharedList.find(params[:id])
     authorize @shared_list
   end
 
