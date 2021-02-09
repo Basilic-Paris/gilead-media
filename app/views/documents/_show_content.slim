@@ -1,41 +1,41 @@
 .cards-one-element
-    .card-one-element-illustration.d-flex-default
-      - case document.format
-      - when "image"
-        = image_tag document.attachment, class: "p-0"
-      - when "video"
-        = video_tag (url_for(document.attachment) + "#t=0.5"), controls: true, class: "p-0"
-      - when "pdf"
-        .h-100.d-flex-default
-          = image_tag "Picto_pdf.png"
-      - when "xls"
-        .h-100.d-flex-default
-          = image_tag "Picto_excel.png"
-      - when "ppt"
-        .h-100.d-flex-default
-          = image_tag "Picto_ppt.png"
-      - when "word"
-        .h-100.d-flex-default
-          = image_tag "Picto_word.png"
-      - else
-        .h-100.d-flex-default
-          = image_tag "Picto_generique.png"
+  .card-one-element-illustration.d-flex-default
+    - case document.format
+    - when "image"
+      = image_tag document.attachment, class: "p-0"
+    - when "video"
+      = video_tag (url_for(document.attachment) + "#t=0.5"), controls: true, class: "p-0"
+    - when "pdf"
+      .h-100.d-flex-default
+        = image_tag "Picto_pdf.png"
+    - when "xls"
+      .h-100.d-flex-default
+        = image_tag "Picto_excel.png"
+    - when "ppt"
+      .h-100.d-flex-default
+        = image_tag "Picto_ppt.png"
+    - when "word"
+      .h-100.d-flex-default
+        = image_tag "Picto_word.png"
+    - else
+      .h-100.d-flex-default
+        = image_tag "Picto_generique.png"
 
-    .card-one-element-content
-      p.font-weight-bold.mb-5 = document.title
-      p.mb-0.color-gray Langue: #{document.display_language}
-      p.mb-0.color-gray Date de création: #{display_date_for(document.created_at)}
-      - if document.usage.present?
-        p.mt-5.color-gray Droits d'utilisation: #{simple_format(document.usage)}
-      - else
-        p.mt-5 Droits d'utilisation: Aucun
+  .card-one-element-content
+    p.font-weight-bold.mb-5 = document.title
+    p.mb-0.color-gray Langue: #{document.display_language}
+    p.mb-0.color-gray Date de création: #{display_date_for(document.created_at)}
+    - if document.usage.present?
+      p.mt-5.color-gray Droits d'utilisation: #{simple_format(document.usage)}
+    - else
+      p.mt-5 Droits d'utilisation: Aucun
 
-      .btn-container
-        - if policy([:admin, document]).validate?
-          = link_to 'Mettre en ligne', admin_document_validate_path(document), method: :patch, class: "btn"
-        - if policy([:admin, document]).edit?
-          = link_to 'Modifier', edit_admin_document_path(document), class: "btn"
-        = link_to rails_blob_path(document.attachment, disposition: "attachment"), class: "btn" do
-          i.fas.fa-file-download
-        a.btn data-toggle="modal" data-target="#addDocumentToFolderOrSharedList"
-          i.fas.fa-plus
+    .btn-container
+      - if policy([:admin, document]).validate?
+        = link_to 'Mettre en ligne', admin_document_validate_path(document), method: :patch, class: "btn"
+      - if policy([:admin, document]).edit?
+        = link_to 'Modifier', edit_admin_document_path(document), class: "btn"
+      = link_to rails_blob_path(document.attachment, disposition: "attachment"), class: "btn" do
+        i.fas.fa-file-download
+      a.btn data-toggle="modal" data-target="#addDocumentToFolderOrSharedList"
+        i.fas.fa-plus
