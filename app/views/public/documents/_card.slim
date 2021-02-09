@@ -1,0 +1,28 @@
+.card
+  - case document.format
+  - when "image"
+    .card-illustration = image_tag document.attachment
+  - when "video"
+    .card-illustration = video_tag (url_for(document.attachment) + "#t=0.5")
+  - when "pdf"
+    .card-illustration-picto = image_tag "Picto_pdf.png"
+  - when "xls"
+    .card-illustration-picto = image_tag "Picto_excel.png"
+  - when "ppt"
+    .card-illustration-picto = image_tag "Picto_ppt.png"
+  - when "word"
+    .card-illustration-picto = image_tag "Picto_word.png"
+  - else
+    .card-illustration-picto = image_tag "Picto_generique.png"
+
+  .card-content.d-flex-column-between
+    .card-infos
+      p.cut-text.font-weight-bold.mb-0 = document.title
+      p.cut-text.mb-0.color-gray = document.display_language
+      - if document.validated?
+        p.cut-text.mb-0.color-gray = display_date_for(document.validation_at)
+      - else
+        p.cut-text.mb-0.color-gray Non validé
+    .card-actions
+      = link_to public_shared_list_document_path(shared_list.code, document), class: "btn" do
+        i.fa.fa-search

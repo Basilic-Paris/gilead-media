@@ -1,0 +1,4 @@
+.container.container-content
+  .cards
+    - @documents.each do |document|
+      = render 'public/documents/card', document: document, shared_list: @shared_list

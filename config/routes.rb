@@ -41,4 +41,12 @@ Rails.application.routes.draw do
       end
     end
   end
+
+  # -------- PUBLIC ROUTES ---------
+  namespace :public do
+    resources :shared_lists, param: :code, only: %i[show] do
+      resources :folders, only: %i[show]
+      resources :documents, only: %i[show]
+    end
+  end
 end
