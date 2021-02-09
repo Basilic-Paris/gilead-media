@@ -17,7 +17,7 @@
   }
 }
 
-.simple_form.label-input-in-line {
+.simple_form.label-input-in-line, .simple_form.label-input-in-line-equal-space {
   label {
     margin-bottom: 0;
     display: flex;
@@ -25,7 +25,7 @@
   }
   .form-group {
     display: grid;
-    grid-template-columns: 1fr 4fr;
+    grid-template-columns: 1fr 1fr;
     .disabled {
       background: none;
       border: none;
@@ -33,5 +33,17 @@
   }
   .form-group.disabled {
     padding-right: 0;
+  }
+}
+
+.simple_form.label-input-in-line {
+  .form-group {
+    grid-template-columns: 1fr 4fr;
+  }
+}
+
+.simple_form.label-input-in-line-equal-space {
+  .form-group {
+    grid-template-columns: 1fr 1fr;
   }
 }
