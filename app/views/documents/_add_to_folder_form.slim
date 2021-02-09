@@ -1,6 +1,6 @@
 = simple_form_for [:admin, document], url: add_to_folder_admin_document_path(document), remote: true do |f|
   .mb-3
-    = f.association :folders, as: :check_boxes, label: "Dossier(s)"
+    = f.association :folders, as: :check_boxes, legend_tag: false
   .mb-3
     p.mb-2 et/ou Nouveau dossier
     = f.fields_for :folders, document.folders.build do |folders_fields|

@@ -10,12 +10,20 @@
       </div>
       <div class="modal-body">
         <% if policy(shared_document).create? %>
+          <p class="mb-2">Liste de partage</p>
           <%= render 'shared_documents/form', document: document, shared_document: shared_document %>
         <% end %>
         <% if policy(shared_list).create_and_attach_document? %>
+          <p class="mb-2">Liste de partage</p>
+          <% if shared_list.errors.messages[:code].present? %>
+            <p class="alert-warning p-3">
+              Une erreur s'est produite dans la génération du code associé à la liste de partage. Veuillez valider à nouveau votre saisie.
+            </p>
+          <% end %>
           <%= render 'shared_lists/create_and_attach_document_form', document: document, shared_list: shared_list %>
         <% end %>
         <% if policy([:admin, document]).add_to_folder? %>
+          <p class="mb-2">Dossier(s)</p>
           <%= render 'documents/add_to_folder_form', document: document %>
         <% end %>
         <!-- TO KEEP: initial version to add folders or documents to shared list directly -->

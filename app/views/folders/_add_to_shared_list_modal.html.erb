@@ -9,6 +9,7 @@
         </button>
       </div>
       <div class="modal-body">
+        <p class="mb-2">Liste de partage</p>
         <% if policy(shared_folder).create? %>
           <%= render 'shared_folders/form', folder: folder, shared_folder: shared_folder %>
         <% end %>

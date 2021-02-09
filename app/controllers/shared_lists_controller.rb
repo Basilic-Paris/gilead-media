@@ -68,6 +68,7 @@ class SharedListsController < ApplicationController
   def new_shared_list
     @shared_list = current_user.shared_lists.new(shared_list_params)
     authorize @shared_list
+    @shared_list.code = SecureRandom.alphanumeric(16)
   end
 
   def find_folder
@@ -83,6 +84,6 @@ class SharedListsController < ApplicationController
   end
 
   def shared_list_params
-    params.require(:shared_list).permit(:title)
+    params.require(:shared_list).permit(:title, :validity, :download)
   end
 end
