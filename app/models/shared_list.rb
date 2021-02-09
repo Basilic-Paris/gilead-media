@@ -9,6 +9,7 @@ class SharedList < ApplicationRecord
   has_many :contacts
 
   validates :title, presence: true, uniqueness: { scope: :user }
+  validates :code, presence: true, uniqueness: true, length: { is: 16 }
 
   scope :ordered_by_title, -> { order('lower(title)') }
 end
