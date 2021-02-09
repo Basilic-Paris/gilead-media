@@ -1,0 +1,12 @@
+.card.rounded
+  .card-illustration
+    .card-illustration-text = folder.title
+  .card-content.d-flex-column-between
+    .card-infos
+      p.cut-text.mb-0.color-gray Date de création: #{display_date_for(folder.created_at)}
+    .card-actions
+      = link_to public_shared_list_folder_path(shared_list.code, folder), class: "btn" do
+        i.fa.fa-search
+      - if shared_list.download?
+        = link_to download_folder_path(folder), method: :patch, class: "btn" do
+          i.fas.fa-file-download
