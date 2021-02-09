@@ -15,6 +15,8 @@ fr:
         email: E-mail
       shared_list:
         title: Titre
+        validity: Jusqu'au
+        download: Téléchargeable
       shared_document:
         shared_list: Liste de partage
         document: Document
