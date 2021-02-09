@@ -13,6 +13,7 @@ class SharedListsController < ApplicationController
 
   def create_and_attach_document
     @shared_document = @shared_list.shared_documents.new(document: @document)
+    @shared_list.code = SecureRandom.alphanumeric(16)
     if @shared_list.save
       redirect_to document_path(@document), flash: { validation_message: true, message: "Votre liste de partage a bien été créée et votre document a bien été ajouté." }
     else
@@ -83,6 +84,6 @@ class SharedListsController < ApplicationController
   end
 
   def shared_list_params
-    params.require(:shared_list).permit(:title)
+    params.require(:shared_list).permit(:title, :validity, :download)
   end
 end
