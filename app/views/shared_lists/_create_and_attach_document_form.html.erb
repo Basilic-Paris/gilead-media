@@ -1,5 +1,5 @@
-<%= simple_form_for [document, shared_list], url: create_and_attach_document_document_shared_lists_path(document), data: { controller: "flatpickr" }, html: { class: "label-input-in-line-equal-space" } do |f| %>
-  <%= f.input :title %>
+<%= simple_form_for [document, shared_list], url: create_and_attach_document_document_shared_lists_path(document), data: { controller: "flatpickr" }, html: { class: "label-input-in-line-equal-space" }, remote: true do |f| %>
+  <%= f.input :title, label: false, placeholder: "Nommez votre liste de partage", input_html: { style: "grid-column: 1 / span 2" } %>
   <%= f.input :validity, as: :string, placeholder: "Date", input_html: { data: { target: "flatpickr.dateSelection" } } %>
   <%= f.input :download, as: :select, include_blank: false %>
   <div class="text-right">
