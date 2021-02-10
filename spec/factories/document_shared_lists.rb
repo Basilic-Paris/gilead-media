@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :shared_document do
+  factory :document_shared_list do
     shared_list { nil }
     document { nil }
   end
