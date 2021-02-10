@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_10_131522) do
+ActiveRecord::Schema.define(version: 2021_02_10_133746) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -73,6 +73,15 @@ ActiveRecord::Schema.define(version: 2021_02_10_131522) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "folder_shared_lists", force: :cascade do |t|
+    t.bigint "shared_list_id", null: false
+    t.bigint "folder_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["folder_id"], name: "index_folder_shared_lists_on_folder_id"
+    t.index ["shared_list_id"], name: "index_folder_shared_lists_on_shared_list_id"
+  end
+
   create_table "folders", force: :cascade do |t|
     t.string "title"
     t.datetime "created_at", precision: 6, null: false
@@ -86,15 +95,6 @@ ActiveRecord::Schema.define(version: 2021_02_10_131522) do
     t.string "password_salt"
     t.datetime "created_at"
     t.index ["password_archivable_type", "password_archivable_id"], name: "index_password_archivable"
-  end
-
-  create_table "shared_folders", force: :cascade do |t|
-    t.bigint "shared_list_id", null: false
-    t.bigint "folder_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["folder_id"], name: "index_shared_folders_on_folder_id"
-    t.index ["shared_list_id"], name: "index_shared_folders_on_shared_list_id"
   end
 
   create_table "shared_lists", force: :cascade do |t|
@@ -132,7 +132,7 @@ ActiveRecord::Schema.define(version: 2021_02_10_131522) do
   add_foreign_key "document_folders", "folders"
   add_foreign_key "document_shared_lists", "documents"
   add_foreign_key "document_shared_lists", "shared_lists"
-  add_foreign_key "shared_folders", "folders"
-  add_foreign_key "shared_folders", "shared_lists"
+  add_foreign_key "folder_shared_lists", "folders"
+  add_foreign_key "folder_shared_lists", "shared_lists"
   add_foreign_key "shared_lists", "users"
 end

@@ -7,7 +7,7 @@ class User < ApplicationRecord
 
   has_many :shared_lists
   has_many :document_shared_lists, through: :shared_lists
-  has_many :shared_folders, through: :shared_lists
+  has_many :folder_shared_lists, through: :shared_lists
 
   validates :first_name, presence: true
   validates :last_name, presence: true
