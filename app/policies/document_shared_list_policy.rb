@@ -1,4 +1,4 @@
-class SharedDocumentPolicy < ApplicationPolicy
+class DocumentSharedListPolicy < ApplicationPolicy
   def create?
     user.shared_lists.initial.present?
   end
