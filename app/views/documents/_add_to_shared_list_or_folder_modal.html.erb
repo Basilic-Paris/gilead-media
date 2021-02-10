@@ -9,9 +9,9 @@
         </button>
       </div>
       <div class="modal-body">
-        <% if policy(shared_document).create? %>
+        <% if policy(document_shared_list).create? %>
           <p class="mb-2">Liste de partage</p>
-          <%= render 'shared_documents/form', document: document, shared_document: shared_document %>
+          <%= render 'document_shared_lists/form', document: document, document_shared_list: document_shared_list %>
         <% end %>
         <% if policy(shared_list).create_and_attach_document? %>
           <p class="mb-2">Liste de partage</p>

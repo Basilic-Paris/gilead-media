@@ -1,4 +1,4 @@
-class SharedDocument < ApplicationRecord
+class DocumentSharedList < ApplicationRecord
   belongs_to :shared_list
   belongs_to :document
 

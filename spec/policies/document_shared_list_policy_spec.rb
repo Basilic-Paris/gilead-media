@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-RSpec.describe SharedDocumentPolicy, type: :policy do
+RSpec.describe DocumentSharedListPolicy, type: :policy do
   let(:user) { User.new }
 
   subject { described_class }
