@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-RSpec.describe SharedFolderPolicy, type: :policy do
+RSpec.describe FolderSharedListPolicy, type: :policy do
   let(:user) { User.new }
 
   subject { described_class }
