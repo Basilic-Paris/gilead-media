@@ -17,7 +17,7 @@ fr:
         title: Titre
         validity: Jusqu'au
         download: Téléchargeable
-      shared_document:
+      document_shared_list:
         shared_list: Liste de partage
         document: Document
       shared_folder:
@@ -26,7 +26,7 @@ fr:
 
     errors:
       models:
-        shared_document:
+        document_shared_list:
           taken: contient déjà ce document
         shared_folder:
           taken: contient déjà ce dossier

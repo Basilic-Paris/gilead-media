@@ -12,7 +12,7 @@ class SharedListsController < ApplicationController
   end
 
   def create_and_attach_document
-    @shared_document = @shared_list.shared_documents.new(document: @document)
+    @document_shared_list = @shared_list.document_shared_lists.new(document: @document)
     if @shared_list.save
       redirect_to document_path(@document), flash: { validation_message: true, message: "Votre liste de partage a bien été créée et votre document a bien été ajouté." }
     else
