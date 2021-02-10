@@ -1,6 +1,6 @@
-class CreateDocumentSharedLists < ActiveRecord::Migration[6.0]
+class CreateSharedDocuments < ActiveRecord::Migration[6.0]
   def change
-    create_table :document_shared_lists do |t|
+    create_table :shared_documents do |t|
       t.references :shared_list, null: false, foreign_key: true
       t.references :document, null: false, foreign_key: true
 
