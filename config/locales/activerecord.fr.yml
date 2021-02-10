@@ -20,7 +20,7 @@ fr:
       document_shared_list:
         shared_list: Liste de partage
         document: Document
-      folder_shared_list:
+      shared_folder:
         shared_list: Liste de partage
         folder: Dossier
 
@@ -28,5 +28,5 @@ fr:
       models:
         document_shared_list:
           taken: contient déjà ce document
-        folder_shared_list:
+        shared_folder:
           taken: contient déjà ce dossier

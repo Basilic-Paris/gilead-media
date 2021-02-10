@@ -1,7 +1,7 @@
 puts 'Destroying'
 Contact.destroy_all
 DocumentSharedList.destroy_all
-FolderSharedList.destroy_all
+SharedFolder.destroy_all
 SharedList.destroy_all
 # User.destroy_all
 DocumentFolder.destroy_all

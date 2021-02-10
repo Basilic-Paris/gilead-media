@@ -1,4 +1,4 @@
-class FolderSharedList < ApplicationRecord
+class SharedFolder < ApplicationRecord
   belongs_to :shared_list
   belongs_to :folder
 

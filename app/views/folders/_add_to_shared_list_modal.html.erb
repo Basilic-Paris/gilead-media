@@ -10,8 +10,8 @@
       </div>
       <div class="modal-body">
         <p class="mb-2">Liste de partage</p>
-        <% if policy(folder_shared_list).create? %>
-          <%= render 'folder_shared_lists/form', folder: folder, folder_shared_list: folder_shared_list %>
+        <% if policy(shared_folder).create? %>
+          <%= render 'shared_folders/form', folder: folder, shared_folder: shared_folder %>
         <% end %>
         <% if policy(shared_list).create_and_attach_folder? %>
           <%= render 'shared_lists/create_and_attach_folder_form', folder: folder, shared_list: shared_list %>

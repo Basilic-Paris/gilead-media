@@ -30,6 +30,6 @@
 
 <% if flash[:errors_attach_folder] %>
   <div data-controller = "show-modal">
-    <%= render 'folders/add_to_shared_list_modal', folder: @folder, shared_list: @shared_list, folder_shared_list: @folder_shared_list %>
+    <%= render 'folders/add_to_shared_list_modal', folder: @folder, shared_list: @shared_list, shared_folder: @shared_folder %>
   </div>
 <% end %>
