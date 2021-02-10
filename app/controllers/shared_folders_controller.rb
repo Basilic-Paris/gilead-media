@@ -1,11 +1,11 @@
-class FolderSharedListsController < ApplicationController
+class SharedFoldersController < ApplicationController
   def create
     @folders = policy_scope(Folder)
     @shared_list = SharedList.new
     @folder = Folder.find(params[:folder_id])
-    @folder_shared_list = @folder.folder_shared_lists.new(folder_shared_list_params)
-    authorize @folder_shared_list
-    if @folder_shared_list.save
+    @shared_folder = @folder.shared_folders.new(shared_folder_params)
+    authorize @shared_folder
+    if @shared_folder.save
       redirect_to folders_path, flash: { validation_message: true, message: "Votre dossier a bien été ajouté à la liste de partage." }
     else
       flash.now[:errors_attach_folder] = true
@@ -13,7 +13,7 @@ class FolderSharedListsController < ApplicationController
     end
   end
 
-  def folder_shared_list_params
-    params.require(:folder_shared_list).permit(:shared_list_id)
+  def shared_folder_params
+    params.require(:shared_folder).permit(:shared_list_id)
   end
 end
