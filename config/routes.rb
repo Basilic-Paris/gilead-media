@@ -25,7 +25,7 @@ Rails.application.routes.draw do
     resources :shared_lists do
       post :create_and_attach_folder, on: :collection
     end
-    resources :shared_folders, only: %i[create]
+    resources :folder_shared_lists, only: %i[create]
   end
   resources :shared_lists, only: %i[index show] do
     patch :add_contacts, on: :member

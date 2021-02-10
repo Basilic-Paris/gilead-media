@@ -2,7 +2,7 @@
   <div class="cards">
     <% @folders.each do |folder| %>
       <%= render 'folders/card', folder: folder %>
-      <%= render 'folders/add_to_shared_list_modal', folder: folder, shared_list: @shared_list, shared_folder: @shared_folder %>
+      <%= render 'folders/add_to_shared_list_modal', folder: folder, shared_list: @shared_list, folder_shared_list: @folder_shared_list %>
     <% end %>
   </div>
 </div>
