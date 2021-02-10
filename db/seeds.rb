@@ -1,6 +1,6 @@
 puts 'Destroying'
 Contact.destroy_all
-SharedDocument.destroy_all
+DocumentSharedList.destroy_all
 SharedFolder.destroy_all
 SharedList.destroy_all
 # User.destroy_all
@@ -30,7 +30,7 @@ img2.attachment.attach(io: File.open("/Users/alice/Desktop/TEST/Logo_Gilead_Mé
 img2.save
 
 video = Document.new(title: "What's Politique - Episode 1", language: "FR", usage: "Interne\nExterne", validation_at: DateTime.now)
-video.attachment.attach(io: File.open("/Users/alice/Desktop/TEST/.Whats_Politique_Episode_un.mp4.icloud"), filename: "Whats_Politique_Episode_un.mp4")
+video.attachment.attach(io: File.open("/Users/alice/Desktop/TEST/.Whats_Politique_Episode_un.mp4"), filename: "Whats_Politique_Episode_un.mp4")
 video.save
 
 numbers = Document.new(title: "Communication financière numbers", language: "FR", usage: "Interne", validation_at: DateTime.now)
