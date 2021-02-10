@@ -5,8 +5,8 @@ class Document < ApplicationRecord
   has_one_attached :attachment
   has_many :document_folders
   has_many :folders, through: :document_folders
-  has_many :document_shared_lists
-  has_many :shared_lists, through: :document_shared_lists
+  has_many :shared_documents
+  has_many :shared_lists, through: :shared_documents
 
   # accepts_nested_attributes_for :folders, reject_if: -> (folder) { folder[:title].blank? }
   ## do the same thing
