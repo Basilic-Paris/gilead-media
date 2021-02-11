@@ -1,8 +1,8 @@
 class SharedDocument < ApplicationRecord
   include SharedDocumentStateMachine
 
-  belongs_to :shared_list
   belongs_to :document
+  has_many :contacts, as: :contactable
 
-  validates :shared_list, uniqueness: { scope: :document }
+  validates :code, presence: true, uniqueness: true, length: { is: 16 }
 end
