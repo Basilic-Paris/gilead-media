@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_10_184906) do
+ActiveRecord::Schema.define(version: 2021_02_11_145620) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,10 +39,11 @@ ActiveRecord::Schema.define(version: 2021_02_10_184906) do
 
   create_table "contacts", force: :cascade do |t|
     t.string "email"
-    t.bigint "shared_list_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["shared_list_id"], name: "index_contacts_on_shared_list_id"
+    t.string "contactable_type"
+    t.bigint "contactable_id"
+    t.index ["contactable_type", "contactable_id"], name: "index_contacts_on_contactable_type_and_contactable_id"
   end
 
   create_table "document_folders", force: :cascade do |t|
@@ -145,7 +146,6 @@ ActiveRecord::Schema.define(version: 2021_02_10_184906) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "contacts", "shared_lists"
   add_foreign_key "document_folders", "documents"
   add_foreign_key "document_folders", "folders"
   add_foreign_key "document_shared_lists", "documents"
