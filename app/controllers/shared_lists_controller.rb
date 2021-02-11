@@ -1,4 +1,6 @@
 class SharedListsController < ApplicationController
+  include ContactHelper
+  include ListHelper
   before_action :find_shared_list, only: %i[show add_contacts send_to_contacts]
   before_action :find_document, only: :create_and_attach_document
   before_action :find_folder, only: :create_and_attach_folder
@@ -34,16 +36,8 @@ class SharedListsController < ApplicationController
 
   def add_contacts
     @shared_list.contacts.destroy_all if @shared_list.contacts.present?
-    emails = contacts_params[:contacts][:email].split(/\s{1,}*[,;\/]\s{1,}*|\s{1,}/).uniq
-    # \s{1,}*[,;\/]\s{1,}* (, ; ou / précédé et optionnellement précédé par un ou plusieurs espaces OU un ou plusieurs espaces
-    @errors = Array.new
-    emails.each do |email|
-      contact = @shared_list.contacts.new(email: email)
-      if contact.save
-      else
-        @errors << "#{contact.email}: #{contact.errors.full_messages.join(', ')}"
-      end
-    end
+    emails = arrange_list(contacts_params[:contacts][:email])
+    create_contacts(@shared_list, emails)
     if @errors.empty?
       if @shared_list.contacts.present?
         @shared_list.add_contacts!
