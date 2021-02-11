@@ -98,8 +98,8 @@ ActiveRecord::Schema.define(version: 2021_02_10_184906) do
   end
 
   create_table "shared_documents", force: :cascade do |t|
-    t.bigint "document_id", null: false
     t.bigint "shared_list_id", null: false
+    t.bigint "document_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["document_id"], name: "index_shared_documents_on_document_id"
@@ -107,8 +107,8 @@ ActiveRecord::Schema.define(version: 2021_02_10_184906) do
   end
 
   create_table "shared_folders", force: :cascade do |t|
-    t.bigint "folder_id", null: false
     t.bigint "shared_list_id", null: false
+    t.bigint "folder_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["folder_id"], name: "index_shared_folders_on_folder_id"
