@@ -1,6 +1,8 @@
 module ListHelper
   def arrange_list(list)
-    list.split(/\s{1,}*[,;\/]\s{1,}*|\s{1,}/).uniq
-    # \s{1,}*[,;\/]\s{1,}* (, ; ou / précédé et optionnellement précédé par un ou plusieurs espaces OU un ou plusieurs espaces
+    list.split(/[,;\/\s]*[,;\/\s][,;\/\s]*/).uniq.delete_if(&:blank?)
+    # [,;\/\s]: , ou ; ou / ou espace
+    # * : 0 ou plus
+    # => [,;\/\s] précédé ou suivi de un ou plusieurs [,;\/\s]
   end
 end
