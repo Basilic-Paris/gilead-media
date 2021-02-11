@@ -1,6 +1,6 @@
 class Contact < ApplicationRecord
-  belongs_to :shared_list
+  belongs_to :contactable, polymorphic: true
 
-  validates :email, uniqueness: { scope: :shared_list }
+  validates :email, uniqueness: { scope: :contactable }
   validates :email, email: { mode: :strict }
 end
