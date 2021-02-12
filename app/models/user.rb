@@ -7,6 +7,7 @@ class User < ApplicationRecord
 
   has_many :shared_lists
   has_many :shared_documents
+  has_many :shared_folders
   has_many :document_shared_lists, through: :shared_lists
   has_many :folder_shared_lists, through: :shared_lists
 
