@@ -15,7 +15,6 @@
   </div>
 <% end %>
 
-
 <% if flash[:validation_message] %>
   <div data-controller = "show-modal">
     <%= render 'shared/validation_modal', message: flash[:message] %>
@@ -31,5 +30,11 @@
 <% if flash[:errors_attach_folder] %>
   <div data-controller = "show-modal">
     <%= render 'folders/add_to_shared_list_modal', folder: @folder, shared_list: @shared_list, folder_shared_list: @folder_shared_list %>
+  </div>
+<% end %>
+
+<% if flash[:errors_create_shared_document] %>
+  <div data-controller = "show-modal">
+    <%= render 'documents/add_to_shared_document_modal', document: @document, shared_document: @shared_document %>
   </div>
 <% end %>
