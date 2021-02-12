@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_12_174101) do
+ActiveRecord::Schema.define(version: 2021_02_12_174641) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -115,6 +115,7 @@ ActiveRecord::Schema.define(version: 2021_02_12_174101) do
     t.bigint "folder_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "aasm_state"
     t.index ["folder_id"], name: "index_shared_folders_on_folder_id"
   end
 
