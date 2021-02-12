@@ -4,7 +4,7 @@ class SharedListPolicy < ApplicationPolicy
   end
 
   def add_contacts?
-    record.user == user
+    record.user == user && record.initial?
   end
 
   def create_and_attach_folder?
