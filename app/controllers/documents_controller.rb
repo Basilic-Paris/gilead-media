@@ -2,6 +2,7 @@ class DocumentsController < ApplicationController
   before_action :find_document, only: %i[show]
 
   def show
+    @shared_document = SharedDocument.new
     @shared_list = SharedList.new
     @document_shared_list = DocumentSharedList.new
   end

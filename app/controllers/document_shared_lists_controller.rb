@@ -1,5 +1,6 @@
 class DocumentSharedListsController < ApplicationController
   def create
+    @shared_document = SharedDocument.new
     @shared_list = SharedList.new
     @document = Document.find(params[:document_id]).decorate
     @document_shared_list = @document.document_shared_lists.new(document_shared_list_params)
