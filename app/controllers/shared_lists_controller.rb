@@ -1,7 +1,6 @@
 class SharedListsController < ApplicationController
-  include ContactHelper
   include ListHelper
-  before_action :find_shared_list, only: %i[show add_contacts send_to_contacts]
+  before_action :find_shared_list, only: %i[show add_contacts]
   before_action :find_document, only: :create_and_attach_document
   before_action :find_folder, only: :create_and_attach_folder
   before_action :new_shared_list, only: %i[create_and_attach_document create_and_attach_folder]
@@ -36,19 +35,16 @@ class SharedListsController < ApplicationController
   end
 
   def add_contacts
-    @shared_list.contacts.destroy_all if @shared_list.contacts.present?
     emails = arrange_list(contacts_params[:contacts][:email])
-    create_contacts(@shared_list, emails)
-    if @errors.empty?
-      if @shared_list.contacts.present?
-        @shared_list.add_contacts!
-        redirect_to shared_list_path(@shared_list), flash: { validation_message: true, message: "Votre liste de partage a bien été envoyée." }
-      else
-        flash.now.alert = "Votre liste de partage ne contient pas de destinataire."
-        render :show
-      end
+
+    emails.each do |email|
+      @shared_list.contacts.build(email: email)
+    end
+
+    if @shared_list.save
+      @shared_list.add_contacts!
+      redirect_to shared_list_path(@shared_list), flash: { validation_message: true, message: "Votre liste de partage a bien été envoyée." }
     else
-      flash.now.alert = @errors.join("<br>").html_safe
       render :show
     end
   end
