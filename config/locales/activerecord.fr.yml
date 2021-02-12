@@ -23,6 +23,9 @@ fr:
       folder_shared_list:
         shared_list: Liste de partage
         folder: Dossier
+      shared_document:
+        validity: Jusqu'au
+        download: Téléchargeable
 
     errors:
       models:
