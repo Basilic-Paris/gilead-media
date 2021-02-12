@@ -24,6 +24,7 @@ class SharedListsController < ApplicationController
   end
 
   def create_and_attach_folder
+    @shared_folder = SharedFolder.new
     @folders = policy_scope(Folder)
     @folder_shared_list = @shared_list.folder_shared_lists.new(folder: @folder)
     if @shared_list.save
