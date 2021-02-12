@@ -26,6 +26,9 @@ fr:
       shared_document:
         validity: Jusqu'au
         download: Téléchargeable
+      shared_folder:
+        validity: Jusqu'au
+        download: Téléchargeable
 
     errors:
       models:
