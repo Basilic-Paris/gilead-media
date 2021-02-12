@@ -4,6 +4,7 @@ class SharedFoldersController < ApplicationController
   before_action :find_folder, only: %i[create]
 
   def create
+    @folders = policy_scope(Folder)
     @shared_list = SharedList.new
     @folder_shared_list = FolderSharedList.new
 
@@ -29,7 +30,7 @@ class SharedFoldersController < ApplicationController
   private
 
   def find_folder
-    @document = Folder.find(params[:folder_id]).decorate
+    @folder = Folder.find(params[:folder_id])
   end
 
   def shared_folder_params
