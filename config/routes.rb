@@ -19,6 +19,7 @@ Rails.application.routes.draw do
     resources :document_shared_lists, only: %i[create]
     resources :shared_documents, only: %i[create]
   end
+
   resources :folders, only: %i[index show] do
     patch :download, on: :member
     # TO KEEP: initial version to add folders or documents to shared list directly
@@ -27,6 +28,7 @@ Rails.application.routes.draw do
       post :create_and_attach_folder, on: :collection
     end
     resources :folder_shared_lists, only: %i[create]
+    resources :shared_folders, only: %i[create]
   end
   resources :shared_lists, only: %i[index show] do
     patch :add_contacts, on: :member

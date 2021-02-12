@@ -1,6 +1,9 @@
 class SharedFolder < ApplicationRecord
-  belongs_to :shared_list
-  belongs_to :folder
+  include SharedFolderStateMachine
 
-  validates :shared_list, uniqueness: { scope: :folder }
+  belongs_to :folder
+  has_many :contacts, as: :contactable
+
+  validates :code, presence: true, uniqueness: true, length: { is: 16 }
+  validates :contacts, presence: true
 end

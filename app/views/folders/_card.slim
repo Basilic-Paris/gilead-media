@@ -9,6 +9,8 @@
         i.fa.fa-search
       = link_to download_folder_path(folder), method: :patch, class: "btn" do
         i.fas.fa-file-download
-      - if (params[:controller] == "folders" && params[:action] == "index") || (params[:controller] == "shared_lists" && params[:action] == "create_and_attach_folder")
+      - if (params[:controller] == "folders" && params[:action] == "index") || (params[:controller] == "shared_lists" && params[:action] == "create_and_attach_folder") || (params[:controller] == "shared_folders" && params[:action] == "create") || (params[:controller] == "folder_shared_lists" && params[:action] == "create")
+        = link_to folder_path(folder), data: { toggle: "modal", target: "#addFolderToSharedFolder#{folder.id}" }, class: "btn" do
+          i.far.fa-paper-plane
         = link_to folder_path(folder), data: { toggle: "modal", target: "#addFolder#{folder.id}ToSharedList" }, class: "btn" do
           i.fas.fa-plus

@@ -38,3 +38,9 @@
     <%= render 'documents/add_to_shared_document_modal', document: @document, shared_document: @shared_document %>
   </div>
 <% end %>
+
+<% if flash[:errors_create_shared_folder] %>
+  <div data-controller = "show-modal">
+    <%= render 'folders/add_to_shared_folder_modal', folder: @folder, shared_folder: @shared_folder %>
+  </div>
+<% end %>

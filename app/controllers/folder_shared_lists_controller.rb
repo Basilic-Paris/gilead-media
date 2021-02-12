@@ -2,6 +2,7 @@ class FolderSharedListsController < ApplicationController
   def create
     @folders = policy_scope(Folder)
     @shared_list = SharedList.new
+    @shared_folder = SharedFolder.new
     @folder = Folder.find(params[:folder_id])
     @folder_shared_list = @folder.folder_shared_lists.new(folder_shared_list_params)
     authorize @folder_shared_list
