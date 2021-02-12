@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_11_152709) do
+ActiveRecord::Schema.define(version: 2021_02_12_174101) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -112,12 +112,10 @@ ActiveRecord::Schema.define(version: 2021_02_11_152709) do
   end
 
   create_table "shared_folders", force: :cascade do |t|
-    t.bigint "shared_list_id", null: false
     t.bigint "folder_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["folder_id"], name: "index_shared_folders_on_folder_id"
-    t.index ["shared_list_id"], name: "index_shared_folders_on_shared_list_id"
   end
 
   create_table "shared_lists", force: :cascade do |t|
@@ -159,6 +157,5 @@ ActiveRecord::Schema.define(version: 2021_02_11_152709) do
   add_foreign_key "shared_documents", "documents"
   add_foreign_key "shared_documents", "users"
   add_foreign_key "shared_folders", "folders"
-  add_foreign_key "shared_folders", "shared_lists"
   add_foreign_key "shared_lists", "users"
 end
