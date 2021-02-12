@@ -1,0 +1,6 @@
+- if object.errors.messages[:contacts].present?
+  - object.errors.full_messages_for(:contacts).each do |message|
+    .invalid-feedback.d-block = message
+  - object.contacts.each do |contact|
+    - if contact.errors.present?
+      .invalid-feedback.d-block #{contact.email}: #{contact.errors.full_messages.join(",")}
