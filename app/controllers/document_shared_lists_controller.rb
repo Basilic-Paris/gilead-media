@@ -13,6 +13,8 @@ class DocumentSharedListsController < ApplicationController
     end
   end
 
+  private
+
   def document_shared_list_params
     params.require(:document_shared_list).permit(:shared_list_id)
   end

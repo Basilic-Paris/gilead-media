@@ -7,5 +7,9 @@ export default class extends Controller {
 
   connect() {
     $('#' + this.modalIdTarget.id).modal('show');
+
+    $('.modal').on('hidden.bs.modal', event => {
+      document.location.reload();
+    })
   }
 }
