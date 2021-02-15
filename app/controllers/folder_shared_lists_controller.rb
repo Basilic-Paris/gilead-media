@@ -14,6 +14,8 @@ class FolderSharedListsController < ApplicationController
     end
   end
 
+  private
+
   def folder_shared_list_params
     params.require(:folder_shared_list).permit(:shared_list_id)
   end
