@@ -6,7 +6,7 @@ class Public::SharedListsController < ApplicationController
 
   def show
     if @shared_list.contacts_added? && (@shared_list.validity.present? ? Date.today <= @shared_list.validity : true)
-      @documents = DocumentDecorator.decorate_collection(@shared_list.documents.validated)
+      @documents = DocumentDecorator.decorate_collection(@shared_list.documents.validated.includes(attachment_attachment: :blob))
       @folders = @shared_list.folders.with_validated_documents
     else
       redirect_to root_path

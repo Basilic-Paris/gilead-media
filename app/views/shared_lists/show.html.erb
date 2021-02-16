@@ -1,7 +1,7 @@
 <div class="container container-content">
   <%= render 'add_contacts_form', shared_list: @shared_list %>
   <div class="cards">
-    <% DocumentDecorator.decorate_collection(@shared_list.documents).each do |document| %>
+    <% DocumentDecorator.decorate_collection(@shared_list.documents.includes(attachment_attachment: :blob)).each do |document| %>
       <%= render 'documents/card', document: document %>
     <% end %>
     <% @shared_list.folders.each do |folder| %>
