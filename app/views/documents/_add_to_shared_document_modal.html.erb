@@ -10,11 +10,6 @@
       </div>
       <div class="modal-body">
         <% if policy(shared_document).create? %>
-          <% if shared_document.errors.messages[:code].present? %>
-            <p class="alert-warning p-3">
-              Une erreur s'est produite dans la génération du code associé à la liste de partage. Veuillez valider à nouveau votre saisie.
-            </p>
-          <% end %>
           <%= render 'shared_documents/form', document: document, shared_document: shared_document %>
         <% end %>
       </div>
