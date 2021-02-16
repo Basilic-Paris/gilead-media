@@ -21,6 +21,8 @@ require("channels")
 // WRITE YOUR OWN JS STARTING FROM HERE 👇
 // ----------------------------------------------------
 
+window.$ = window.jQuery = require('jquery');
+
 // External imports
 import "bootstrap";
 
