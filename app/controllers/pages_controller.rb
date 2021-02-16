@@ -3,9 +3,9 @@ class PagesController < ApplicationController
 
   def home
     if current_user.admin?
-      @documents = policy_scope(Document)
+      @documents = policy_scope(Document).includes(attachment_attachment: :blob)
     else
-      @documents = policy_scope(Document).validated
+      @documents = policy_scope(Document).validated.includes(attachment_attachment: :blob)
     end
   end
 end

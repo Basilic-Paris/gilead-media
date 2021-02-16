@@ -75,7 +75,7 @@ class FoldersController < ApplicationController
   end
 
   def find_documents
-    current_user.admin? ? @documents = DocumentDecorator.decorate_collection(@folder.documents) : @documents = DocumentDecorator.decorate_collection(@folder.documents.validated)
+    current_user.admin? ? @documents = DocumentDecorator.decorate_collection(@folder.documents.includes(attachment_attachment: :blob)) : @documents = DocumentDecorator.decorate_collection(@folder.documents.validated.includes(attachment_attachment: :blob))
   end
 
   # TO KEEP: initial version to add folders or documents to shared list directly
