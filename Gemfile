@@ -44,6 +44,7 @@ gem 'pg_search', '~> 2.3.0'
 gem 'draper'
 gem 'email_validator', require: 'email_validator/strict'
 gem 'aasm'
+gem 'postmark-rails'
 
 group :development, :test do  gem 'pry-byebug'
   gem 'pry-rails'
@@ -55,6 +56,7 @@ group :development, :test do  gem 'pry-byebug'
   gem 'factory_bot_rails'
   gem 'rspec-rails'
   gem 'bullet'
+  gem 'letter_opener'
 end
 
 group :development do
