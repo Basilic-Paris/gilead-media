@@ -1,27 +1,40 @@
-<h2>Change your password</h2>
+<div class="container container-content d-flex flex-column">
 
-<%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
-  <%= f.error_notification %>
-
-  <%= f.input :reset_password_token, as: :hidden %>
-  <%= f.full_error :reset_password_token %>
-
-  <div class="form-inputs">
-    <%= f.input :password,
-                label: "New password",
-                required: true,
-                autofocus: true,
-                hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
-                input_html: { autocomplete: "new-password" } %>
-    <%= f.input :password_confirmation,
-                label: "Confirm your new password",
-                required: true,
-                input_html: { autocomplete: "new-password" } %>
+  <div class="d-flex-default p-5">
+    <%= image_tag "logo_gilead_media.png" %>
   </div>
 
-  <div class="form-actions">
-    <%= f.button :submit, "Change my password" %>
-  </div>
-<% end %>
+  <div class="cards-devise">
+    <div class="card-devise w-100 d-flex-default">
+      <%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put, class: 'w-100' }) do |f| %>
+        <%= f.error_notification %>
 
-<%= render "devise/shared/links" %>
+        <%= f.input :reset_password_token, as: :hidden %>
+        <%= f.full_error :reset_password_token %>
+
+        <div class="form-inputs">
+          <%= f.input :password,
+                      label: "Nouveau mot de passe",
+                      required: true,
+                      autofocus: true,
+                      hint: ("#{@minimum_password_length} caractères minimum" if @minimum_password_length),
+                      input_html: { autocomplete: "new-password" } %>
+          <%= f.input :password_confirmation,
+                      label: "Confirmation de votre nouveau mot de passe",
+                      required: true,
+                      input_html: { autocomplete: "new-password" } %>
+        </div>
+
+        <div class="form-actions">
+          <%= f.button :submit, "Modifier mon mot de passe" %>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="card-devise card-devise-illustration">
+      <%= image_tag "photo_gilead.jpg" %>
+    </div>
+
+  </div>
+</div>
+  <%#= render "devise/shared/links" %>
