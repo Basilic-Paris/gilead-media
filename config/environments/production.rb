@@ -2,7 +2,8 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: "gilead-media.herokuapp.com" }
   config.action_mailer.delivery_method = :postmark
   config.action_mailer.postmark_settings = {
-    api_token: Rails.application.credentials.postmark_api_token
+    # api_token: Rails.application.credentials.postmark_api_token
+    Rails.application.credentials.dig(:postmark, :prod, :postmark_api_token)
   }
   # Settings specified here will take precedence over those in config/application.rb.
 
