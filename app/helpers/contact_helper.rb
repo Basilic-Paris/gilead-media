@@ -1,11 +1,7 @@
 module ContactHelper
-  def create_contacts(object, emails_list)
-    @errors = Array.new
-    emails_list.each do |email|
-      contact = object.contacts.new(email: email)
-      unless contact.save
-        @errors << "#{contact.email}: #{contact.errors.full_messages.join(', ')}"
-      end
+  def notify_contacts
+    contacts.each do |contact|
+      ContactMailer.notify_contacts(contact).deliver_later
     end
   end
 end
