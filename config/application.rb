@@ -30,5 +30,8 @@ module GileadMedia
     config.time_zone = 'Europe/Paris'
     config.i18n.default_locale = :fr
     config.i18n.available_locales = [:fr]
+    config.action_mailer.default_options = {
+      from: '"Alice Fabre" <a.fabre@basilic.com>'
+    }
   end
 end

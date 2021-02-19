@@ -44,6 +44,7 @@ class SharedListsController < ApplicationController
 
     if @shared_list.save
       @shared_list.add_contacts!
+      @shared_list.notify_contacts
       redirect_to shared_list_path(@shared_list), flash: { validation_message: true, message: "Votre liste de partage a bien été envoyée." }
     else
       render :show
