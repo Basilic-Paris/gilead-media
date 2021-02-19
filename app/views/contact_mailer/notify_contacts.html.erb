@@ -1,0 +1,19 @@
+<p>Bonjour,</p>
+
+<% if @contact.contactable_type == "SharedList" %>
+  <p><%= @user.full_name %> souhaite partager des documents avec vous.</p>
+<% elsif @contact.contactable_type == "SharedDocument" %>
+  <p><%= @user.full_name %> souhaite partager un document avec vous.</p>
+<% elsif @contact.contactable_type == "SharedFolder" %>
+  <p><%= @user.full_name %> souhaite partager un dossier avec vous.</p>
+<% end %>
+
+<p>Pour y accéder, veuillez cliquer sur le lien ci dessous:</p>
+
+<% if @contact.contactable_type == "SharedList" %>
+  <%= link_to 'Voir les documents', public_shared_list_url(@contact.contactable.code), target: :_blank %>
+<% elsif @contact.contactable_type == "SharedDocument" %>
+  <%= link_to 'Voir le document', public_shared_document_url(@contact.contactable.code), target: :_blank %>
+<% elsif @contact.contactable_type == "SharedFolder" %>
+  <%= link_to 'Voir le dossier', public_shared_folder_url(@contact.contactable.code), target: :_blank %>
+<% end %>
