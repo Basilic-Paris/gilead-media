@@ -19,6 +19,7 @@ class SharedDocumentsController < ApplicationController
 
     if @shared_document.save
       @shared_document.add_contacts!
+      @shared_document.notify_contacts
       redirect_to document_path(@document), flash: { validation_message: true, message: "Votre document a bien été envoyé." }
     else
       flash.now[:errors_create_shared_document] = true
