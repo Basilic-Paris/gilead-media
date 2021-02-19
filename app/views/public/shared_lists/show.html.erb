@@ -1,10 +1,10 @@
 <div class="container container-content">
   <div class="cards">
     <% @folders.each do |folder| %>
-      <%= render 'public/folders/card', folder: folder, shared_list: @shared_list %>
+      <%= render 'public/folders/card', folder: folder, shared_object: @shared_list %>
     <% end %>
     <% @documents.each do |document| %>
-      <%= render 'public/documents/card', document: document, shared_list: @shared_list %>
+      <%= render 'public/documents/card', document: document, shared_object: @shared_list %>
     <% end %>
   </div>
 </div>

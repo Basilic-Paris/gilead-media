@@ -24,5 +24,9 @@
       - else
         p.cut-text.mb-0.color-gray Non validé
     .card-actions
-      = link_to public_shared_list_document_path(shared_list.code, document), class: "btn" do
-        i.fa.fa-search
+      - if shared_object.class == SharedList
+        = link_to public_shared_list_document_path(shared_object.code, document), class: "btn" do
+          i.fa.fa-search
+      - if shared_object.class == SharedFolder
+        = link_to public_shared_folder_document_path(shared_object.code, document), class: "btn" do
+          i.fa.fa-search
