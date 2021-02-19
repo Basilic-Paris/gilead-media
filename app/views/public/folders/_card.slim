@@ -5,8 +5,13 @@
     .card-infos
       p.cut-text.mb-0.color-gray Date de création: #{display_date_for(folder.created_at)}
     .card-actions
-      = link_to public_shared_list_folder_path(shared_list.code, folder), class: "btn" do
-        i.fa.fa-search
-      - if shared_list.download?
+      - if shared_object.class == SharedList
+        = link_to public_shared_list_folder_path(shared_object.code, folder), class: "btn" do
+          i.fa.fa-search
+      - if shared_object.class == SharedFolder
+        = link_to public_shared_folder_folder_path(shared_object.code, folder), class: "btn" do
+          i.fa.fa-search
+
+      - if shared_object.download?
         = link_to download_folder_path(folder), method: :patch, class: "btn" do
           i.fas.fa-file-download
