@@ -2,6 +2,7 @@ class FoldersController < ApplicationController
   require 'zip'
   require 'tempfile'
 
+  skip_before_action :authenticate_user!, only: :download
   before_action :find_folder, only: %i[show download]
   before_action :find_documents, only: %i[show download]
 
@@ -75,7 +76,7 @@ class FoldersController < ApplicationController
   end
 
   def find_documents
-    current_user.admin? ? @documents = DocumentDecorator.decorate_collection(@folder.documents.includes(attachment_attachment: :blob)) : @documents = DocumentDecorator.decorate_collection(@folder.documents.validated.includes(attachment_attachment: :blob))
+    current_user.present? && current_user.admin? ? @documents = DocumentDecorator.decorate_collection(@folder.documents.includes(attachment_attachment: :blob)) : @documents = DocumentDecorator.decorate_collection(@folder.documents.validated.includes(attachment_attachment: :blob))
   end
 
   # TO KEEP: initial version to add folders or documents to shared list directly
