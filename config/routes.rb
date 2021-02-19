@@ -51,5 +51,10 @@ Rails.application.routes.draw do
       resources :folders, only: %i[show]
       resources :documents, only: %i[show]
     end
+    resources :shared_documents, param: :code, only: %i[show]
+    resources :shared_folders, param: :code, only: %i[show] do
+      resources :folders, only: %i[show]
+      resources :documents, only: %i[show]
+    end
   end
 end
