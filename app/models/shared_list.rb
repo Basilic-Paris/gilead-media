@@ -1,5 +1,6 @@
 class SharedList < ApplicationRecord
   include SharedListStateMachine
+  include ContactHelper
 
   belongs_to :user
   has_many :document_shared_lists
