@@ -1,5 +1,5 @@
 = simple_form_for [folder, shared_list], url: create_and_attach_folder_folder_shared_lists_path(folder), data: { controller: "flatpickr" }, html: { class: "label-input-in-line-equal-space" }, remote: true do |f|
   = f.input :title, label: false, placeholder: "Nommez votre liste de partage", input_html: { style: "grid-column: 1 / span 2" }
   = f.input :validity, as: :string, placeholder: "Date", input_html: { data: { target: "flatpickr.dateSelection" } }
-  = f.input :download, as: :select, include_blank: false
-  text-right = f.submit "Valider", class: "btn"
+  = f.input :download, as: :select, prompt: "Sélectionnez"
+  = f.submit "Valider", class: "btn"

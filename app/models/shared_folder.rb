@@ -8,4 +8,5 @@ class SharedFolder < ApplicationRecord
 
   validates :code, presence: true, uniqueness: true, length: { is: 16 }
   validates :contacts, presence: true
+  validates :download, presence: true
 end
