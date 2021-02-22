@@ -2,7 +2,7 @@
   display: grid;
   &-users {
     grid-template-columns: repeat(5, auto);
-    grid-gap: 1rem;
+    grid-gap: 2rem 1rem;
     &-title {
       color: #C73442;
       font-weight: bold;
