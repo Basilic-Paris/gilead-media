@@ -8,5 +8,5 @@ class SharedDocument < ApplicationRecord
 
   validates :code, presence: true, uniqueness: true, length: { is: 16 }
   validates :contacts, presence: true
-  validates :download, presence: true
+  validates :download, inclusion: { in: [true, false] }
 end

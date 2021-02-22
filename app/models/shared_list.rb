@@ -12,7 +12,7 @@ class SharedList < ApplicationRecord
   validates :title, presence: true#, uniqueness: { scope: :user }
   validates :code, presence: true, uniqueness: true, length: { is: 16 }
   validates :contacts, presence: true, on: :update
-  validates :download, presence: true
+  validates :download, inclusion: { in: [true, false] }
 
   scope :ordered_by_title, -> { order('lower(title)') }
 end
