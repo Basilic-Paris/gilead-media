@@ -1,8 +1,8 @@
 = simple_form_for [folder, shared_folder], data: { controller: "flatpickr" }, html: { class: "label-input-in-line-equal-space" }, remote: true do |f|
   = f.input :validity, as: :string, placeholder: "Date", input_html: { data: { target: "flatpickr.dateSelection" } }
-  = f.input :download, as: :select, include_blank: false
+  = f.input :download, as: :select, prompt: "Sélectionnez"
   = f.association :contacts do |c|
     = c.input :email, label: "Destinataires", input_html: { value: shared_folder.contacts.map(&:email).join(", ") }
   = render 'contacts/errors_on_association', object: shared_folder
 
-  .text-right = f.submit "Envoyer", class: "btn"
+  = f.submit "Envoyer", class: "btn"

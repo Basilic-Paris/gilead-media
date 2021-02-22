@@ -1,4 +1,10 @@
 fr:
+  helpers:
+    submit:
+      document:
+        create: "Créer un document"
+        update: "Modifier ce document"
+
   activerecord:
     attributes:
       user:

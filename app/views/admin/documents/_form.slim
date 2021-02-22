@@ -1,9 +1,17 @@
 = simple_form_for [:admin, @document], remote: true do |f|
-  = f.input :title
-  = f.input :language, as: :radio_buttons, collection: Document::LANGUAGES.map { |k,v| [v,k] }
-  = f.input :usage
-  = f.input :attachment, as: :file
-  .text-center = f.submit class: "btn"
+  .border.p-5.bg-white
+    = f.input :title
+    = f.input :language, as: :select, collection: Document::LANGUAGES.map { |k,v| [v,k] }, prompt: "Sélectionnez une langue"
+    = f.input :usage
+    = f.input :attachment, as: :file
+    // label.d-flex.align-items-center
+      span.btn.mr-3 Choisir un document
+      .d-none = f.input :attachment, as: :file, label: false
+      - if document.attachment.present?
+        span = document.attachment_blob[:filename]
+      - else
+        span Aucun fichier choisi
+  .pt-5.text-center = f.submit class: "btn"
 
   //.text-center
     - if params[:action] == "new"

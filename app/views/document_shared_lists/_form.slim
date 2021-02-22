@@ -1,3 +1,3 @@
 = simple_form_for [document, document_shared_list], remote: true do |f|
   = f.association :shared_list, collection: current_user.shared_lists.initial, as: :radio_buttons, required: false, legend_tag: false
-  .text-right = f.submit "Valider", class: "btn"
+  = f.submit "Valider", class: "btn"

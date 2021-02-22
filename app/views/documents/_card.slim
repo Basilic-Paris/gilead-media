@@ -17,10 +17,12 @@
 
   .card-content.d-flex-column-between
     .card-infos
-      p.cut-text.font-weight-bold.mb-0 = document.title
-      p.cut-text.mb-0.color-gray = document.display_language
+      p.cut-text.font-weight-bold = document.title
+      p.cut-text.mb-0 Langue:
+      p.cut-text.color-gray = document.display_language
+      p.cut-text.mb-0 Date de validation:
       - if document.validated?
-        p.cut-text.mb-0.color-gray = display_date_for(document.validation_at)
+        p.cut-text.color-gray = display_date_for(document.validation_at)
       - else
         p.cut-text.mb-0.color-gray Non validé
     .card-actions

@@ -1,0 +1,22 @@
+.was-validated .form-control:valid, .form-control.is-valid {
+  border-color: #ced4da;
+  background-image: none;
+}
+
+.was-validated .form-control:valid:focus, .form-control.is-valid:focus {
+  border-color: #ced4da;
+  box-shadow: none;
+}
+
+.was-validated .form-check-input:valid ~ .form-check-label, .form-check-input.is-valid ~ .form-check-label {
+  color: #495057;
+}
+
+.form-control:focus {
+  border-color: #ced4da;
+  box-shadow: none;
+}
+
+.form-group {
+  margin-bottom: 2rem;
+}

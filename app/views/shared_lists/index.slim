@@ -1,7 +1,10 @@
 .container.container-content
+  p.text-center Vous n'avez pas de liste de partage active pour le moment.
+
+//.container.container-content
   - if @shared_lists.present?
     .cards
       - @shared_lists.each do |shared_list|
         = render 'card', shared_list: shared_list
   - else
-    p Vous n'avez pas de liste active pour le moment.
+    p Vous n'avez pas de liste de partage active pour le moment.
