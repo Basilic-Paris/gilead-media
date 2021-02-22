@@ -3,7 +3,11 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="addDocumentToSharedDocumentTitle">Envoyer <%= document.title %> à</h5>
+        <div class="modal-title" id="addDocumentToSharedDocumentTitle">
+          <h4 class="color-burgundy mb-0">Envoyer</h4>
+          <h5 class="mb-0"><%= document.title %></h5>
+          <h4 class="color-burgundy mb-0">à...</h4>
+        </div>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>

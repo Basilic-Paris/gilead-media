@@ -3,22 +3,26 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="addDocumentToFolderOrSharedListTitle">Ajouter <%= document.title %> à</h5>
+        <div class="modal-title" id="addDocumentToFolderOrSharedListTitle">
+          <h4 class="color-burgundy mb-0">Ajouter</h4>
+          <h5 class="mb-0"><%= document.title %></h5>
+          <h4 class="color-burgundy mb-0">à...</h4>
+        </div>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
         <% if policy(document_shared_list).create? %>
-          <p class="mb-2">Liste de partage</p>
+          <h5 class="modal-body-title">Liste de partage</h5>
           <%= render 'document_shared_lists/form', document: document, document_shared_list: document_shared_list %>
         <% end %>
         <% if policy(shared_list).create_and_attach_document? %>
-          <p class="mb-2">Liste de partage</p>
+          <h5 class="modal-body-title">Liste de partage</h5>
           <%= render 'shared_lists/create_and_attach_document_form', document: document, shared_list: shared_list %>
         <% end %>
         <% if policy([:admin, document]).add_to_folder? %>
-          <p class="mb-2">Dossier(s)</p>
+          <h5 class="modal-body-title">Dossier(s)</h5>
           <%= render 'documents/add_to_folder_form', document: document %>
         <% end %>
         <!-- TO KEEP: initial version to add folders or documents to shared list directly -->
