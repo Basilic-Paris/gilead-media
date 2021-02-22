@@ -1,9 +1,7 @@
 .simple_form.search {
   .form-group {
     margin-bottom: 0;
-    &.search_title {
-      width: 100%;
-    }
+    flex-grow: 1;
   }
   [data-target="search.moreOptions"] {
     @media(max-width: 767px) {
