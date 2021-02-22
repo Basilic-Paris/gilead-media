@@ -10,10 +10,10 @@ class ApplicationController < ActionController::Base
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
   def user_not_authorized
     if controller_path.split("/").first == "public"
-      flash[:alert] = "Cette page n'existe plus ou a été déplacée."
+      flash[:alert] = "Ce lien n'est plus actif."
       redirect_to(public_root_path)
     else
-      flash[:alert] = "You are not authorized to perform this action."
+      flash[:alert] = "Vous n'êtes pas autorisé à effectuer cette action."
       redirect_to(root_path)
     end
   end
