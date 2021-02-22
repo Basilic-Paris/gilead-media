@@ -4,7 +4,7 @@ class Public::SharedListsController < ApplicationController
   layout "public"
 
   def show
-    @documents = DocumentDecorator.decorate_collection(@shared_list.documents.validated)
+    @documents = DocumentDecorator.decorate_collection(@shared_list.documents.validated.includes(attachment_attachment: :blob))
     @folders = @shared_list.folders.with_validated_documents
   end
 
