@@ -1,9 +1,14 @@
 .card.rounded
-  .card-illustration
-    .card-illustration-text = folder.title
+  .card-illustration style="position:relative"
+    = image_tag "dossier_plein.png"
+    .d-flex.justify-content-center.align-items-center.text-center.h-100.w-100 style="position:absolute; top:0; left:0"
+      div style="width: 30%" = folder.title
   .card-content.d-flex-column-between
     .card-infos
-      p.cut-text.mb-0.color-gray Date de création: #{display_date_for(folder.created_at)}
+      p.cut-text.mb-0 Date de création:
+      p.cut-text.color-gray #{display_date_for(folder.created_at)}
+      p.cut-text.mb-0 Contenu:
+      p.cut-text.color-gray #{policy_scope([:public, folder.documents]).count} élément(s)
     .card-actions
       - if shared_object.class == SharedList
         = link_to public_shared_list_folder_path(shared_object.code, folder), class: "btn" do
