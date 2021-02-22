@@ -47,6 +47,7 @@ Rails.application.routes.draw do
 
   # -------- PUBLIC ROUTES ---------
   namespace :public do
+    root to: 'pages#home'
     resources :shared_lists, param: :code, only: %i[show] do
       resources :folders, only: %i[show]
       resources :documents, only: %i[show]
