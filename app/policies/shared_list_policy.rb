@@ -17,7 +17,7 @@ class SharedListPolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
-      scope.where(user: user)
+      scope.where(user: user).initial
     end
   end
 end
