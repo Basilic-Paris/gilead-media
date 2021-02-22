@@ -1,6 +1,5 @@
 class Public::FoldersController < ApplicationController
   skip_before_action :authenticate_user!, only: :show
-  skip_after_action :verify_authorized, only: :show
   before_action :find_shared_object, :find_folder, only: :show
   layout "public"
 
@@ -16,6 +15,7 @@ class Public::FoldersController < ApplicationController
     elsif params[:shared_folder_code].present?
       @shared_object = SharedFolder.find_by(code: params[:shared_folder_code])
     end
+    authorize([:public, @shared_object], :show?)
   end
 
   def find_folder
