@@ -25,6 +25,8 @@
 }
 
 .btn:disabled, .btn:disabled:hover {
-  // visibility: hidden;
-  content:'goodbye';
+  border: thin solid;
+  color: white !important;
+  background-color: #C73442 !important;
+  opacity: 0.65 !important;
 }
