@@ -97,9 +97,25 @@ class Document < ApplicationRecord
   def set_format
     case main_content_type
     when "image"
-      self.format = "image"
+      case content_type
+      when "image/gif"
+        self.format = "image"
+      when "image/png"
+        self.format = "image"
+      when "image/jpeg"
+        self.format = "image"
+      else
+        self.format = "other"
+      end
     when "video"
-      self.format = "video"
+      case content_type
+      when "video/mp4"
+        self.format = "video"
+      when "video/quicktime"
+        self.format = "video"
+      else
+        self.format = "other"
+      end
     when "application"
       case content_type
       when "application/pdf"
