@@ -23,6 +23,11 @@
 
   .card-one-element-content
     p.font-weight-bold.mb-5 = document.title
+    p.mb-0 Tag(s)
+    - if document.tag_list.present?
+      p.color-gray = document.tag_list
+    - else
+      p.color-gray Aucun
     p.mb-0 Langue:
     p.color-gray = document.display_language
     p.mb-0 Date de création:
