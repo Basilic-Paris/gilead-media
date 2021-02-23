@@ -45,6 +45,7 @@ gem 'draper'
 gem 'email_validator', require: 'email_validator/strict'
 gem 'aasm'
 gem 'postmark-rails'
+gem 'acts-as-taggable-on', '~> 6.0'
 
 group :development, :test do  gem 'pry-byebug'
   gem 'pry-rails'
