@@ -1,4 +1,6 @@
 class DocumentsController < ApplicationController
+  include ListHelper
+
   before_action :find_document, only: %i[show]
 
   def show
@@ -10,8 +12,17 @@ class DocumentsController < ApplicationController
   def index
     @documents = policy_scope(Document).includes(attachment_attachment: :blob)
     if search_params.present?
-      search_params.reject { |key, value| value.blank? }.each do |key, value|
-        key == :created_at ? @documents = @documents.created_in_days_range(value.first, value.last) : @documents = @documents.advanced_search(key, value)
+      search_params.reject { |key, value| value.blank? || key == "title" }.each do |key, value|
+        if key == "created_at"
+          @documents = @documents.created_in_days_range(value.split(" au ").first.to_date, value.split(" au ").last.to_date)
+        else
+          @documents = @documents.advanced_search(key, value)
+        end
+      end
+      if search_params[:title].present?
+        @documents = (@documents.advanced_search(:title, search_params[:title]) + @documents.tagged_with(arrange_list(search_params[:title]), any: true)).uniq
+      else
+        @documents
       end
     else
       @documents
@@ -40,7 +51,7 @@ class DocumentsController < ApplicationController
   end
 
   def search_params
-    params.fetch(:search, {}).permit(:title, :fmt, :language, :created_at)
+    params.fetch(:search, {}).permit(:title, :format, :language, :created_at)
   end
 
   # TO KEEP: initial version to add folders or documents to shared list directly
