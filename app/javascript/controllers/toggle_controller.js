@@ -4,7 +4,6 @@ export default class extends Controller {
   static targets = [ "moreOptions" ]
 
   connect() {
-    console.log("Hello")
   }
 
   toggle() {
