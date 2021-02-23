@@ -6,7 +6,7 @@
         <i data-target="search.dropdownIcon" data-action="click->search#toggle" class="fas fa-lg fa-sort-down btn"></i>
       </div>
       <div class="d-flex justify-content-between invisible" data-target="search.moreOptions">
-        <%= f.input :fmt, as: :select, collection: Document::FORMATS.map { |k,v| [v,k] }, prompt: "Type de document", label: false %>
+        <%= f.input :format, as: :select, collection: Document::FORMATS.map { |k,v| [v,k] }, prompt: "Type de document", label: false %>
         <%= f.input :created_at, label: false, placeholder: "Date", input_html: { data: { target: "search.datesSelection" } } %>
         <%= f.input :language, as: :select, collection: Document::LANGUAGES.map { |k,v| [v,k] }, prompt: "Langue", label: false %>
         <%= f.submit "Rechercher", class: "btn" %>

@@ -2,6 +2,8 @@ class Document < ApplicationRecord
   include DatetimeHelper
   include PgSearch::Model
 
+  acts_as_taggable_on :tags
+
   has_one_attached :attachment
   has_many :document_folders
   has_many :folders, through: :document_folders
@@ -34,7 +36,7 @@ class Document < ApplicationRecord
     "autres": "Autres"
   }
 
-  validates :title, presence: true
+  validates :title, presence: true, uniqueness: true
   validates :language, presence: true, inclusion: { in: LANGUAGES.stringify_keys.keys }
   validates :attachment, presence: true
 

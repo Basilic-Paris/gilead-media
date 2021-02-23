@@ -3,6 +3,7 @@
     = f.input :title
     = f.input :language, as: :select, collection: Document::LANGUAGES.map { |k,v| [v,k] }, prompt: "Sélectionnez une langue"
     = f.input :usage
+    = f.input :tag_list, value: document.tag_list.join(", ")
     = f.input :attachment, as: :file
     // label.d-flex.align-items-center
       span.btn.mr-3 Choisir un document
