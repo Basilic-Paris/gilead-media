@@ -22,22 +22,25 @@
         = image_tag "Picto_generique.png"
 
   .card-one-element-content
-    p.font-weight-bold.mb-5 = document.title
-    p.mb-0 Tag(s)
-    - if document.tag_list.present?
-      p.color-gray = document.tag_list
-    - else
-      p.color-gray Aucun
-    p.mb-0 Langue:
-    p.color-gray = document.display_language
-    p.mb-0 Date de création:
-    p.color-gray = display_date_for(document.created_at)
-    - if document.usage.present?
+    .mb-4
+      p.mb-2.font-weight-bold = document.title
+      - if document.tag_list.present?
+        p.mb-2.color-gray = document.tag_list.map{|tag| tag.upcase}.join("; ")
+      - if document.validated?
+        p.mb-2.color-gray Mis en ligne le: #{display_date_for(document.validation_at)}
+    .mb-4
+      p.mb-0 Langue:
+      p.mb-2.color-gray = document.display_language
+      p.mb-0 Date de création:
+      p.mb-2.color-gray = display_date_for(document.created_at)
+      p.mb-0 Format:
+      p.mb-2.color-gray = Document::FORMATS[@document.format.to_sym]
+    .mb-2
       p.mb-0 Droits d'utilisation:
-      = simple_format(document.usage, class: "color-gray")
-    - else
-      p.mb-0 Droits d'utilisation:
-      p.color-gray Aucun
+      - if document.usage.present?
+        = simple_format(document.usage, class: "color-gray mb-2")
+      - else
+        p.mb-2.color-gray Aucun
 
     .btn-container
       - if policy([:admin, document]).validate?
