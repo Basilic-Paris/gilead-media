@@ -12,7 +12,7 @@
         span = document.attachment_blob[:filename]
       - else
         span Aucun fichier choisi
-  .pt-5.text-center = f.submit class: "btn"
+  .pt-5.text-center = f.submit class: "btn", data: { disable_with: 'Chargement...' }
 
   //.text-center
     - if params[:action] == "new"
