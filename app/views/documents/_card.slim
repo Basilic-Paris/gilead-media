@@ -18,13 +18,13 @@
   .card-content.d-flex-column-between
     .card-infos
       p.cut-text.font-weight-bold = document.title
-      p.cut-text.mb-0 Langue:
-      p.cut-text.color-gray = document.display_language
       p.cut-text.mb-0 Date de validation:
       - if document.validated?
         p.cut-text.color-gray = display_date_for(document.validation_at)
       - else
-        p.cut-text.mb-0.color-gray Non validé
+        p.cut-text.color-gray Non validé
+      p.cut-text.mb-0 Langue:
+      p.cut-text.color-gray = document.display_language
     .card-actions
       = link_to document_path(document), class: "btn" do
         i.fa.fa-search
