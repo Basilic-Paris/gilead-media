@@ -2,7 +2,7 @@ $("form#new_document_shared_list").replaceWith("<%= j render('document_shared_li
 $("form#new_shared_list").replaceWith("<%= j render('shared_lists/create_and_attach_document_form', document: @document, shared_list: @shared_list) %>");
 $("form#new_shared_document").replaceWith("<%= j render('shared_documents/form', document: @document, shared_document: @shared_document) %>");
 
-$('.modal#addDocumentToFolderOrSharedList').on('hidden.bs.modal', event => {
+$('.modal#addDocument<%=@document.id%>ToFolderOrSharedList').on('hidden.bs.modal', event => {
   $("form#new_document_shared_list").replaceWith("<%= j render('document_shared_lists/form', document: @document, document_shared_list: @document.document_shared_lists.new) %>");
   $("form#new_shared_list").replaceWith("<%= j render('shared_lists/create_and_attach_document_form', document: @document, shared_list: SharedList.new) %>");
 })
