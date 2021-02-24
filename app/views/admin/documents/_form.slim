@@ -1,18 +1,55 @@
-= simple_form_for [:admin, @document], remote: true do |f|
-  .border.p-5.bg-white
-    = f.input :title
-    = f.input :tag_list, value: document.tag_list.join(", ")
-    = f.input :language, as: :select, collection: Document::LANGUAGES.map { |k,v| [v,k] }, prompt: "Sélectionnez une langue"
-    = f.input :usage
-    = f.input :attachment, as: :file
-    // label.d-flex.align-items-center
-      span.btn.mr-3 Choisir un document
+= simple_form_for [:admin, document], remote: true do |f|
+  .cards-one-element
+    label.card-one-element-illustration.d-flex-default.flex-column style="cursor: pointer"
       .d-none = f.input :attachment, as: :file, label: false
-      - if document.attachment.present?
-        span = document.attachment_blob[:filename]
+      - if document.attachment.present? && document.attachment.persisted?
+        - case document.format
+        - when "image"
+          = image_tag document.attachment, class: "p-0"
+        - when "video"
+          = video_tag (url_for(document.attachment) + "#t=0.5"), controls: true, class: "p-0"
+        - when "pdf"
+          .h-100.d-flex-default
+            = image_tag "Picto_pdf.png"
+        - when "xls"
+          .h-100.d-flex-default
+            = image_tag "Picto_excel.png"
+        - when "ppt"
+          .h-100.d-flex-default
+            = image_tag "Picto_ppt.png"
+        - when "word"
+          .h-100.d-flex-default
+            = image_tag "Picto_word.png"
+        - else
+          .h-100.d-flex-default
+            = image_tag "Picto_generique.png"
       - else
-        span Aucun fichier choisi
-  .pt-5.text-center = f.submit class: "btn", data: { disable_with: 'Chargement...' }
+        .h-100.d-flex-default
+          i.fas.fa-download.fa-10x.color-burgundy
+
+      - if document.errors[:attachment].present?
+        .invalid-feedback.d-block.text-center.mb-5 = document.errors.full_messages_for(:attachment).join(",")
+      - elsif document.attachment.present? && !document.attachment.persisted?
+        .invalid-feedback.d-block.text-center.mb-5 Pièce jointe doit être rempli(e)
+
+    .card-one-element-content
+      .mb-4
+        = f.input :title
+        = f.input :tag_list, value: document.tag_list.join(", ")
+        = f.input :language, as: :select, collection: Document::LANGUAGES.map { |k,v| [v,k] }, prompt: "Sélectionnez une langue"
+        = f.input :usage
+        //= f.input :attachment, as: :file
+        //label.d-flex.align-items-center.mb-5.pb-5
+          - if document.attachment.present?
+            span.btn.mr-3 Choisir un autre document
+          - else
+            span.btn.mr-3 Choisir un autre document
+          .d-none = f.input :attachment, as: :file, label: false
+          //- if document.attachment.present?
+            span = document.attachment_blob[:filename]
+          //- else
+            span Aucun fichier choisi
+        .text-center = f.submit class: "btn", data: { disable_with: 'Chargement...' }
 
   //.text-center
     - if params[:action] == "new"
