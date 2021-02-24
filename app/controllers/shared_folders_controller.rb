@@ -21,7 +21,10 @@ class SharedFoldersController < ApplicationController
     if @shared_folder.save
       @shared_folder.add_contacts!
       @shared_folder.notify_contacts
-      redirect_to folders_path, flash: { validation_message: true, message: "Votre dossier a bien été envoyé." }
+      respond_to do |format|
+        format.html { redirect_to folders_path, flash: { validation_message: true, message: "Votre dossier a bien été envoyé." } }
+        format.js { @message = "Votre dossier a bien été envoyé." }
+      end
     else
       flash.now[:errors_create_shared_folder] = true
       render 'folders/index'

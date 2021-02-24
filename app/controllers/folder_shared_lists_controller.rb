@@ -7,7 +7,10 @@ class FolderSharedListsController < ApplicationController
     @folder_shared_list = @folder.folder_shared_lists.new(folder_shared_list_params)
     authorize @folder_shared_list
     if @folder_shared_list.save
-      redirect_to folders_path, flash: { validation_message: true, message: "Votre dossier a bien été ajouté à la liste de partage." }
+      respond_to do |format|
+        format.html { redirect_to folders_path, flash: { validation_message: true, message: "Votre dossier a bien été ajouté à la liste de partage." } }
+        format.js { @message = "Votre dossier a bien été ajouté à la liste de partage." }
+      end
     else
       flash.now[:errors_attach_folder] = true
       render "folders/index"

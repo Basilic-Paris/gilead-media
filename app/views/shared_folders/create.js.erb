@@ -1,0 +1,4 @@
+$('.modal#addFolderToSharedFolder<%=@folder.id%>').modal('toggle');
+
+$('.modal#validationModal').replaceWith("<%= j render('shared/validation_modal', message: @message) %>")
+$('.modal#validationModal').modal("toggle");
