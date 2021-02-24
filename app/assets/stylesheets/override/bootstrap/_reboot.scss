@@ -9,3 +9,7 @@ abbr[title], abbr[data-original-title] {
 //   -webkit-text-decoration-skip-ink: none;
 //           text-decoration-skip-ink: none;
 }
+
+button:focus {
+  outline: none;
+}
