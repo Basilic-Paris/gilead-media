@@ -4,10 +4,40 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <style>
       /* Email styles need to be inline */
+      @media all {
+        .btn {
+          margin-top: 2rem;
+          padding: 10px 30px;
+          text-transform: uppercase;
+          text-decoration: none;
+          cursor: pointer;
+          background: #C73442;
+          color: white !important;
+        }
+
+        .btn:focus {
+          outline: none;
+        }
+
+        .btn:hover {
+          background: white;
+          color: #C73442 !important;
+          border: 1px solid #C73442;
+        }
+
+        table {
+          margin: 2em 0;
+          display: flex;
+          align-items: center;
+          justify-content: center
+        }
+      }
     </style>
   </head>
 
   <body>
     <%= yield %>
+    <p>Nous vous en souhaitons bonne réception.</p>
+    <%= image_tag("Logo_GileadMédia_Noir.png", style: "width: 12em", alt: "logo_gilead_media_noir") %>
   </body>
 </html>

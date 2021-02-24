@@ -3,6 +3,7 @@
 <head>
   <title>We're sorry, but something went wrong (500)</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta charset="UTF-8">
   <style>
   .rails-default-error-page {
     background-color: #EFEFEF;
@@ -51,16 +52,49 @@
     color: #666;
     box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
   }
+
+  a {
+    margin-top: 2rem;
+    padding: 10px 30px;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+    background: #C73442;
+    color: white !important;
+  }
+
+  a:focus {
+    outline: none;
+  }
+
+  a:hover {
+    background: white;
+    color: #C73442 !important;
+    border: 1px solid #C73442;
+  }
+
   </style>
 </head>
 
 <body class="rails-default-error-page">
   <!-- This file lives in public/500.html -->
-  <div class="dialog">
+  <!-- <div class="dialog">
     <div>
       <h1>We're sorry, but something went wrong.</h1>
     </div>
     <p>If you are the application owner check the logs for more information.</p>
+  </div> -->
+  <div style="height: 80vh; display: flex; justify-content: center; align-items: center; flex-direction: column">
+    <img src="https://gilead-media-staging.herokuapp.com/assets/Logo_GileadM%C3%A9dia_Noir-fad4c61d3e255e1d9d144aa1bfc0c9404fea8b3ad2e998a2aba37c7fd8cba3c3.png">
+    <div style="padding: 0.5em 0 0.5em 0">
+      <p>Cette page ne fonctionne pas.</p>
+      <p>Notre équipe met tout en oeuvre pour régler ce problème.</p>
+    </div>
+    <a href="#" id='host-link'>Revenir à l'accueil</a>
   </div>
+
+  <script type="text/javascript">
+    document.getElementById('host-link').href = window.location.origin;
+  </script>
 </body>
 </html>

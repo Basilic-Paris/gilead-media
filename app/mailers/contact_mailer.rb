@@ -1,4 +1,4 @@
-class ContactMailer < Devise::Mailer
+class ContactMailer < ApplicationMailer
   def notify_contacts(contact)
     @contact = contact
     @user = @contact.contactable.user
