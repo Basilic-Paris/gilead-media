@@ -39,7 +39,7 @@ class Admin::DocumentsController < ApplicationController
 
   def add_to_folder
     if @document.update(folder_params)
-      redirect_to document_path(@document)
+      redirect_to document_path(@document), flash: { validation_message: true, message: "Votre document a bien été ajouté au dossier." }
     else
       render :show
     end

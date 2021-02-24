@@ -1,5 +1,6 @@
 class DocumentSharedListsController < ApplicationController
   def create
+    @documents = policy_scope(Document).validated
     @shared_document = SharedDocument.new
     @shared_list = SharedList.new
     @document = Document.find(params[:document_id]).decorate
