@@ -5,7 +5,7 @@ class Admin::DocumentsController < ApplicationController
   def validate
     @document.validation_at = DateTime.now
     if @document.save
-      redirect_to documents_path
+      redirect_to document_path(@document)
     else
       render "documents/show"
     end
@@ -39,7 +39,10 @@ class Admin::DocumentsController < ApplicationController
 
   def add_to_folder
     if @document.update(folder_params)
-      redirect_to document_path(@document), flash: { validation_message: true, message: "Votre document a bien été ajouté au dossier." }
+      respond_to do |format|
+        format.html { redirect_to document_path(@document), flash: { validation_message: true, message: "Votre document a bien été ajouté au(x) dossier(s)." } }
+        format.js { @message = "Votre document a bien été ajouté au(x) dossier(s)." }
+      end
     else
       render :show
     end
