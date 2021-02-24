@@ -10,6 +10,7 @@ class DocumentsController < ApplicationController
   end
 
   def index
+    @shared_document = SharedDocument.new
     @documents = policy_scope(Document).includes(attachment_attachment: :blob)
     if search_params.present?
       search_params.reject { |key, value| value.blank? || key == "title" }.each do |key, value|
@@ -28,10 +29,10 @@ class DocumentsController < ApplicationController
       @documents
     end
 
-    respond_to do |format|
-      format.html
-      format.js
-    end
+    # respond_to do |format|
+    #   format.html
+    #   format.js
+    # end
   end
 
   # TO KEEP: initial version to add folders or documents to shared list directly

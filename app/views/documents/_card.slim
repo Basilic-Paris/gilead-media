@@ -28,6 +28,9 @@
     .card-actions
       = link_to document_path(document), class: "btn" do
         i.fa.fa-search
+      - if document.validated? && (params[:controller] == "documents" && params[:action] == "index")
+        = link_to document_path(document), data: { toggle: "modal", target: "#addDocumentToSharedDocument#{document.id}" }, class: "btn" do
+          i.far.fa-paper-plane
 
 //div
   - case document.format

@@ -10,6 +10,10 @@
     <% end %>
     <% documents.each do |document| %>
       <%= render 'card', document: document.decorate %>
+
+      <% if document.validated? %>
+        <%= render 'documents/add_to_shared_document_modal', document: document, shared_document: @shared_document %>
+      <% end %>
     <% end %>
   </div>
 </div>

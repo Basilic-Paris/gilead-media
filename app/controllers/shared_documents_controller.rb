@@ -4,6 +4,7 @@ class SharedDocumentsController < ApplicationController
   before_action :find_document, only: %i[create]
 
   def create
+    @documents = policy_scope(Document).validated
     @shared_list = SharedList.new
     @document_shared_list = DocumentSharedList.new
 
