@@ -1,4 +1,5 @@
 $('.modal#addFolderToSharedFolder<%=@folder.id%>').modal('toggle');
+$('.modal#addFolderToSharedFolder<%=@folder.id%> form#new_shared_folder').replaceWith("<%= j render('shared_folders/form', folder: @folder, shared_folder: SharedFolder.new) %>")
 
 $('.modal#validationModal').replaceWith("<%= j render('shared/validation_modal', message: @message) %>")
 $('.modal#validationModal').modal("toggle");
