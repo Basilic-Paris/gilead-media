@@ -46,7 +46,8 @@
       - if policy([:admin, document]).validate?
         = link_to 'Mettre en ligne', admin_document_validate_path(document), method: :patch, class: "btn"
       - if policy([:admin, document]).edit?
-        = link_to 'Modifier', edit_admin_document_path(document), class: "btn"
+        = link_to edit_admin_document_path(document), class: "btn" do
+          i.fas.fa-cog
       = link_to rails_blob_path(document.attachment, disposition: "attachment"), class: "btn" do
         i.fas.fa-file-download
       - if document.validated?
