@@ -14,6 +14,9 @@ class FoldersController < ApplicationController
   end
 
   def show
+    @shared_list = SharedList.new
+    @folder_shared_list = FolderSharedList.new
+    @shared_folder = SharedFolder.new
   end
 
   # TO KEEP: initial version to add folders or documents to shared list directly
