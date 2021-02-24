@@ -7,6 +7,6 @@ $('.modal#addDocumentToFolderOrSharedList').on('hidden.bs.modal', event => {
   $("form#new_shared_list").replaceWith("<%= j render('shared_lists/create_and_attach_document_form', document: @document, shared_list: SharedList.new) %>");
 })
 
-$('.modal#addDocumentToSharedDocument').on('hidden.bs.modal', event => {
+$('.modal#addDocumentToSharedDocument<%= @document.id %>').on('hidden.bs.modal', event => {
   $("#new_shared_document").replaceWith("<%= j render('shared_documents/form', document: @document, shared_document: SharedDocument.new) %>");
 })
