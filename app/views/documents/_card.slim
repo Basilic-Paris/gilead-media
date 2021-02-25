@@ -28,9 +28,11 @@
     .card-actions
       = link_to document_path(document), class: "btn" do
         i.fa.fa-search
-      - if document.validated? && (params[:controller] == "documents" && params[:action] == "index")
+      - if document.validated? && ((params[:controller] == "documents" && params[:action] == "index") || (params[:controller] == "shared_lists" && params[:action] == "create_and_attach_document") || (params[:controller] == "shared_documents" && params[:action] == "create") || (params[:controller] == "document_shared_lists" && params[:action] == "create") || (params[:controller] == "documents" && params[:action] == "add_to_folder"))
         = link_to document_path(document), data: { toggle: "modal", target: "#addDocumentToSharedDocument#{document.id}" }, class: "btn" do
           i.far.fa-paper-plane
+        = link_to document_path(document), data: { toggle: "modal", target: "#addDocument#{document.id}ToFolderOrSharedList" }, class: "btn" do
+          i.fas.fa-plus
 
 //div
   - case document.format

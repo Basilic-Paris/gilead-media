@@ -11,7 +11,9 @@ class DocumentsController < ApplicationController
 
   def index
     @shared_document = SharedDocument.new
-    @documents = policy_scope(Document).includes(attachment_attachment: :blob)
+    @shared_list = SharedList.new
+    @document_shared_list = DocumentSharedList.new
+    @documents = policy_scope(Document).includes(:folders, attachment_attachment: :blob, document_folders: :folder)
     if search_params.present?
       search_params.reject { |key, value| value.blank? || key == "title" }.each do |key, value|
         if key == "created_at"
