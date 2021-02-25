@@ -1,4 +1,4 @@
-$('.modal#addDocumentToSharedDocument<%=@document.id%>').modal('toggle');
+$('.modal#addDocumentToSharedDocument<%=@document.id%>').modal('hide');
 $('.modal#addDocumentToSharedDocument<%=@document.id%> form#new_shared_document').replaceWith("<%= j render('shared_documents/form', document: @document, shared_document: SharedDocument.new) %>")
 
 $('.modal#validationModal').replaceWith("<%= j render('shared/validation_modal', message: @message) %>")
