@@ -5,9 +5,10 @@ class Document < ApplicationRecord
   acts_as_taggable_on :tags
 
   has_one_attached :attachment
-  has_many :document_folders
+  has_many :document_folders, dependent: :destroy
+  has_many :shared_documents, dependent: :destroy
   has_many :folders, through: :document_folders
-  has_many :document_shared_lists
+  has_many :document_shared_lists, dependent: :destroy
   has_many :shared_lists, through: :document_shared_lists
 
   # accepts_nested_attributes_for :folders, reject_if: -> (folder) { folder[:title].blank? }

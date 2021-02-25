@@ -1,7 +1,7 @@
 class Folder < ApplicationRecord
-  has_many :document_folders
+  has_many :document_folders, dependent: :destroy
   has_many :documents, through: :document_folders
-  has_many :folder_shared_lists
+  has_many :folder_shared_lists, dependent: :destroy
   has_many :shared_lists, through: :folder_shared_lists
 
   validates :title, presence: true, uniqueness: true

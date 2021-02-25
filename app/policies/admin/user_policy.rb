@@ -3,6 +3,10 @@ class Admin::UserPolicy < ApplicationPolicy
     user.admin?
   end
 
+  def destroy?
+    user.admin?
+  end
+
   class Scope < Scope
     def resolve
       scope.all

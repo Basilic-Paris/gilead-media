@@ -5,9 +5,9 @@ class User < ApplicationRecord
   #        :recoverable, :rememberable, :validatable
   devise :database_authenticatable, :recoverable, :rememberable, :validatable, :password_expirable, :password_archivable
 
-  has_many :shared_lists
-  has_many :shared_documents
-  has_many :shared_folders
+  has_many :shared_lists, dependent: :destroy
+  has_many :shared_documents, dependent: :destroy
+  has_many :shared_folders, dependent: :destroy
   has_many :document_shared_lists, through: :shared_lists
   has_many :folder_shared_lists, through: :shared_lists
 

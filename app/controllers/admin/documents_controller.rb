@@ -1,5 +1,5 @@
 class Admin::DocumentsController < ApplicationController
-  before_action :find_document, only: %i[edit update add_to_folder]
+  before_action :find_document, only: %i[edit update destroy add_to_folder]
   before_action :find_document_with_document_id, only: %i[validate]
 
   def validate
@@ -46,6 +46,11 @@ class Admin::DocumentsController < ApplicationController
     else
       render :show
     end
+  end
+
+  def destroy
+    @document.destroy
+    redirect_to documents_path, { flash: { validation_message: true, message: "Le document a bien été supprimé." } }
   end
 
   private

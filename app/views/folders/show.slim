@@ -1,7 +1,10 @@
 .container.container-content
   .d-flex.justify-content-between.alig-items-center
     h1 = @folder.title
-    .card-actions
+    h1.card-actions
+      - if policy([:admin, @folder]).destroy?
+        = link_to admin_folder_path(@folder), method: :delete, data: {confirm: "<p class='text-center mt-n-3'>Vous êtes sur le point de supprimer un dossier.<br>Souhaitez-vous confirmer?</p>".html_safe } do
+          i.btn.fa.fa-minus.h-100.pt-2
       = link_to download_folder_path(@folder), method: :patch, class: "btn" do
         i.fas.fa-file-download
       = link_to folder_path(@folder), data: { toggle: "modal", target: "#addFolderToSharedFolder#{@folder.id}" }, class: "btn" do
