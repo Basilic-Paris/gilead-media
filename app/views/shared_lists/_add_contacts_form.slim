@@ -5,4 +5,6 @@
       = c.input :email, label: "Destinataires", required: false, disabled: !shared_list.initial?, input_html: { value: shared_list.contacts.pluck(:email).join(", ") }
     = render 'contacts/errors_on_association', object: shared_list
     - if shared_list.initial?
-      .text-right = f.submit "Envoyer", class: "btn", data: {confirm: "Vous êtes sur le point d'envoyer votre liste de partage.\nSouhaitez-vous confirmer?", verify: 'Valider', verify_text: 'Tapez "Valider" pour confirmer'}
+      .text-right = f.button :submit, "Envoyer", class: "btn", data: {confirm: "<p class='text-center mt-n-3'>Vous êtes sur le point d'envoyer votre liste de partage.<br>Souhaitez-vous confirmer?</p>".html_safe}
+
+      //.text-right = f.submit "Envoyer", class: "btn", data: {confirm: "Vous êtes sur le point d'envoyer votre liste de partage.\nSouhaitez-vous confirmer?", verify: 'Valider', verify_text: 'Tapez "Valider" pour confirmer'}
