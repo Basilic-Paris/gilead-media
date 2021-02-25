@@ -42,6 +42,7 @@ Rails.application.routes.draw do
         patch :add_to_folder, on: :member
         patch :validate
       end
+      resources :folders, only: %i[destroy]
     end
   end
 

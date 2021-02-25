@@ -21,7 +21,7 @@ class Admin::UsersController < ApplicationController
     @user = User.find(params[:id])
     authorize([:admin, @user])
     @user.destroy
-    redirect_to admin_users_path, { flash: { validation_message: true, message: "L'utilisateur a bien été supprimé" } }
+    redirect_to admin_users_path, { flash: { validation_message: true, message: "L'utilisateur a bien été supprimé." } }
   end
 
   private

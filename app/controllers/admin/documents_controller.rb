@@ -50,7 +50,7 @@ class Admin::DocumentsController < ApplicationController
 
   def destroy
     @document.destroy
-    redirect_to documents_path, { flash: { validation_message: true, message: "Le document a bien été supprimé" } }
+    redirect_to documents_path, { flash: { validation_message: true, message: "Le document a bien été supprimé." } }
   end
 
   private
