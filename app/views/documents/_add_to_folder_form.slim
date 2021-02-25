@@ -1,14 +1,13 @@
 = simple_form_for [:admin, document], url: add_to_folder_admin_document_path(document), remote: true do |f|
-  = f.association :folders, as: :check_boxes, legend_tag: false
-  .mb-3.mt-n3 data-controller="toggle"
-    .form-check data-action="click->toggle#toggle"
-      .form-check-input.mt-0.color-gray style="cursor: pointer;" +
+  = f.association :folders, as: :check_boxes, legend_tag: false, input_html: { class: "tag-selector" }, item_wrapper_class: 'tag-item'
+  .mt-n3 data-controller="toggle"
+    .btn.btn-inverse.btn-no-hover.btn-inverse-no-hover.border-0.w-100.font-weight-bold.p-2 data-action="click->toggle#toggle click->toggle#toggleClasses" data-class-to-toggle="btn-inverse, btn-no-hover-inverse" data-target="toggle.elementToToggle" style="cursor: pointer;" Nouveau dossier
+      .form-check-input.mt-0.color-gray +
       .form-check-label.color-gray Créer nouveau dossier
     .mb-3.invisible data-target="toggle.moreOptions"
       = f.fields_for :folders, document.folders.build do |folders_fields|
-        = folders_fields.text_field :title, class: "w-100", style: "outline: none;"
+        = folders_fields.text_field :title, class: "form-control w-100", style: "outline: none;"
   = f.submit "Valider", class: "btn"
-
 
 //- if policy([:admin, document]).add_to_folder?
   = simple_form_for [:admin, document], url: add_to_folder_admin_document_path(document), remote: true do |f|
