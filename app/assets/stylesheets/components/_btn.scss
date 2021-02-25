@@ -14,7 +14,33 @@
     background-color: white !important;
     opacity: 1 !important;
   }
+  &-inverse {
+    color: #C73442 !important;
+    background-color: white !important;
+    &:hover {
+      color: white !important;
+      background-color: #C73442 !important;
+      opacity: 1 !important;
+    }
+  }
 }
+
+.btn.btn-no-hover {
+  &:hover {
+    color: white !important;
+    background-color: #C73442 !important;
+    opacity: 1 !important;
+  }
+}
+
+.btn-inverse.btn-inverse-no-hover {
+  &:hover {
+    color: #C73442 !important;
+    background-color: white !important;
+    opacity: 1 !important;
+  }
+}
+
 
 .btn-white-hover-red {
   color: white;
