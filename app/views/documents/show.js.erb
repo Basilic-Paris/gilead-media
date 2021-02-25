@@ -13,10 +13,10 @@ $('.modal#addDocumentToSharedDocument<%= @document.id %>').on('hidden.bs.modal',
   <% end %>
 })
 
-// $('.modal#addDocument<%= @document.id %>ToFolderOrSharedList').on('hidden.bs.modal', event => {
-//   <% @documents.each do |document| %>
-//     $('.modal#addDocument<%= document.id %>ToFolderOrSharedList form#new_document_shared_list').replaceWith("<%= j render('document_shared_lists/form', document: document, document_shared_list: DocumentSharedList.new) %>");
-//     $('.modal#addDocument<%= document.id %>ToFolderOrSharedList form#new_shared_list').replaceWith("<%= j render('shared_lists/create_and_attach_document_form', document: document, shared_list: SharedList.new) %>");
-//     $('.modal#addDocument<%= document.id %>ToFolderOrSharedList form#edit_document_<%= document.id %>').replaceWith("<%= j render('documents/add_to_folder_form', document: document) %>");
-//   <% end %>
-// })
+$('.modal#addDocument<%= @document.id %>ToFolderOrSharedList').on('hidden.bs.modal', event => {
+  <% @documents.each do |document| %>
+    $('.modal#addDocument<%= document.id %>ToFolderOrSharedList form#new_document_shared_list').replaceWith("<%= j render('document_shared_lists/form', document: document, document_shared_list: DocumentSharedList.new) %>");
+    $('.modal#addDocument<%= document.id %>ToFolderOrSharedList form#new_shared_list').replaceWith("<%= j render('shared_lists/create_and_attach_document_form', document: document, shared_list: SharedList.new) %>");
+    $('.modal#addDocument<%= document.id %>ToFolderOrSharedList form#edit_document_<%= document.id %>').replaceWith("<%= j render('documents/add_to_folder_form', document: document) %>");
+  <% end %>
+})
