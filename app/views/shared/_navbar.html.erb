@@ -24,27 +24,19 @@
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <%= link_to "Documents", documents_path, class: "nav-link" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "Dossiers", folders_path, class: "nav-link" %>
-          </li>
+          <%= active_link_to 'Documents', documents_path, wrap_tag: :li, wrap_class: "nav-item", class: "nav-link", active: ['documents'] %>
+          <%= active_link_to 'Dossiers', folders_path, wrap_tag: :li, wrap_class: "nav-item", class: "nav-link", active: ['folders'] %>
           <li class="nav-item" id="shared-list-nav-item">
             <% if current_user.shared_lists.initial.present? %>
-              <%= link_to "Liste de partage", shared_list_path(current_user.shared_lists.initial.first), class: "nav-link" %>
+              <%= active_link_to 'Liste de partage', shared_list_path(current_user.shared_lists.initial.first), class: "nav-link", active: ['shared_lists'] %>
             <% else %>
-              <%= link_to "Liste de partage", shared_lists_path, class: "nav-link" %>
+              <%= active_link_to 'Liste de partage', shared_lists_path, class: "nav-link", active: ['shared_lists'] %>
             <% end %>
           </li>
           <% if current_user.admin? %>
-            <li class="nav-item">
-              <%= link_to "Utilisateurs", admin_users_path, class: "nav-link" %>
-            </li>
+            <%= active_link_to 'Utilisateurs', admin_users_path, wrap_tag: :li, wrap_class: "nav-item", class: "nav-link", active: ['admin/users'] %>
           <% end %>
-          <li class="nav-item">
-            <%= link_to "Mon compte", edit_user_registration_path, class: "nav-link" %>
-          </li>
+          <%= active_link_to 'Mon compte', edit_user_registration_path, wrap_tag: :li, wrap_class: "nav-item", class: "nav-link", active: ['devise/registrations'] %>
         </ul>
       </div>
     </div>
