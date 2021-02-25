@@ -4,6 +4,7 @@ class SharedDocumentsController < ApplicationController
   before_action :find_document, only: %i[create]
 
   def create
+    @documents = policy_scope(Document).validated
     @shared_list = SharedList.new
     @document_shared_list = DocumentSharedList.new
 
@@ -20,7 +21,10 @@ class SharedDocumentsController < ApplicationController
     if @shared_document.save
       @shared_document.add_contacts!
       @shared_document.notify_contacts
-      redirect_to document_path(@document), flash: { validation_message: true, message: "Votre document a bien été envoyé." }
+      respond_to do |format|
+        format.html { redirect_to documents_path, flash: { validation_message: true, message: "Votre document a bien été envoyé." } }
+        format.js { @message = "Votre document a bien été envoyé." }
+      end
     else
       flash.now[:errors_create_shared_document] = true
       render 'documents/show'

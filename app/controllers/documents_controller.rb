@@ -10,7 +10,10 @@ class DocumentsController < ApplicationController
   end
 
   def index
-    @documents = policy_scope(Document).includes(attachment_attachment: :blob)
+    @shared_document = SharedDocument.new
+    @shared_list = SharedList.new
+    @document_shared_list = DocumentSharedList.new
+    @documents = policy_scope(Document).includes(:folders, attachment_attachment: :blob, document_folders: :folder)
     if search_params.present?
       search_params.reject { |key, value| value.blank? || key == "title" }.each do |key, value|
         if key == "created_at"
@@ -28,10 +31,10 @@ class DocumentsController < ApplicationController
       @documents
     end
 
-    respond_to do |format|
-      format.html
-      format.js
-    end
+    # respond_to do |format|
+    #   format.html
+    #   format.js
+    # end
   end
 
   # TO KEEP: initial version to add folders or documents to shared list directly

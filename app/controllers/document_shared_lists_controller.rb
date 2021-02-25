@@ -1,12 +1,16 @@
 class DocumentSharedListsController < ApplicationController
   def create
+    @documents = policy_scope(Document).validated
     @shared_document = SharedDocument.new
     @shared_list = SharedList.new
     @document = Document.find(params[:document_id]).decorate
     @document_shared_list = @document.document_shared_lists.new(document_shared_list_params)
     authorize @document_shared_list
     if @document_shared_list.save
-      redirect_to document_path(@document), flash: { validation_message: true, message: "Votre document a bien été ajouté à la liste de partage." }
+      respond_to do |format|
+        format.html { redirect_to document_path(@document), flash: { validation_message: true, message: "Votre document a bien été ajouté à la liste de partage." } }
+        format.js { @message = "Votre document a bien été ajouté à la liste de partage." }
+      end
     else
       flash.now[:errors_attach_document] = true
       render "documents/show"

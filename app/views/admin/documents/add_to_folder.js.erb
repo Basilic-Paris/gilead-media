@@ -1,0 +1,5 @@
+$('.modal#addDocument<%=@document.id%>ToFolderOrSharedList').modal('toggle');
+$('.modal#addDocument<%=@document.id%>ToFolderOrSharedList form#edit_document_<%=@document.id%>').replaceWith("<%= j render('documents/add_to_folder_form', document: @document) %>")
+
+$('.modal#validationModal').replaceWith("<%= j render('shared/validation_modal', message: @message) %>")
+$('.modal#validationModal').modal("toggle");
