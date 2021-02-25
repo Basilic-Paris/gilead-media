@@ -4,4 +4,9 @@
 
 .modal-header {
   padding: 1rem;
+  border-bottom: none;
+}
+
+.modal-footer {
+  border-top: none;
 }
