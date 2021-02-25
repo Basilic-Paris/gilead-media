@@ -1,3 +1,4 @@
 = simple_form_for [document, document_shared_list], remote: true do |f|
-  = f.association :shared_list, collection: current_user.shared_lists.initial, as: :radio_buttons, required: false, legend_tag: false, input_html: { class: "tag-selector" }, item_wrapper_class: 'tag-item'
+  = f.association :shared_list, collection: current_user.shared_lists.initial, as: :radio_buttons, required: false, legend_tag: false
+  //= f.association :shared_list, collection: current_user.shared_lists.initial, as: :radio_buttons, required: false, legend_tag: false, input_html: { class: "tag-selector" }, item_wrapper_class: 'tag-item'
   = f.submit "Valider", class: "btn"
