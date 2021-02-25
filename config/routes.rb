@@ -38,7 +38,7 @@ Rails.application.routes.draw do
   authenticate :user, ->(user) { user.admin } do
     namespace :admin do
       resources :users, only: %i[index create destroy]
-      resources :documents, only: %i[new create edit update] do
+      resources :documents, only: %i[new create edit update destroy] do
         patch :add_to_folder, on: :member
         patch :validate
       end
