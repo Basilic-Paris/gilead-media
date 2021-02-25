@@ -2,8 +2,6 @@
   = f.association :folders, as: :check_boxes, legend_tag: false, input_html: { class: "tag-selector" }, item_wrapper_class: 'tag-item'
   .mt-n3 data-controller="toggle"
     .btn.btn-inverse.btn-no-hover.btn-inverse-no-hover.border-0.w-100.font-weight-bold.p-2 data-action="click->toggle#toggle click->toggle#toggleClasses" data-class-to-toggle="btn-inverse, btn-no-hover-inverse" data-target="toggle.elementToToggle" style="cursor: pointer;" Nouveau dossier
-      .form-check-input.mt-0.color-gray +
-      .form-check-label.color-gray Créer nouveau dossier
     .mb-3.invisible data-target="toggle.moreOptions"
       = f.fields_for :folders, document.folders.build do |folders_fields|
         = folders_fields.text_field :title, class: "form-control w-100", style: "outline: none;"
