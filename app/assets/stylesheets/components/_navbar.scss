@@ -52,3 +52,8 @@
 .navbar-lewagon .navbar-brand img {
   width: 40px;
 }
+
+a[aria-current="page"] {
+  background: #C73442;
+  color: white !important;
+}
