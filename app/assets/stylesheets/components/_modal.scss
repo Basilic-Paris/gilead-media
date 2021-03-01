@@ -8,5 +8,13 @@
     .form-group {
       margin-bottom: 1rem;
     }
+    .form-group.email {
+      margin-bottom: 0;
+    }
+
+    .invalid-feedback.email {
+      padding-top: -1rem;
+      padding-bottom: 1rem;
+    }
   }
 }

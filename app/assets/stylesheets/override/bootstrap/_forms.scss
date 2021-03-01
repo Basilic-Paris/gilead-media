@@ -20,3 +20,12 @@
 .form-group {
   margin-bottom: 2rem;
 }
+
+.form-group.email {
+  margin-bottom: 0;
+}
+
+.invalid-feedback.email {
+  padding-top: -2rem;
+  padding-bottom: 2rem;
+}
