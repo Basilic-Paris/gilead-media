@@ -1,7 +1,12 @@
 class SharedFoldersController < ApplicationController
   include ListHelper
 
-  before_action :find_folder, only: %i[create]
+  before_action :find_folder, only: %i[new create]
+
+  def new
+    @shared_folder = @folder.shared_folders.new
+    authorize @shared_folder
+  end
 
   def create
     @folders = policy_scope(Folder)
@@ -22,19 +27,18 @@ class SharedFoldersController < ApplicationController
       @shared_folder.add_contacts!
       @shared_folder.notify_contacts
       respond_to do |format|
-        format.html { redirect_to folders_path, flash: { validation_message: true, message: "Votre dossier a bien été envoyé." } }
+        format.html { redirect_to folder_path(@folder), flash: { validation_message: true, message: "Votre dossier a bien été envoyé." } }
         format.js { @message = "Votre dossier a bien été envoyé." }
       end
     else
-      flash.now[:errors_create_shared_folder] = true
-      render 'folders/index'
+      render :new
     end
   end
 
   private
 
   def find_folder
-    @folder = Folder.find(params[:folder_id])
+    @folder = Folder.find(params[:id])
   end
 
   def shared_folder_params

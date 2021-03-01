@@ -1,0 +1,2 @@
+$(".modal#addFolderToSharedFolder .modal-header h5").replaceWith("<h5><%= @folder.title %></h5>");
+$("form#new_shared_folder").replaceWith("<%= j render('shared_folders/form', folder: @folder, shared_folder: @shared_folder) %>");
