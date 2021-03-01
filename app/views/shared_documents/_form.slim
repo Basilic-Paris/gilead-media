@@ -1,4 +1,4 @@
-= simple_form_for [document, shared_document], data: { controller: "flatpickr" }, html: { class: "label-input-in-line-equal-space" }, remote: true do |f|
+= simple_form_for [document, shared_document], url: shared_documents_path(document), method: :post, data: { controller: "flatpickr" }, html: { class: "label-input-in-line-equal-space" }, remote: true do |f|
 
   - if shared_document.errors.messages[:code].present?
     p.alert-warning.p-3 Une erreur s'est produite dans la génération du code associé à la liste de partage. Veuillez valider à nouveau votre saisie.

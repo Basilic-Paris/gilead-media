@@ -17,7 +17,9 @@ Rails.application.routes.draw do
       post :create_and_attach_document, on: :collection
     end
     resources :document_shared_lists, only: %i[create]
-    resources :shared_documents, only: %i[create]
+    member do
+      resources :shared_documents, only: %i[new create]
+    end
   end
 
   resources :folders, only: %i[index show] do

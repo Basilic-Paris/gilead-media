@@ -1,7 +1,12 @@
 class SharedDocumentsController < ApplicationController
   include ListHelper
 
-  before_action :find_document, only: %i[create]
+  before_action :find_document, only: %i[new create]
+
+  def new
+    @shared_document = @document.shared_documents.new
+    authorize @shared_document
+  end
 
   def create
     @documents = policy_scope(Document).validated
@@ -22,19 +27,18 @@ class SharedDocumentsController < ApplicationController
       @shared_document.add_contacts!
       @shared_document.notify_contacts
       respond_to do |format|
-        format.html { redirect_to documents_path, flash: { validation_message: true, message: "Votre document a bien été envoyé." } }
+        format.html { redirect_to document_path(@document), flash: { validation_message: true, message: "Votre document a bien été envoyé." } }
         format.js { @message = "Votre document a bien été envoyé." }
       end
     else
-      flash.now[:errors_create_shared_document] = true
-      render 'documents/show'
+      render :new
     end
   end
 
   private
 
   def find_document
-    @document = Document.find(params[:document_id]).decorate
+    @document = Document.find(params[:id]).decorate
   end
 
   def shared_document_params

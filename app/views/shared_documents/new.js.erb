@@ -1,0 +1,3 @@
+$(".modal#addDocumentToSharedDocument .modal-header h5").replaceWith("<h5><%= @document.title %></h5>");
+$("form#new_shared_document").replaceWith("<%= j render('shared_documents/form', document: @document, shared_document: @shared_document) %>");
+
