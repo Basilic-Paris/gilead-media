@@ -11,9 +11,6 @@
     <% documents.each do |document| %>
       <%= render 'card', document: document.decorate %>
 
-      <% if document.validated? %>
-        <%= render 'documents/add_to_shared_document_modal', document: document, shared_document: @shared_document %>
-      <% end %>
       <%= render 'documents/add_to_shared_list_or_folder_modal', document: document, shared_list: @shared_list, document_shared_list: @document_shared_list %>
       <%= render 'documents/add_to_shared_document_modal', document: document, shared_document: @shared_document %>
     <% end %>
