@@ -3,9 +3,9 @@
     <% @folders.each do |folder| %>
       <%= render 'folders/card', folder: folder %>
       <%= render 'folders/add_to_shared_list_modal', folder: folder, shared_list: @shared_list, folder_shared_list: @folder_shared_list %>
-      <%= render 'folders/add_to_shared_folder_modal', folder: folder, shared_folder: @shared_folder %>
     <% end %>
   </div>
 </div>
 
+<%= render 'folders/add_to_shared_folder_modal', folder: @folders.first, shared_folder: @shared_folder %>
 <%= render 'shared/validation_modal', message: "" %>
