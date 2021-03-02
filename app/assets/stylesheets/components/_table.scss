@@ -1,6 +1,11 @@
 .table {
+  // display: grid;
+  display: -ms-grid;
   display: grid;
   &-users {
+    // grid-template-columns: repeat(5, auto);
+    // grid-gap: 2rem 1rem;
+    -ms-grid-columns: auto 1rem auto 1rem auto 1rem auto 1rem auto;
     grid-template-columns: repeat(5, auto);
     grid-gap: 2rem 1rem;
     &-title {
