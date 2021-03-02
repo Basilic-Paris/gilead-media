@@ -1,73 +1,20 @@
-// .cut-text {
-//   text-overflow: ellipsis;
-//   overflow: hidden;
-//   white-space: nowrap;
-// }
-
-// .d-flex-column-between {
-//   height: 100%;
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: space-between;
-// }
-
-// .d-flex-default {
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-// }
-
-// .container-content {
-//   padding: 1rem 0;
-//   @media(min-width: 576px) {
-//     padding-top: 3rem;
-//     padding-bottom: 3rem;
-//   }
-// }
-
-// .bg-grey {
-//   background-color: lightgray;
-// }
-
-// .color-gray {
-//   color: gray;
-// }
-
-// .color-burgundy {
-//   color: #C73442;
-// }
-
 .cut-text {
-  -o-text-overflow: ellipsis;
-     text-overflow: ellipsis;
+  text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
 }
 
 .d-flex-column-between {
   height: 100%;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .d-flex-default {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  justify-content: center;
+  align-items: center;
 }
 
 .container-content {
