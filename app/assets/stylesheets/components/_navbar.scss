@@ -1,8 +1,5 @@
 .navbar-lewagon {
-  // justify-content: space-between;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  justify-content: space-between;
   &-black {
     background: #262626;
     .nav-link {
@@ -38,10 +35,7 @@
 
 .navbar-nav {
   @media(min-width: 576px) {
-    // align-items: center;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
+    align-items: center;
   }
 }
 
@@ -52,10 +46,7 @@
 }
 
 .navbar-lewagon .navbar-collapse {
-  // flex-grow: 0;
-  -webkit-box-flex: 0;
-      -ms-flex-positive: 0;
-          flex-grow: 0;
+  flex-grow: 0;
 }
 
 .navbar-lewagon .navbar-brand img {
