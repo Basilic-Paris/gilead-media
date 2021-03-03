@@ -4,7 +4,7 @@ class Admin::UserPolicy < ApplicationPolicy
   end
 
   def destroy?
-    user.admin?
+    user.admin? && user != record
   end
 
   class Scope < Scope
