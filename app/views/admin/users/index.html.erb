@@ -12,8 +12,10 @@
       <!-- <div><%#= user.encrypted_password %></div> -->
       <div></div>
       <div class="w-100 h-100">
-        <%= link_to admin_user_path(user), method: :delete, data: {confirm: "<p class='text-center mt-n-3'>Vous êtes sur le point de supprimer un utilisateur ainsi que l'ensemble des liens qu'il aurait pu envoyer.<br>Souhaitez-vous confirmer?</p>".html_safe } do %>
-          <i class="btn fa fa-minus w-100 h-100"></i>
+        <% unless user == current_user %>
+          <%= link_to admin_user_path(user), method: :delete, data: {confirm: "<p class='text-center mt-n-3'>Vous êtes sur le point de supprimer un utilisateur ainsi que l'ensemble des liens qu'il aurait pu envoyer.<br>Souhaitez-vous confirmer?</p>".html_safe } do %>
+            <i class="btn fa fa-minus w-100 h-100"></i>
+          <% end %>
         <% end %>
       </div>
     <% end %>
