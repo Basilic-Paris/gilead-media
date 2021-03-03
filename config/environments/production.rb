@@ -1,6 +1,6 @@
 Rails.application.configure do
-  config.action_mailer.asset_host = 'https://giledia.com/'
-  config.action_mailer.default_url_options = { host: "giledia.com" }
+  config.action_mailer.asset_host = 'https://www.giledia.com/'
+  config.action_mailer.default_url_options = { host: "www.giledia.com" }
   config.action_mailer.delivery_method = :postmark
   config.action_mailer.postmark_settings = {
     # api_token: Rails.application.credentials.postmark_api_token
