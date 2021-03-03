@@ -31,7 +31,7 @@ module GileadMedia
     config.i18n.default_locale = :fr
     config.i18n.available_locales = [:fr]
     config.action_mailer.default_options = {
-      from: '"Alice Fabre" <a.fabre@basilic.com>'
+      from: '"Envoi Giledia" <envoi@giledia.com>'
     }
   end
 end
