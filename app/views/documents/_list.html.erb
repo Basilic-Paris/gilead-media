@@ -1,18 +1,17 @@
 <div id="documents-cards" >
-  <% if documents.blank? %>
-    <p>Aucun document ne correspond à vos critères de recherches.</p>
-  <% end %>
   <div class="cards">
     <% if current_user.admin? %>
       <div class="card d-flex-default bg-grey">
         <%= link_to "+", new_admin_document_path, style: "font-size: 6rem", class: "font-weight-light btn-white-hover-red" %>
       </div>
     <% end %>
-    <% documents.each do |document| %>
-      <%= render 'card', document: document.decorate %>
+    <% unless documents.blank? %>
+      <% documents.each do |document| %>
+        <%= render 'card', document: document.decorate %>
 
-      <%= render 'documents/add_to_shared_list_or_folder_modal', document: document, shared_list: @shared_list, document_shared_list: @document_shared_list %>
-      <%= render 'documents/add_to_shared_document_modal', document: document, shared_document: @shared_document %>
+        <%= render 'documents/add_to_shared_list_or_folder_modal', document: document, shared_list: @shared_list, document_shared_list: @document_shared_list %>
+        <%= render 'documents/add_to_shared_document_modal', document: document, shared_document: @shared_document %>
+      <% end %>
     <% end %>
   </div>
 </div>
