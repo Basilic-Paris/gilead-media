@@ -21,12 +21,12 @@
       p.cut-text.mb-0 Langue:
       p.cut-text.color-gray = document.display_language
     .card-actions
-      - if shared_object.download?
-        = link_to rails_blob_path(document.attachment, disposition: "attachment"), class: "btn" do
-          i.fas.fa-file-download
       - if shared_object.class == SharedList
         = link_to public_shared_list_document_path(shared_object.code, document), class: "btn" do
           i.fa.fa-search
+      - if shared_object.download?
+        = link_to rails_blob_path(document.attachment, disposition: "attachment"), class: "btn" do
+          i.fas.fa-file-download
       - if shared_object.class == SharedFolder
         = link_to public_shared_folder_document_path(shared_object.code, document), class: "btn" do
           i.fa.fa-search
