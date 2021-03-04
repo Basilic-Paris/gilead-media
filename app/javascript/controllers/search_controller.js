@@ -2,7 +2,7 @@ import { Controller } from "stimulus"
 import flatpickr from 'plugins/flatpickr/flatpickr';
 
 export default class extends Controller {
-  static targets = [ "dropdownIcon", "moreOptions", "datesSelection", "title", "format", "language" ]
+  static targets = [ "dropdownIcon", "moreOptions", "datesSelection", "title", "format", "language", "firstSubmitButton" ]
 
   connect() {
     flatpickr(this.datesSelectionTarget, {
@@ -18,6 +18,7 @@ export default class extends Controller {
     this.dropdownIconTarget.classList.toggle('fa-sort-down');
     this.dropdownIconTarget.classList.toggle('fa-sort-up');
     this.dropdownIconTarget.classList.toggle('align-self-end');
+    this.firstSubmitButtonTarget.classList.toggle('d-none');
 
     this.moreOptionsTarget.classList.toggle('visible');
     this.moreOptionsTarget.classList.toggle('invisible');
