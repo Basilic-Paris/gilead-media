@@ -44,8 +44,8 @@
 
     .btn-container
       - if policy([:admin, document]).destroy?
-        = link_to admin_document_path(document), method: :delete, data: {confirm: "<p class='text-center mt-n-3'>Vous êtes sur le point de supprimer un document.<br>Souhaitez-vous confirmer?</p>".html_safe } do
-          i.btn.fa.fa-minus.h-100.pt-2
+        = link_to admin_document_path(document), method: :delete, data: {confirm: "<p class='text-center mt-n-3'>Vous êtes sur le point de supprimer un document.<br>Souhaitez-vous confirmer?</p>".html_safe }, class: "btn" do
+          i.fas.fa-minus
       - if policy([:admin, document]).validate?
         = link_to 'Mettre en ligne', admin_document_validate_path(document), method: :patch, class: "btn"
       - if policy([:admin, document]).edit?
@@ -55,6 +55,6 @@
         i.fas.fa-file-download
       - if document.validated?
         = link_to new_shared_document_path(document), class: "btn", data: { toggle: "modal", target: "#addDocumentToSharedDocument" }, remote: true do
-          i.far.fa-paper-plane
+          i.fas.fa-paper-plane
         a.btn data-toggle="modal" data-target="#addDocument#{document.id}ToFolderOrSharedList"
           i.fas.fa-plus

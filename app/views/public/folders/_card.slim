@@ -12,10 +12,10 @@
     .card-actions
       - if shared_object.class == SharedList
         = link_to public_shared_list_folder_path(shared_object.code, folder), class: "btn" do
-          i.fa.fa-search
+          i.fas.fa-search
       - if shared_object.class == SharedFolder
         = link_to public_shared_folder_folder_path(shared_object.code, folder), class: "btn" do
-          i.fa.fa-search
+          i.fas.fa-search
 
       - if shared_object.download?
         = link_to download_folder_path(folder), method: :patch, class: "btn" do

@@ -11,11 +11,11 @@
       p.cut-text.color-gray #{policy_scope(folder.documents).count} élément(s)
     .card-actions
       = link_to folder_path(folder), class: "btn" do
-        i.fa.fa-search
+        i.fas.fa-search
       = link_to download_folder_path(folder), method: :patch, class: "btn" do
         i.fas.fa-file-download
       - if (params[:controller] == "folders" && params[:action] == "index") || (params[:controller] == "shared_lists" && params[:action] == "create_and_attach_folder") || (params[:controller] == "shared_folders" && params[:action] == "create") || (params[:controller] == "folder_shared_lists" && params[:action] == "create")
         = link_to new_shared_folder_path(folder), class: "btn", data: { toggle: "modal", target: "#addFolderToSharedFolder" }, remote: true do
-          i.far.fa-paper-plane
+          i.fas.fa-paper-plane
         = link_to folder_path(folder), data: { toggle: "modal", target: "#addFolder#{folder.id}ToSharedList" }, class: "btn" do
           i.fas.fa-plus
