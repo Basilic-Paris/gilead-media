@@ -17,8 +17,7 @@ export default class extends Controller {
   toggle() {
     this.dropdownIconTarget.classList.toggle('fa-sort-down');
     this.dropdownIconTarget.classList.toggle('fa-sort-up');
-    this.dropdownIconTarget.classList.toggle('d-flex');
-    this.dropdownIconTarget.classList.toggle('align-items-center');
+    this.dropdownIconTarget.classList.toggle('align-self-end');
 
     this.moreOptionsTarget.classList.toggle('visible');
     this.moreOptionsTarget.classList.toggle('invisible');
