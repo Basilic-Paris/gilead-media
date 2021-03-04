@@ -6,6 +6,8 @@
     &-title {
       color: #C73442;
       font-weight: bold;
+      display: flex;
+      align-items: center;
     }
     &-new-line {
       grid-column: 1
