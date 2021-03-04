@@ -20,6 +20,7 @@ export default class extends Controller {
   toggleWithIcon() {
     this.dropdownIconTarget.classList.toggle('fa-sort-down');
     this.dropdownIconTarget.classList.toggle('fa-sort-up');
+    this.dropdownIconTarget.classList.toggle('align-self-end');
 
     this.moreOptionsTarget.classList.toggle('visible');
     this.moreOptionsTarget.classList.toggle('invisible');
