@@ -2,6 +2,7 @@ class DocumentsController < ApplicationController
   include ListHelper
 
   before_action :find_document, only: %i[show]
+  before_action :disable_turbolinks_cache, only: %i[index]
 
   def show
     @shared_document = SharedDocument.new

@@ -30,11 +30,4 @@ export default class extends Controller {
     this.formatTarget.value = ""
     this.languageTarget.value = ""
   }
-
-  disconnect() {
-    this.clearSearchValues()
-    if (this.dropdownIconTarget.classList.contains('fa-sort-up')) {
-      this.toggle()
-    }
-  }
 }
