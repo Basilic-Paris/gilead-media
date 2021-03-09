@@ -1,5 +1,0 @@
-$('.modal#addFolder<%=@folder.id%>ToSharedList').modal('toggle');
-$('.modal#addFolder<%=@folder.id%>ToSharedList form#new_folder_shared_list').replaceWith("<%= j render('folder_shared_lists/form', folder: @folder, folder_shared_list: FolderSharedList.new) %>")
-
-$('.modal#validationModal').replaceWith("<%= j render('shared/validation_modal', message: @message) %>")
-$('.modal#validationModal').modal("toggle");
