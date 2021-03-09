@@ -7,10 +7,6 @@ class SharedListPolicy < ApplicationPolicy
     record.user == user && record.initial?
   end
 
-  def create_and_attach_folder?
-    user.shared_lists.initial.blank?
-  end
-
   def create_and_attach_document?
     user.shared_lists.initial.blank?
   end
