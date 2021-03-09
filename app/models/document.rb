@@ -34,7 +34,7 @@ class Document < ApplicationRecord
     "ppt": "Power-Point",
     "xls": "Excel",
     "word": "Word",
-    "autres": "Autres"
+    "other": "Autres"
   }
 
   validates :title, presence: true, uniqueness: true
