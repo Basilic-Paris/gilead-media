@@ -3,7 +3,7 @@ class FoldersController < ApplicationController
   require 'tempfile'
 
   skip_before_action :authenticate_user!, only: :download
-  before_action :find_folder, only: %i[show download]
+  before_action :find_folder, only: %i[show download add_to_shared_list attach_to_new_shared_list attach_to_existing_shared_list]
   before_action :find_documents, only: %i[show download]
 
   def index
@@ -17,6 +17,41 @@ class FoldersController < ApplicationController
     @shared_list = SharedList.new
     @folder_shared_list = FolderSharedList.new
     @shared_folder = SharedFolder.new
+  end
+
+  def add_to_shared_list
+    if policy(@folder).attach_to_new_shared_list?
+      @shared_list = current_user.shared_lists.new
+    elsif policy(@folder).attach_to_existing_shared_list?
+      @shared_list = current_user.shared_lists.initial.first
+    end
+    @folder_shared_list = @folder.folder_shared_lists.new
+  end
+
+  def attach_to_new_shared_list
+    @shared_list = current_user.shared_lists.new(shared_list_params)
+    @shared_list.code = SecureRandom.alphanumeric(16)
+    @folder_shared_list = @shared_list.folder_shared_lists.new(folder: @folder)
+    if @shared_list.save
+      respond_to do |format|
+        format.html { redirect_to folders_path, flash: { validation_message: true, message: "Votre liste de partage a bien été créée et votre dossier a bien été ajouté à celle-ci." } }
+        format.js { @message = "Votre liste de partage a bien été créée et votre dossier a bien été ajouté à celle-ci." }
+      end
+    else
+      render :add_to_shared_list
+    end
+  end
+
+  def attach_to_existing_shared_list
+    @folder_shared_list = @folder.folder_shared_lists.new(folder_shared_list_params)
+    if @folder_shared_list.save
+      respond_to do |format|
+        format.html { redirect_to folders_path, flash: { validation_message: true, message: "Votre dossier a bien été ajouté à la liste de partage." } }
+        format.js { @message = "Votre dossier a bien été ajouté à la liste de partage." }
+      end
+    else
+      render :add_to_shared_list
+    end
   end
 
   # TO KEEP: initial version to add folders or documents to shared list directly
@@ -80,6 +115,14 @@ class FoldersController < ApplicationController
 
   def find_documents
     current_user.present? && current_user.admin? ? @documents = DocumentDecorator.decorate_collection(@folder.documents.includes(attachment_attachment: :blob)) : @documents = DocumentDecorator.decorate_collection(@folder.documents.validated.includes(attachment_attachment: :blob))
+  end
+
+  def folder_shared_list_params
+    params.require(:folder_shared_list).permit(:shared_list_id)
+  end
+
+  def shared_list_params
+    params.require(:shared_list).permit(:title, :validity, :download)
   end
 
   # TO KEEP: initial version to add folders or documents to shared list directly

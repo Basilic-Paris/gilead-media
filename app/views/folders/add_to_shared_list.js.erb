@@ -1,0 +1,17 @@
+$(".modal#addFolderToSharedList .modal-header h5").replaceWith("<h5><%= @folder.title %></h5>");
+
+<% if policy(@folder).attach_to_new_shared_list? %>
+  $("form#add_folder_to_new_shared_list").replaceWith("<%= j render('folders/attach_to_new_shared_list_form', folder: @folder, shared_list: @shared_list, folder_shared_list: @folder_shared_list) %>");
+<% elsif policy(@folder).attach_to_existing_shared_list? %>
+  $("form#add_folder_to_existing_shared_list").replaceWith("<%= j render('folders/attach_to_existing_shared_list_form', folder: @folder, shared_list: @shared_list, folder_shared_list: @folder_shared_list) %>");
+<% end %>
+
+$('.modal#addFolderToSharedList').on('hidden.bs.modal', event => {
+  $(".modal#addFolderToSharedList .modal-header h5").replaceWith("<h5><%= @folder.title %></h5>");
+  <% if policy(@folder).attach_to_new_shared_list? %>
+    $("form#add_folder_to_new_shared_list").replaceWith("<%= j render('folders/attach_to_new_shared_list_form', folder: @folder, shared_list: SharedList.new, folder_shared_list: FolderSharedList.new) %>");
+  <% elsif policy(@folder).attach_to_existing_shared_list? %>
+    $("form#add_folder_to_existing_shared_list").replaceWith("<%= j render('folders/attach_to_existing_shared_list_form', folder: @folder, shared_list: SharedList.new, folder_shared_list: FolderSharedList.new) %>");
+  <% end %>
+})
+

@@ -26,21 +26,3 @@
     <%= render 'documents/add_to_shared_list_or_folder_modal', document: @document, shared_list: @shared_list, document_shared_list: @document_shared_list %>
   </div>
 <% end %>
-
-<% if flash[:errors_attach_folder] %>
-  <div data-controller = "show-modal">
-    <%= render 'folders/add_to_shared_list_modal', folder: @folder, shared_list: @shared_list, folder_shared_list: @folder_shared_list %>
-  </div>
-<% end %>
-
-<% if flash[:errors_create_shared_document] %>
-  <div data-controller = "show-modal">
-    <%= render 'documents/add_to_shared_document_modal', document: @document, shared_document: @shared_document %>
-  </div>
-<% end %>
-
-<% if flash[:errors_create_shared_folder] %>
-  <div data-controller = "show-modal">
-    <%= render 'folders/add_to_shared_folder_modal', folder: @folder, shared_folder: @shared_folder %>
-  </div>
-<% end %>

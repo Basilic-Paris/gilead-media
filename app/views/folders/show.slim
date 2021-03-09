@@ -9,7 +9,7 @@
         i.fas.fa-file-download
       = link_to new_shared_folder_path(@folder), class: "btn", data: { toggle: "modal", target: "#addFolderToSharedFolder" }, remote: true do
         i.fas.fa-paper-plane
-      = link_to folder_path(@folder), data: { toggle: "modal", target: "#addFolder#{@folder.id}ToSharedList" }, class: "btn" do
+      = link_to add_to_shared_list_folder_path(@folder), data: { toggle: "modal", target: "#addFolderToSharedList" }, class: "btn" do
         i.fas.fa-plus
   .card.rounded.p-4
     .cards

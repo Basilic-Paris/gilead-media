@@ -1,9 +1,9 @@
 <!-- Modal -->
-<div class="modal fade" id="addFolder<%= folder.id %>ToSharedList" tabindex="-1" role="dialog" aria-labelledby="addFolder<%= folder.id %>ToSharedListTitle" aria-hidden="true" data-target='show-modal.modalId'>
+<div class="modal fade" id="addFolderToSharedList" tabindex="-1" role="dialog" aria-labelledby="addFolderToSharedListTitle" aria-hidden="true" data-target='show-modal.modalId'>
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header" style="border-bottom: 1px solid #dee2e6;">
-        <div class="modal-title" id="addFolder<%= folder.id %>ToSharedListTitle">
+        <div class="modal-title" id="addFolderToSharedListTitle">
           <h4 class="color-burgundy mb-0">Ajouter</h4>
           <h5 class="mb-0"><%= folder.title %></h5>
           <h4 class="color-burgundy mb-0">à...</h4>
@@ -14,12 +14,7 @@
       </div>
       <div class="modal-body">
         <h5 class="modal-body-title">Liste de partage</h5>
-        <% if policy(folder_shared_list).create? %>
-          <%= render 'folder_shared_lists/form', folder: folder, folder_shared_list: folder_shared_list %>
-        <% end %>
-        <% if policy(shared_list).create_and_attach_folder? %>
-          <%= render 'shared_lists/create_and_attach_folder_form', folder: folder, shared_list: shared_list %>
-        <% end %>
+        <%= render 'folders/add_to_shared_list_forms', folder: folder, shared_list: shared_list, folder_shared_list: folder_shared_list %>
         <!-- TO KEEP: initial version to add folders or documents to shared list directly -->
         <%#= render 'add_to_shared_list_form', folder: folder %>
       </div>
