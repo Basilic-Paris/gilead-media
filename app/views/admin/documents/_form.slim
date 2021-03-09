@@ -25,7 +25,7 @@
             = image_tag "Picto_generique.png"
       - else
         .h-100.d-flex-default
-          i.fas.fa-download.fa-10x.color-burgundy
+          i.fas.fa-download.fa-10x.color-burgundy.w-100
 
       - if document.errors[:attachment].present?
         .invalid-feedback.d-block.text-center.mb-5 = document.errors.full_messages_for(:attachment).join(",")
