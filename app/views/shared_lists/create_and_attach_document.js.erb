@@ -1,6 +1,0 @@
-$('.modal#addDocument<%=@document.id%>ToFolderOrSharedList').modal('toggle');
-
-$('.modal#validationModal').replaceWith("<%= j render('shared/validation_modal', message: @message) %>")
-$('.modal#validationModal').modal("toggle");
-
-$('#shared-list-nav-item a').attr("href", "<%=shared_list_path(current_user.shared_lists.initial.first)%>")
