@@ -30,10 +30,10 @@
         i.fas.fa-search
       = link_to rails_blob_path(document.attachment, disposition: "attachment"), class: "btn" do
         i.fas.fa-file-download
-      - if document.validated? && ((params[:controller] == "documents" && params[:action] == "index") || (params[:controller] == "shared_lists" && params[:action] == "create_and_attach_document") || (params[:controller] == "shared_documents" && params[:action] == "create") || (params[:controller] == "document_shared_lists" && params[:action] == "create") || (params[:controller] == "documents" && params[:action] == "add_to_folder"))
+      - if document.validated? && (params[:controller] == "documents" && params[:action] == "index")
         = link_to new_shared_document_path(document), class: "btn", data: { toggle: "modal", target: "#addDocumentToSharedDocument" }, remote: true do
           i.fas.fa-paper-plane
-        = link_to document_path(document), data: { toggle: "modal", target: "#addDocument#{document.id}ToFolderOrSharedList" }, class: "btn" do
+        = link_to add_to_shared_list_or_folder_document_path(document), class: "btn", data: { toggle: "modal", target: "#addDocumentToSharedListOrFolder" }, remote: true do
           i.fas.fa-plus
 
 //div

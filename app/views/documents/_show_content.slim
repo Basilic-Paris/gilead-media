@@ -56,5 +56,5 @@
       - if document.validated?
         = link_to new_shared_document_path(document), class: "btn", data: { toggle: "modal", target: "#addDocumentToSharedDocument" }, remote: true do
           i.fas.fa-paper-plane
-        a.btn data-toggle="modal" data-target="#addDocument#{document.id}ToFolderOrSharedList"
+        = link_to add_to_shared_list_or_folder_document_path(document), class: "btn", data: { toggle: "modal", target: "#addDocumentToSharedListOrFolder" }, remote: true do
           i.fas.fa-plus
