@@ -1,0 +1,8 @@
+<div class="container container-content">
+  <h1>Ajouter le document "<%= @document.title %>"</h1>
+  <div class="modal-body">
+    <%= render 'documents/add_to_shared_list_or_folder_forms', document: @document, shared_list: @shared_list, document_shared_list: @document_shared_list %>
+  </div>
+</div>
+
+<%= render 'shared/validation_modal', message: "" %>

@@ -1,0 +1,20 @@
+<!-- Modal -->
+<div class="modal fade" id="addDocumentToSharedListOrFolder" tabindex="-1" role="dialog" aria-labelledby="addDocumentToSharedListOrFolderTitle" aria-hidden="true" data-target='show-modal.modalId'>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style="border-bottom: 1px solid #dee2e6;">
+        <div class="modal-title" id="addDocumentToSharedListOrFolderTitle">
+          <h4 class="color-burgundy mb-0">Ajouter</h4>
+          <h5 class="mb-0"><%= document.title %></h5>
+          <h4 class="color-burgundy mb-0">à...</h4>
+        </div>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <%= render 'documents/add_to_shared_list_or_folder_forms', document: document, shared_list: shared_list, document_shared_list: document_shared_list %>
+      </div>
+    </div>
+  </div>
+</div>
