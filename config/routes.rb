@@ -13,12 +13,15 @@ Rails.application.routes.draw do
   resources :documents, only: %i[index show] do
     # TO KEEP: initial version to add folders or documents to shared list directly
     # patch :add_to_shared_list, on: :member
-    resources :shared_lists, only: %i[] do
-      post :create_and_attach_document, on: :collection
-    end
-    resources :document_shared_lists, only: %i[create]
+
     member do
       resources :shared_documents, only: %i[new create]
+    end
+
+    member do
+      get :add_to_shared_list_or_folder
+      post :attach_to_new_shared_list
+      post :attach_to_existing_shared_list
     end
   end
 
@@ -44,8 +47,13 @@ Rails.application.routes.draw do
     namespace :admin do
       resources :users, only: %i[index create destroy]
       resources :documents, only: %i[new create edit update destroy] do
-        patch :add_to_folder, on: :member
+
         patch :validate
+
+        member do
+          post :attach_to_folder
+        end
+
       end
       resources :folders, only: %i[destroy]
     end
