@@ -11,11 +11,11 @@ class Admin::DocumentPolicy < ApplicationPolicy
     user.admin?
   end
 
-  def add_to_folder?
+  def destroy?
     user.admin?
   end
 
-  def destroy?
+  def attach_to_folder?
     user.admin?
   end
 
