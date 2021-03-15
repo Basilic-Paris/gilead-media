@@ -20,12 +20,8 @@ class FoldersController < ApplicationController
   end
 
   def add_to_shared_list
-    if policy(@folder).attach_to_new_shared_list?
-      @shared_list = current_user.shared_lists.new
-    elsif policy(@folder).attach_to_existing_shared_list?
-      @shared_list = current_user.shared_lists.initial.first
-    end
-    @folder_shared_list = @folder.folder_shared_lists.new
+    @shared_list = SharedList.new
+    @folder_shared_list = FolderSharedList.new
   end
 
   def attach_to_new_shared_list
@@ -43,6 +39,7 @@ class FoldersController < ApplicationController
   end
 
   def attach_to_existing_shared_list
+    @shared_list = current_user.shared_lists.initial.first
     @folder_shared_list = @folder.folder_shared_lists.new(folder_shared_list_params)
     if @folder_shared_list.save
       respond_to do |format|

@@ -1,5 +1,5 @@
 <% if policy(folder).attach_to_new_shared_list? %>
-  <%= render 'folders/attach_to_new_shared_list_form', folder: folder, shared_list: shared_list, folder_shared_list: folder_shared_list %>
+  <%= render 'folders/attach_to_new_shared_list_form', folder: folder, shared_list: shared_list %>
 <% elsif policy(folder).attach_to_existing_shared_list? %>
-  <%= render 'folders/attach_to_existing_shared_list_form', folder: folder, shared_list: shared_list , folder_shared_list: folder_shared_list%>
+  <%= render 'folders/attach_to_existing_shared_list_form', folder: folder, folder_shared_list: folder_shared_list %>
 <% end %>
