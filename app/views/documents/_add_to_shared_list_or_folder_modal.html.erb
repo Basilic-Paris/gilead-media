@@ -1,9 +1,9 @@
 <!-- Modal -->
-<div class="modal fade" id="addDocument<%=document.id%>ToFolderOrSharedList" tabindex="-1" role="dialog" aria-labelledby="addDocument<%=document.id%>ToFolderOrSharedListTitle" aria-hidden="true" data-target='show-modal.modalId'>
+<div class="modal fade" id="addDocumentToSharedListOrFolder" tabindex="-1" role="dialog" aria-labelledby="addDocumentToSharedListOrFolderTitle" aria-hidden="true" data-target='show-modal.modalId'>
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header" style="border-bottom: 1px solid #dee2e6;">
-        <div class="modal-title" id="addDocument<%=document.id%>ToFolderOrSharedListTitle">
+        <div class="modal-title" id="addDocumentToSharedListOrFolderTitle">
           <h4 class="color-burgundy mb-0">Ajouter</h4>
           <h5 class="mb-0"><%= document.title %></h5>
           <h4 class="color-burgundy mb-0">à...</h4>
@@ -13,64 +13,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <% if current_user.admin? %>
-          <% if policy(document_shared_list).create? %>
-              <div data-controller="toggle">
-                <div class="d-flex justify-content-between">
-                  <h5 class="modal-body-title">Liste de partage</h5>
-                  <div class="btn d-flex" data-action="click->toggle#toggleWithIcon">
-                    <i data-target="toggle.dropdownIcon" class="fas fa-lg fa-sort-down"></i>
-                  </div>
-                </div>
-                <div class="invisible" data-target="toggle.moreOptions">
-                  <%= render 'document_shared_lists/form', document: document, document_shared_list: document_shared_list %>
-                </div>
-              </div>
-          <% end %>
-
-          <% if policy(shared_list).create_and_attach_document? %>
-            <div data-controller="toggle">
-              <div class="d-flex justify-content-between">
-                <h5 class="modal-body-title">Liste de partage</h5>
-                <div class="btn d-flex" data-action="click->toggle#toggleWithIcon">
-                  <i data-target="toggle.dropdownIcon" class="fas fa-lg fa-sort-down"></i>
-                </div>
-              </div>
-              <div class="invisible" data-target="toggle.moreOptions">
-                <%= render 'shared_lists/create_and_attach_document_form', document: document, shared_list: shared_list %>
-              </div>
-            </div>
-          <% end %>
-
-        <% else %>
-
-          <% if policy(document_shared_list).create? %>
-            <h5 class="modal-body-title">Liste de partage</h5>
-            <%= render 'document_shared_lists/form', document: document, document_shared_list: document_shared_list %>
-          <% end %>
-
-          <% if policy(shared_list).create_and_attach_document? %>
-            <h5 class="modal-body-title">Liste de partage</h5>
-            <%= render 'shared_lists/create_and_attach_document_form', document: document, shared_list: shared_list %>
-          <% end %>
-
-        <% end %>
-
-        <% if policy([:admin, document]).add_to_folder? %>
-          <div data-controller="toggle" class="mt-5">
-            <div class="d-flex justify-content-between">
-              <h5 class="modal-body-title">Dossier(s)</h5>
-              <div class="btn d-flex" data-action="click->toggle#toggleWithIcon">
-                <i data-target="toggle.dropdownIcon" class="fas fa-lg fa-sort-down"></i>
-              </div>
-            </div>
-            <div class="invisible" data-target="toggle.moreOptions">
-              <%= render 'documents/add_to_folder_form', document: document %>
-            </div>
-          </div>
-        <% end %>
-        <!-- TO KEEP: initial version to add folders or documents to shared list directly -->
-        <%#= render 'add_to_shared_list_form', document: document %>
+        <%= render 'documents/add_to_shared_list_or_folder_forms', document: document, shared_list: shared_list, document_shared_list: document_shared_list %>
       </div>
     </div>
   </div>

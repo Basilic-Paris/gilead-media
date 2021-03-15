@@ -1,0 +1,31 @@
+<div data-controller="toggle">
+  <div class="d-flex justify-content-between">
+    <h5 class="modal-body-title">Liste de partage</h5>
+    <% if current_user.admin? %>
+      <div class="btn d-flex" data-action="click->toggle#toggleWithIcon">
+        <i data-target="toggle.dropdownIcon" class="fas fa-lg fa-sort-down"></i>
+      </div>
+    <% end %>
+  </div>
+  <div class="<%= 'invisible' if current_user.admin? %>" data-target="toggle.moreOptions">
+    <% if policy(document).attach_to_new_shared_list? %>
+      <%= render 'documents/attach_to_new_shared_list_form', document: document, shared_list: shared_list %>
+    <% elsif policy(document).attach_to_existing_shared_list? %>
+      <%= render 'documents/attach_to_existing_shared_list_form', document: document, document_shared_list: document_shared_list %>
+    <% end %>
+  </div>
+</div>
+
+<% if policy([:admin, document]).attach_to_folder? %>
+  <div data-controller="toggle" class="mt-5">
+    <div class="d-flex justify-content-between">
+      <h5 class="modal-body-title">Dossier(s)</h5>
+      <div class="btn d-flex" data-action="click->toggle#toggleWithIcon">
+        <i data-target="toggle.dropdownIcon" class="fas fa-lg fa-sort-down"></i>
+      </div>
+    </div>
+    <div class="<%= 'invisible' if current_user.admin? %>" data-target="toggle.moreOptions">
+      <%= render 'admin/documents/attach_to_folder_form', document: document %>
+    </div>
+  </div>
+<% end %>

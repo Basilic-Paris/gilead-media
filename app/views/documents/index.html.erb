@@ -5,6 +5,7 @@
 
 <% unless @documents.blank? %>
   <%= render 'documents/add_to_shared_document_modal', document: @documents.first, shared_document: @shared_document %>
+  <%= render 'documents/add_to_shared_list_or_folder_modal', document: @documents.first, shared_list: @shared_list, document_shared_list: @document_shared_list %>
 <% end %>
 
 <%= render 'shared/validation_modal', message: "" %>

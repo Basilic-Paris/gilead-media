@@ -1,5 +1,5 @@
 class Admin::DocumentsController < ApplicationController
-  before_action :find_document, only: %i[edit update destroy add_to_folder]
+  before_action :find_document, only: %i[edit update destroy attach_to_folder]
   before_action :find_document_with_document_id, only: %i[validate]
 
   def validate
@@ -37,20 +37,22 @@ class Admin::DocumentsController < ApplicationController
     end
   end
 
-  def add_to_folder
+  def destroy
+    @document.destroy
+    redirect_to documents_path, { flash: { validation_message: true, message: "Le document a bien été supprimé." } }
+  end
+
+  def attach_to_folder
+    @shared_list = SharedList.new
+    @document_shared_list = DocumentSharedList.new
     if @document.update(folder_params)
       respond_to do |format|
         format.html { redirect_to document_path(@document), flash: { validation_message: true, message: "Votre document a bien été ajouté au(x) dossier(s)." } }
         format.js { @message = "Votre document a bien été ajouté au(x) dossier(s)." }
       end
     else
-      render :show
+      render 'documents/add_to_shared_list_or_folder'
     end
-  end
-
-  def destroy
-    @document.destroy
-    redirect_to documents_path, { flash: { validation_message: true, message: "Le document a bien été supprimé." } }
   end
 
   private

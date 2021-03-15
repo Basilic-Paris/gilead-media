@@ -20,9 +20,3 @@
     <%= render 'shared/validation_modal', message: flash[:message] %>
   </div>
 <% end %>
-
-<% if flash[:errors_attach_document] %>
-  <div data-controller = "show-modal">
-    <%= render 'documents/add_to_shared_list_or_folder_modal', document: @document, shared_list: @shared_list, document_shared_list: @document_shared_list %>
-  </div>
-<% end %>
