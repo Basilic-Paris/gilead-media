@@ -44,6 +44,9 @@
       border: none;
     }
   }
+  .label-input-in-column .form-group {
+    display: block;
+  }
   .form-group.disabled {
     padding-right: 0;
   }

@@ -4,8 +4,9 @@ class SharedDocumentsController < ApplicationController
   before_action :find_document, only: %i[new create]
 
   def new
-    @shared_document = @document.shared_documents.new
+    @shared_document = @document.shared_documents.new(user: current_user)
     authorize @shared_document
+    @shared_document.build_custom_mail
   end
 
   def create
@@ -42,7 +43,7 @@ class SharedDocumentsController < ApplicationController
   end
 
   def shared_document_params
-    params.require(:shared_document).permit(:validity, :download)
+    params.require(:shared_document).permit(:validity, :download, custom_mail_attributes: [:body])
   end
 
   def contacts_params

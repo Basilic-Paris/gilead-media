@@ -1,2 +1,17 @@
 $(".modal#addFolderToSharedFolder .modal-header h5").replaceWith("<h5><%= @folder.title %></h5>");
 $("form#new_shared_folder").replaceWith("<%= j render('shared_folders/form', folder: @folder, shared_folder: @shared_folder) %>");
+
+// resize body custom-mail input text to fit content
+var input = document.getElementById("shared_folder_custom_mail_attributes_body")
+if (input.offsetHeight != 0) {
+  input.style.height = `${input.scrollHeight + (input.offsetHeight - input.clientHeight)}px`
+}
+
+$(".modal#addFolderToSharedFolder").on('shown.bs.modal', (event) => {
+  input.style.height = `${input.scrollHeight + (input.offsetHeight - input.clientHeight)}px`
+})
+
+input.addEventListener('keyup', (event) => {
+  input.style.height = null
+  input.style.height = `${input.scrollHeight + (input.offsetHeight - input.clientHeight)}px`
+})

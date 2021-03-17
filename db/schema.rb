@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_22_214333) do
+ActiveRecord::Schema.define(version: 2021_03_16_090958) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,6 +44,15 @@ ActiveRecord::Schema.define(version: 2021_02_22_214333) do
     t.string "contactable_type"
     t.bigint "contactable_id"
     t.index ["contactable_type", "contactable_id"], name: "index_contacts_on_contactable_type_and_contactable_id"
+  end
+
+  create_table "custom_mails", force: :cascade do |t|
+    t.text "body"
+    t.string "mailable_type"
+    t.bigint "mailable_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["mailable_type", "mailable_id"], name: "index_custom_mails_on_mailable_type_and_mailable_id"
   end
 
   create_table "document_folders", force: :cascade do |t|
