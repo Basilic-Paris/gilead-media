@@ -1,12 +1,15 @@
 = simple_form_for [document, shared_document], url: shared_documents_path(document), method: :post, data: { controller: "flatpickr" }, html: { class: "label-input-in-line-equal-space" }, remote: true do |f|
 
   - if shared_document.errors.messages[:code].present?
-    p.alert-warning.p-3 Une erreur s'est produite dans la génération du code associé à la liste de partage. Veuillez valider à nouveau votre saisie.
+    p.alert-warning.p-3 Une erreur s'est produite dans la génération du code associé au document partagé. Veuillez valider à nouveau votre saisie.
 
   = f.input :validity, as: :string, placeholder: "Date", input_html: { data: { target: "flatpickr.dateSelection" } }
   = f.input :download, as: :select, prompt: "Sélectionnez"
   = f.association :contacts do |c|
     = c.input :email, label: "Destinataires", input_html: { value: shared_document.contacts.map(&:email).join(", ") }
   = render 'contacts/errors_on_association', object: shared_document
+  .label-input-in-column
+    = f.association :custom_mail do |custom_mail|
+      = custom_mail.input :body, label: "Corps du mail", input_html: { value: "#{shared_document.custom_mail.body.blank? && shared_document.errors.messages[:"custom_mail.body"].blank? ? shared_document.custom_mail.body_default_value : shared_document.custom_mail.body}" }
 
   = f.submit "Envoyer", class: "btn"
