@@ -1,3 +1,17 @@
 $(".modal#addDocumentToSharedDocument .modal-header h5").replaceWith("<h5><%= @document.title %></h5>");
 $("form#new_shared_document").replaceWith("<%= j render('shared_documents/form', document: @document, shared_document: @shared_document) %>");
 
+// resize body custom-mail input text to fit content
+var input = document.getElementById("shared_document_custom_mail_attributes_body")
+if (input.offsetHeight != 0) {
+  input.style.height = `${input.scrollHeight + (input.offsetHeight - input.clientHeight)}px`
+}
+
+$(".modal#addDocumentToSharedDocument").on('shown.bs.modal', (event) => {
+  input.style.height = `${input.scrollHeight + (input.offsetHeight - input.clientHeight)}px`
+})
+
+input.addEventListener('keyup', (event) => {
+  input.style.height = null
+  input.style.height = `${input.scrollHeight + (input.offsetHeight - input.clientHeight)}px`
+})
