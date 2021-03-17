@@ -7,15 +7,18 @@ class SharedListsController < ApplicationController
   end
 
   def show
+    @shared_list.build_custom_mail
   end
 
   def add_contacts
+    @shared_list.validate_custom_mail = true
     emails = arrange_list(contacts_params[:contacts][:email])
 
     emails.each do |email|
       @shared_list.contacts.build(email: email)
     end
 
+    @shared_list.assign_attributes(custom_mail_params)
     if @shared_list.save
       @shared_list.add_contacts!
       @shared_list.notify_contacts
@@ -42,5 +45,9 @@ class SharedListsController < ApplicationController
 
   def shared_list_params
     params.require(:shared_list).permit(:title, :validity, :download)
+  end
+
+  def custom_mail_params
+    params.require(:shared_list).permit(custom_mail_attributes: [:body])
   end
 end

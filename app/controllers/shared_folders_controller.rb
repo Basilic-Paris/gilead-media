@@ -4,8 +4,9 @@ class SharedFoldersController < ApplicationController
   before_action :find_folder, only: %i[new create]
 
   def new
-    @shared_folder = @folder.shared_folders.new
+    @shared_folder = @folder.shared_folders.new(user: current_user)
     authorize @shared_folder
+    @shared_folder.build_custom_mail
   end
 
   def create
@@ -42,7 +43,7 @@ class SharedFoldersController < ApplicationController
   end
 
   def shared_folder_params
-    params.require(:shared_folder).permit(:validity, :download)
+    params.require(:shared_folder).permit(:validity, :download, custom_mail_attributes: [:body])
   end
 
   def contacts_params
