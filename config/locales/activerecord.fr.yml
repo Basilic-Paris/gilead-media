@@ -36,6 +36,8 @@ fr:
       shared_folder:
         validity: Jusqu'au
         download: Téléchargeable
+      custom_mail:
+        body: Corps du mail
 
     errors:
       models:
