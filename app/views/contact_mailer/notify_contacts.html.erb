@@ -1,14 +1,4 @@
-<p>Bonjour,</p>
-
-<% if @contact.contactable_type == "SharedList" %>
-  <p><%= @user.full_name %> souhaite partager des documents avec vous.</p>
-<% elsif @contact.contactable_type == "SharedDocument" %>
-  <p><%= @user.full_name %> souhaite partager un document avec vous.</p>
-<% elsif @contact.contactable_type == "SharedFolder" %>
-  <p><%= @user.full_name %> souhaite partager un dossier avec vous.</p>
-<% end %>
-
-<p>Pour y accéder, veuillez cliquer sur le lien ci dessous:</p>
+<p><%= simple_format(@custom_mail.body) %></p>
 
 <table border="0" cellpadding="0" cellspacing="10" style="margin: 2em 0">
   <tbody>
