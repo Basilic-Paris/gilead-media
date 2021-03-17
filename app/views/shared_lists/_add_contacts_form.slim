@@ -4,7 +4,7 @@
     = f.association :contacts do |c|
       = c.input :email, label: "Destinataires", required: false, disabled: !shared_list.initial?, input_html: { value: shared_list.contacts.pluck(:email).join(", ") }
     = render 'contacts/errors_on_association', object: shared_list
-    .label-input-in-column
+    div class="#{'d-none' if shared_list.contacts_added?}"
       = f.association :custom_mail do |custom_mail|
         = custom_mail.input :body, label: "Corps du mail", input_html: { value: "#{shared_list.custom_mail.body.blank? && shared_list.errors.messages[:"custom_mail.body"].blank? ? shared_list.custom_mail.body_default_value : shared_list.custom_mail.body}", data: {target: "autogrow-text-area.area"} }
     - if shared_list.initial?
