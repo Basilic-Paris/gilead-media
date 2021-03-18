@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_16_090958) do
+ActiveRecord::Schema.define(version: 2021_03_18_093854) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,6 +52,8 @@ ActiveRecord::Schema.define(version: 2021_03_16_090958) do
     t.bigint "mailable_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "subject"
+    t.text "signature"
     t.index ["mailable_type", "mailable_id"], name: "index_custom_mails_on_mailable_type_and_mailable_id"
   end
 
