@@ -37,7 +37,9 @@ fr:
         validity: Jusqu'au
         download: Téléchargeable
       custom_mail:
-        body: Corps du mail
+        subject: Objet
+        body: Corps
+        signature: Signature
 
     errors:
       models:

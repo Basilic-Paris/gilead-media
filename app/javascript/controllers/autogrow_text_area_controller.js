@@ -4,16 +4,23 @@ export default class extends Controller {
   static targets = [ "area" ]
 
   connect() {
-    // resize body custom-mail input text to fit content
-    const input = this.areaTarget
+    const areass = this.areaTargets
 
-    if (input.offsetHeight != 0) {
-      input.style.height = `${input.scrollHeight + (input.offsetHeight - input.clientHeight)}px`
+    areas.forEach((input) => {
+      this.autogrowTextArea(area)
+    })
+  }
+
+  autogrowTextArea = (area) => {
+    if (area.offsetHeight != 0) {
+      area.style.overflow = "hidden"
+      area.style.height = `${area.scrollHeight + (area.offsetHeight - area.clientHeight)}px`
     }
 
-    input.addEventListener('keyup', (event) => {
-      input.style.height = null
-      input.style.height = `${input.scrollHeight + (input.offsetHeight - input.clientHeight)}px`
+    area.addEventListener('keyup', (event) => {
+      area.style.overflow = "hidden"
+      area.style.height = null
+      area.style.height = `${area.scrollHeight + (area.offsetHeight - area.clientHeight)}px`
     })
   }
 }

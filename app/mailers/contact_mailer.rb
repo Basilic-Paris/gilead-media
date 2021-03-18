@@ -3,6 +3,6 @@ class ContactMailer < ApplicationMailer
     @contact = contact
     @user = @contact.contactable.user
     @custom_mail = @contact.contactable.custom_mail
-    mail(to: @contact.email, subject: "#{@user.full_name} souhaite partager des documents avec vous")
+    mail(to: @contact.email, subject: "#{@custom_mail.subject}")
   end
 end
