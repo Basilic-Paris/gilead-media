@@ -4,10 +4,10 @@ export default class extends Controller {
   static targets = [ "area" ]
 
   connect() {
-    const areass = this.areaTargets
+    const textInputs = this.areaTargets
 
-    areas.forEach((input) => {
-      this.autogrowTextArea(area)
+    textInputs.forEach((textInput) => {
+      this.autogrowTextArea(textInput)
     })
   }
 
