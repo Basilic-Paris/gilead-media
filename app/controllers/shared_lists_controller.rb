@@ -48,6 +48,6 @@ class SharedListsController < ApplicationController
   end
 
   def custom_mail_params
-    params.require(:shared_list).permit(custom_mail_attributes: [:body])
+    params.require(:shared_list).permit(custom_mail_attributes: [:subject, :body, :signature])
   end
 end

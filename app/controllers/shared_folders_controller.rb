@@ -43,7 +43,7 @@ class SharedFoldersController < ApplicationController
   end
 
   def shared_folder_params
-    params.require(:shared_folder).permit(:validity, :download, custom_mail_attributes: [:body])
+    params.require(:shared_folder).permit(:validity, :download, custom_mail_attributes: [:subject, :body, :signature])
   end
 
   def contacts_params
