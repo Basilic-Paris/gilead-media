@@ -5,8 +5,11 @@
       = c.input :email, label: "Destinataires", required: false, disabled: !shared_list.initial?, input_html: { value: shared_list.contacts.pluck(:email).join(", ") }
     = render 'contacts/errors_on_association', object: shared_list
     div class="#{'d-none' if shared_list.contacts_added?}"
+      h5.color-burgundy.text-left.mb-4 E-mail
       = f.association :custom_mail do |custom_mail|
-        = custom_mail.input :body, label: "Corps du mail", input_html: { value: "#{shared_list.custom_mail.body.blank? && shared_list.errors.messages[:"custom_mail.body"].blank? ? shared_list.custom_mail.body_default_value : shared_list.custom_mail.body}", data: {target: "autogrow-text-area.area"} }
+        = custom_mail.input :subject, input_html: { value: "#{shared_list.custom_mail.subject.blank? && shared_list.errors.messages[:"custom_mail.subject"].blank? ? shared_list.custom_mail.subject_default_value : shared_list.custom_mail.subject}" }
+        = custom_mail.input :body, input_html: { value: "#{shared_list.custom_mail.body.blank? && shared_list.errors.messages[:"custom_mail.body"].blank? ? shared_list.custom_mail.body_default_value : shared_list.custom_mail.body}", data: {target: "autogrow-text-area.area"} }
+        = custom_mail.input :signature, input_html: { value: "#{shared_list.custom_mail.signature.blank? && shared_list.errors.messages[:"custom_mail.signature"].blank? ? shared_list.custom_mail.signature_default_value : shared_list.custom_mail.signature}", data: {target: "autogrow-text-area.area"} }
     - if shared_list.initial?
       .text-right = f.button :submit, "Envoyer", class: "btn", data: {confirm: "<p class='text-center mt-n-3'>Vous êtes sur le point d'envoyer votre liste de partage.<br>Souhaitez-vous confirmer?</p>".html_safe}
 
