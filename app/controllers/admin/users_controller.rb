@@ -1,4 +1,5 @@
 class Admin::UsersController < ApplicationController
+  before_action :disable_turbolinks_cache, only: %i[create]
 
   def index
     @users = policy_scope([:admin, User])

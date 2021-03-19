@@ -1,6 +1,7 @@
 class SharedListsController < ApplicationController
   include ListHelper
   before_action :find_shared_list, only: %i[show add_contacts]
+  before_action :disable_turbolinks_cache, only: %i[show]
 
   def index
     @shared_lists = policy_scope(SharedList)
