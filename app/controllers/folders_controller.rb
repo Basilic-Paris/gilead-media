@@ -5,6 +5,7 @@ class FoldersController < ApplicationController
   skip_before_action :authenticate_user!, only: :download
   before_action :find_folder, only: %i[show download add_to_shared_list attach_to_new_shared_list attach_to_existing_shared_list]
   before_action :find_documents, only: %i[show download]
+  before_action :disable_turbolinks_cache, only: %i[index show]
 
   def index
     @folders = policy_scope(Folder)

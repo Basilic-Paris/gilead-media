@@ -1,6 +1,7 @@
 class Admin::DocumentsController < ApplicationController
   before_action :find_document, only: %i[edit update destroy attach_to_folder]
   before_action :find_document_with_document_id, only: %i[validate]
+  before_action :disable_turbolinks_cache, only: %i[create update]
 
   def validate
     @document.validation_at = DateTime.now
