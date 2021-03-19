@@ -1,4 +1,6 @@
 class Admin::FoldersController < ApplicationController
+  before_action :disable_turbolinks_cache, only: %i[destroy]
+
   def destroy
     @folder = Folder.find(params[:id])
     authorize([:admin, @folder])
