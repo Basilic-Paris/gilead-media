@@ -32,32 +32,6 @@ class DocumentsController < ApplicationController
     else
       @documents
     end
-
-    # def attach_pdf_thumbnail
-    #   # gemfile
-    #     # Add gem 'libreconv'
-    #   # document.rb
-    #     # Add has_one_attached :pdf_thumbnail
-    #   @document = Document.second
-
-    #   bucket_name = @document.attachment.service.bucket.name
-    #   object_key = @document.attachment.blob.key
-    #   local_path = "./#{object_key}"
-    #   s3 = Aws::S3::Client.new(
-    #     region: Rails.application.credentials.aws[:region],
-    #     access_key_id: Rails.application.credentials.aws[:access_key_id],
-    #     secret_access_key: Rails.application.credentials.aws[:secret_access_key],
-    #   )
-
-    #   target = "#{Rails.root}/app/views/#{@document.attachment.blob.filename}"
-    #   resp = s3.get_object({ bucket:bucket_name, key:object_key }, target: target)
-
-    #   Libreconv.convert(target, "#{Rails.root}/app/views/1.pdf")
-    #   File.delete(target) if File.exist?(target)
-
-    #   @document.pdf_thumbnail.attach(io: File.open("#{Rails.root}/app/views/1.pdf"), filename: "#{@document.attachment.blob.filename}.pdf", content_type: 'application/pdf')
-    #   File.delete("#{Rails.root}/app/views/1.pdf") if File.exist?("#{Rails.root}/app/views/1.pdf")
-    # end
   end
 
   def add_to_shared_list_or_folder
@@ -99,6 +73,32 @@ class DocumentsController < ApplicationController
   #   else
   #     render :show
   #   end
+  # end
+
+  # def attach_pdf_thumbnail
+  #   # gemfile
+  #     # Add gem 'libreconv'
+  #   # document.rb
+  #     # Add has_one_attached :pdf_thumbnail
+  #   @document = Document.second
+
+  #   bucket_name = @document.attachment.service.bucket.name
+  #   object_key = @document.attachment.blob.key
+  #   local_path = "./#{object_key}"
+  #   s3 = Aws::S3::Client.new(
+  #     region: Rails.application.credentials.aws[:region],
+  #     access_key_id: Rails.application.credentials.aws[:access_key_id],
+  #     secret_access_key: Rails.application.credentials.aws[:secret_access_key],
+  #   )
+
+  #   target = "#{Rails.root}/app/views/#{@document.attachment.blob.filename}"
+  #   resp = s3.get_object({ bucket:bucket_name, key:object_key }, target: target)
+
+  #   Libreconv.convert(target, "#{Rails.root}/app/views/1.pdf")
+  #   File.delete(target) if File.exist?(target)
+
+  #   @document.pdf_thumbnail.attach(io: File.open("#{Rails.root}/app/views/1.pdf"), filename: "#{@document.attachment.blob.filename}.pdf", content_type: 'application/pdf')
+  #   File.delete("#{Rails.root}/app/views/1.pdf") if File.exist?("#{Rails.root}/app/views/1.pdf")
   # end
 
   private
