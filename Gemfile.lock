@@ -407,6 +407,7 @@ DEPENDENCIES
   factory_bot_rails
   font-awesome-sass
   glib2
+  gobject-introspection
   image_processing
   jbuilder (~> 2.7)
   letter_opener
