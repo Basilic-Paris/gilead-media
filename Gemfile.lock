@@ -399,6 +399,7 @@ DEPENDENCIES
   email_validator
   factory_bot_rails
   font-awesome-sass
+  gio2
   gobject-introspection
   jbuilder (~> 2.7)
   letter_opener
