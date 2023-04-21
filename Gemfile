@@ -48,7 +48,7 @@ gem 'postmark-rails'
 gem 'acts-as-taggable-on', '~> 6.0'
 gem 'active_link_to'
 
-# gem 'libreconv'
+gem 'libreconv'
 # gem 'image_processing'
 # gem 'gobject-introspection'
 # gem 'glib2'
