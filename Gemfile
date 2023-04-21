@@ -53,6 +53,7 @@ gem 'active_link_to'
 # gem 'gobject-introspection'
 # gem 'glib2'
 gem 'poppler'
+gem 'gobject-introspection'
 gem 'activestorage-office-previewer'
 
 group :development, :test do  gem 'pry-byebug'
