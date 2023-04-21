@@ -52,8 +52,6 @@ gem 'active_link_to'
 # gem 'image_processing'
 # gem 'gobject-introspection'
 # gem 'glib2'
-gem 'gobject-introspection'
-gem 'gio2'
 gem 'poppler'
 gem 'activestorage-office-previewer'
 
