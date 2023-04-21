@@ -52,6 +52,7 @@ gem 'active_link_to'
 # gem 'image_processing'
 # gem 'gobject-introspection'
 # gem 'glib2'
+gem 'gobject-introspection', '~> 4.1', '>= 4.1.2'
 gem 'poppler'
 gem 'activestorage-office-previewer'
 
