@@ -159,7 +159,6 @@ GEM
       addressable (~> 2.8)
     letter_opener (1.8.1)
       launchy (>= 2.2, < 3)
-    libreconv (0.9.5)
     listen (3.8.0)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
@@ -379,7 +378,6 @@ DEPENDENCIES
   font-awesome-sass
   jbuilder (~> 2.7)
   letter_opener
-  libreconv
   listen (~> 3.2)
   pg (>= 0.18, < 2.0)
   pg_search (~> 2.3.0)
