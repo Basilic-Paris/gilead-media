@@ -53,7 +53,7 @@ gem 'image_processing'
 # gem 'gobject-introspection'
 # gem 'glib2'
 # gem 'gobject-introspection', '~> 4.1', '>= 4.1.2'
-gem 'poppler'
+# gem 'poppler'
 gem 'activestorage-office-previewer'
 
 group :development, :test do  gem 'pry-byebug'
