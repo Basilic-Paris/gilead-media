@@ -50,6 +50,7 @@ gem 'active_link_to'
 
 gem 'libreconv'
 gem 'image_processing'
+gem 'glib2'
 gem 'poppler'
 gem 'activestorage-office-previewer'
 
