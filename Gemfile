@@ -49,11 +49,6 @@ gem 'acts-as-taggable-on', '~> 6.0'
 gem 'active_link_to'
 
 # gem 'libreconv'
-gem 'image_processing'
-# gem 'gobject-introspection'
-# gem 'glib2'
-# gem 'gobject-introspection', '~> 4.1', '>= 4.1.2'
-# gem 'poppler'
 gem 'activestorage-office-previewer'
 
 group :development, :test do  gem 'pry-byebug'
