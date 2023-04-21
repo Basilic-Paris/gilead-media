@@ -49,6 +49,9 @@ gem 'acts-as-taggable-on', '~> 6.0'
 gem 'active_link_to'
 
 gem 'libreconv'
+gem 'image_processing'
+gem 'poppler'
+gem 'activestorage-office-previewer'
 
 group :development, :test do  gem 'pry-byebug'
   gem 'pry-rails'
