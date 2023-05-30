@@ -1,21 +1,7 @@
 .card
-  - case document.format
-  - when "image"
-    .card-illustration = image_tag document.attachment
-  - when "video"
-    .card-illustration = video_tag (url_for(document.attachment) + "#t=0.5")
-  - when "pdf"
-    .card-illustration-picto = image_tag "Picto_pdf.png"
-  - when "xls"
-    .card-illustration-picto = image_tag "Picto_excel.png"
-  - when "ppt"
-    .card-illustration-picto = image_tag "Picto_ppt.png"
-  - when "word"
-    .card-illustration-picto = image_tag "Picto_word.png"
-  - else
-    .card-illustration-picto = image_tag "Picto_generique.png"
+  .card-illustration = document.preview_icon(with_video_controls: false, class: 'p-0', picto_class: 'p-4')
 
-  .card-content.d-flex-column-between
+  .card-content.d-flex-column-between.h-50
     .card-infos
       p.cut-text.font-weight-bold = document.title
       p.cut-text.mb-0 Date de validation:
@@ -35,20 +21,3 @@
           i.fas.fa-paper-plane
         = link_to add_to_shared_list_or_folder_document_path(document), class: "btn", data: { toggle: "modal", target: "#addDocumentToSharedListOrFolder" }, remote: true do
           i.fas.fa-plus
-
-//div
-  - case document.format
-  - when "image"
-    = image_tag document.attachment
-  - when "video"
-    = video_tag (url_for(document.attachment) + "#t=0.5")
-  - when "pdf"
-    i.d-flex-default.far.fa-file-pdf style="color: red"
-  - when "xls"
-    i.d-flex-default.far.fa-file-excel style="color: green"
-  - when "ppt"
-    i.d-flex-default.far.fa-file-powerpoint style="color: red"
-  - when "word"
-    i.d-flex-default.far.fa-file-word style="color: blue"
-  - else
-    img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/greece.jpg"
