@@ -1,25 +1,6 @@
 .cards-one-element
   .card-one-element-illustration.d-flex-default
-    - case document.format
-    - when "image"
-      = image_tag document.attachment, class: "p-0"
-    - when "video"
-      = video_tag (url_for(document.attachment) + "#t=0.5"), controls: true, class: "p-0"
-    - when "pdf"
-      .h-100.d-flex-default
-        = image_tag "Picto_pdf.png"
-    - when "xls"
-      .h-100.d-flex-default
-        = image_tag "Picto_excel.png"
-    - when "ppt"
-      .h-100.d-flex-default
-        = image_tag "Picto_ppt.png"
-    - when "word"
-      .h-100.d-flex-default
-        = image_tag "Picto_word.png"
-    - else
-      .h-100.d-flex-default
-        = image_tag "Picto_generique.png"
+    .h-100.d-flex-default = document.preview_icon(with_video_controls: true, class: 'p-0', picto_class: 'p-4')
 
   .card-one-element-content
     .mb-4

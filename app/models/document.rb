@@ -1,6 +1,8 @@
 class Document < ApplicationRecord
   include DatetimeHelper
   include PgSearch::Model
+  include ActionView::Helpers
+  include Rails.application.routes.url_helpers
 
   acts_as_taggable_on :tags
 
@@ -85,7 +87,38 @@ class Document < ApplicationRecord
     attachment.blob.filename.to_s.split(".").last
   end
 
+  def preview_icon(attrs = {})
+    return false if attachment.blank?
+    case format
+    when "image"
+      image_tag(attachment, class: attrs[:class])
+    when "video"
+      video_tag(attachment.service_url + "#t=0.5", controls: attrs[:with_video_controls], class: attrs[:class])
+    else
+      if attachment.previewable?
+        image_tag(attachment.preview(resize_to_limit: [400, 400]), class: attrs[:class])
+      else
+        case format
+        when "pdf"
+          ActionController::Base.helpers.image_tag("Picto_pdf.png", class: attrs[:picto_class])
+        when "xls"
+          ActionController::Base.helpers.image_tag("Picto_excel.png", class: attrs[:picto_class])
+        when "ppt"
+          ActionController::Base.helpers.image_tag("Picto_ppt.png", class: attrs[:picto_class])
+        when "word"
+          ActionController::Base.helpers.image_tag("Picto_word.png", class: attrs[:picto_class])
+        else
+          ActionController::Base.helpers.image_tag("Picto_generique.png", class: attrs[:picto_class])
+        end
+      end
+    end
+  end
+
   private
+
+  def default_url_options
+    Rails.application.config.action_mailer.default_url_options
+  end
 
   def content_type
     self.attachment.blob.content_type
