@@ -57,9 +57,6 @@ Rails.application.routes.draw do
       end
       resources :folders, only: %i[destroy]
     end
-    namespace :custom do
-      resources :documents, only: %i[index]
-    end
   end
 
   # -------- PUBLIC ROUTES ---------
