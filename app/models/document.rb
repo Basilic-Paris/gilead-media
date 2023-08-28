@@ -39,8 +39,19 @@ class Document < ApplicationRecord
     "other": "Autres"
   }
 
+  THEMES = [
+    "VIH",
+    "Hépatite virale",
+    "CAR-T",
+    "Oncologie",
+    "Policies",
+    "RSE",
+    "Empreinte",
+  ]
+
   validates :title, presence: true, uniqueness: true
   validates :language, presence: true, inclusion: { in: LANGUAGES.stringify_keys.keys }
+  validates :theme, presence: true, inclusion: { in: THEMES }
   validates :attachment, presence: true
 
   scope :validated, -> { where.not(validation_at: nil) }

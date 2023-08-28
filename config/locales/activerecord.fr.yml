@@ -18,6 +18,7 @@ fr:
         format: Format
         attachment: Pièce jointe
         tag_list: "Tag(s): utilisez une virgule comme séparateur"
+        theme: Thème
       contact:
         email: E-mail
       shared_list:
