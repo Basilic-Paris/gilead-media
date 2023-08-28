@@ -6,6 +6,9 @@
     .mb-4
       p.mb-2.font-weight-bold = document.title
     .mb-2
+      - if document.theme.present?
+        p.mb-0 Thème:
+        p.mb-2.color-gray = document.theme
       p.mb-0 Langue:
       p.mb-2.color-gray = document.display_language
       p.mb-0 Format:
