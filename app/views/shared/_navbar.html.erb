@@ -24,8 +24,10 @@
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
+          <%= active_link_to 'Home', root_path, wrap_tag: :li, wrap_class: "nav-item", class: "nav-link", active: [pages: :home] %>
           <%= active_link_to 'Documents', documents_path, wrap_tag: :li, wrap_class: "nav-item", class: "nav-link", active: ['documents'] %>
           <%= active_link_to 'Dossiers', folders_path, wrap_tag: :li, wrap_class: "nav-item", class: "nav-link", active: ['folders'] %>
+          <%= active_link_to 'Arborescence', tree_diagram_path, wrap_tag: :li, wrap_class: "nav-item", class: "nav-link", active: [pages: :tree_diagram] %>
           <li class="nav-item" id="shared-list-nav-item">
             <% if current_user.shared_lists.initial.present? %>
               <%= active_link_to 'Liste de partage', shared_list_path(current_user.shared_lists.initial.first), class: "nav-link", active: ['shared_lists'] %>

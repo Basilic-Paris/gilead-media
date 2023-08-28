@@ -1,7 +1,7 @@
 <div class="pb-5">
   <%= simple_form_for :search, url: documents_path, method: "get", data: { controller: "search" }, remote: true do |f| %>
     <div class="d-flex">
-      <%= f.input :title, label: false, placeholder: "Votre recherche: titre du document, mots clés...", input_html: { data: { target: "search.title" } } %>
+      <%= f.input :title, label: false, placeholder: "Votre recherche: titre du document, mots clés, thème...", input_html: { data: { target: "search.title" } } %>
       <div class="btn d-flex" data-action="click->search#toggle">
         <i data-target="search.dropdownIcon" class="fas fa-lg fa-sort-down"></i>
       </div>

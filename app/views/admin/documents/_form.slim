@@ -19,6 +19,7 @@
         = f.input :title
         = f.input :tag_list, value: document.tag_list.join(", ")
         = f.input :language, as: :select, collection: Document::LANGUAGES.map { |k,v| [v,k] }, prompt: "Sélectionnez une langue"
+        = f.input :theme, as: :select, collection: Document::THEMES, prompt: "Sélectionnez un thème"
         = f.input :usage
         //= f.input :attachment, as: :file
         //label.d-flex.align-items-center.mb-5.pb-5

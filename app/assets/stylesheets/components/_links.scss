@@ -1,0 +1,7 @@
+.link-primary {
+  font-style: italic;
+  text-decoration: underline;
+  &:hover {
+    color: #C73442 !important;
+  }
+}

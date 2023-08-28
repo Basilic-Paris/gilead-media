@@ -10,6 +10,9 @@
       - if document.validated?
         p.mb-2.color-gray Mis en ligne le: #{display_date_for(document.validation_at)}
     .mb-4
+      - if document.theme.present?
+        p.mb-0 Thème:
+        p.mb-2.color-gray = document.theme
       p.mb-0 Langue:
       p.mb-2.color-gray = document.display_language
       p.mb-0 Date de création:
