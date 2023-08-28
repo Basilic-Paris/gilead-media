@@ -8,7 +8,12 @@ Rails.application.routes.draw do
     patch 'users', to: 'devise/registrations#update', as: :user_registration
   end
 
-  root to: 'documents#index'
+  root to: 'pages#home'
+
+  controller :pages do
+    get :home
+    get :tree_diagram
+  end
 
   resources :documents, only: %i[index show] do
     # TO KEEP: initial version to add folders or documents to shared list directly
