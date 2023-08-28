@@ -25,12 +25,14 @@ class DocumentsController < ApplicationController
         end
       end
       if search_params[:title].present?
-        @documents = (@documents.advanced_search(:title, search_params[:title]) + @documents.tagged_with(arrange_list(search_params[:title]), any: true)).uniq
-      else
-        @documents
+        @documents = (@documents.advanced_search(:title, search_params[:title]) + @documents.advanced_search(:theme, search_params[:title]) + @documents.tagged_with(arrange_list(search_params[:title]), any: true)).uniq
       end
-    else
-      @documents
+    elsif params[:theme].present?
+      if params[:theme] == "no"
+        @documents = @documents.where(theme: nil).order(:title)
+      else
+        @documents = @documents.advanced_search(:theme, params[:theme]).order(:title)
+      end
     end
   end
 
