@@ -1,5 +1,5 @@
 <div class="container container-content">
-  <%= render 'search_form' %>
+  <%= render 'search_form' unless params[:theme].present? %>
   <%= render 'list', documents: @documents %>
 </div>
 
