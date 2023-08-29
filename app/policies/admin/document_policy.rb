@@ -1,6 +1,6 @@
 class Admin::DocumentPolicy < ApplicationPolicy
   def validate?
-    user.admin? && !record.validated?
+    user.admin? && record.valid? && !record.validated?
   end
 
   def create?
