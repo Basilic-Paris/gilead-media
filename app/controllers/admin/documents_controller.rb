@@ -8,6 +8,11 @@ class Admin::DocumentsController < ApplicationController
     if @document.save
       redirect_to document_path(@document)
     else
+      flash.now.alert = "Une erreur est survenue; ce document ne peut pas être mis en ligne."
+      @document = @document.decorate
+      @shared_document = SharedDocument.new
+      @shared_list = SharedList.new
+      @document_shared_list = DocumentSharedList.new
       render "documents/show"
     end
   end
