@@ -102,9 +102,9 @@ class Document < ApplicationRecord
     return false if attachment.blank?
     case format
     when "image"
-      image_tag(attachment, class: attrs[:class])
+      image_tag(attachment, class: attrs[:class], style: "max-height: 100%; max-width: 100%")
     when "video"
-      video_tag(attachment.service_url + "#t=0.5", controls: attrs[:with_video_controls], class: attrs[:class])
+      video_tag(attachment.service_url + "#t=0.5", controls: attrs[:with_video_controls], class: attrs[:class], style: "max-height: 100%; max-width: 100%")
     else
       if attachment.previewable?
         image_tag(attachment.preview(resize_to_limit: [400, 400]), class: attrs[:class])
