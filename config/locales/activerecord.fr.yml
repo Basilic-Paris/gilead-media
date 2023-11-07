@@ -19,6 +19,7 @@ fr:
         attachment: Pièce jointe
         tag_list: "Tag(s): utilisez une virgule comme séparateur"
         theme: Thème
+        aasm_state: Statut
       contact:
         email: E-mail
       shared_list:

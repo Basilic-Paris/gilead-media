@@ -1,4 +1,5 @@
 class Document < ApplicationRecord
+  include DocumentStateMachine
   include DatetimeHelper
   include PgSearch::Model
   include ActionView::Helpers
