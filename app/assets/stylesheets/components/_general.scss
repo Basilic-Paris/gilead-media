@@ -1,7 +1,12 @@
 .cut-text {
-  text-overflow: ellipsis;
+  // text-overflow: ellipsis;
+  // overflow: hidden;
+  // white-space: nowrap;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
   overflow: hidden;
-  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .d-flex-column-between {
