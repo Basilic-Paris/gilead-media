@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_08_24_125727) do
+ActiveRecord::Schema.define(version: 2023_10_20_142714) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -84,6 +84,7 @@ ActiveRecord::Schema.define(version: 2023_08_24_125727) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "theme"
+    t.string "aasm_state"
   end
 
   create_table "folder_shared_lists", force: :cascade do |t|

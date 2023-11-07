@@ -17,6 +17,7 @@
     .card-one-element-content
       .mb-4
         = f.input :title
+        = f.input :aasm_state, collection: Document.aasm.states.map { |state| [state.default_display_name, state.name] }, include_blank: false
         = f.input :tag_list, value: document.tag_list.join(", ")
         = f.input :language, as: :select, collection: Document::LANGUAGES.map { |k,v| [v,k] }, prompt: "Sélectionnez une langue"
         = f.input :theme, as: :select, collection: Document::THEMES, prompt: "Sélectionnez un thème"

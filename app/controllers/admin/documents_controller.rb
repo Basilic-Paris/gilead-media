@@ -64,7 +64,7 @@ class Admin::DocumentsController < ApplicationController
   private
 
   def document_params
-    params.require(:document).permit(:title, :language, :theme, :usage, :attachment, :tag_list)
+    params.require(:document).permit(:title, :aasm_state, :language, :theme, :usage, :attachment, :tag_list)
   end
 
   def folder_params

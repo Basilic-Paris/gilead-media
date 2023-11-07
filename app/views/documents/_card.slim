@@ -1,23 +1,28 @@
-.card
-  .card-illustration = document.preview_icon(with_video_controls: false, class: 'p-0', picto_class: 'p-4')
+div style="position: relative"
+  .card style="#{'filter: brightness(0.8)' unless document.active?}"
+    .card-illustration
+      = document.preview_icon(with_video_controls: false, class: 'p-0', picto_class: 'p-4')
 
-  .card-content.d-flex-column-between.h-50
-    .card-infos
-      p.cut-text.font-weight-bold = document.title
-      p.cut-text.mb-0 Date de validation:
-      - if document.validated?
-        p.cut-text.color-gray = display_date_for(document.validation_at)
-      - else
-        p.cut-text.color-gray Non validé
-      p.cut-text.mb-0 Langue:
-      p.cut-text.color-gray = document.display_language
-    .card-actions
-      = link_to document_path(document), class: "btn" do
-        i.fas.fa-search
-      = link_to rails_blob_path(document.attachment, disposition: "attachment"), class: "btn" do
-        i.fas.fa-file-download
-      - if document.validated? && (params[:controller] == "documents" && params[:action] == "index")
-        = link_to new_shared_document_path(document), class: "btn", data: { toggle: "modal", target: "#addDocumentToSharedDocument" }, remote: true do
-          i.fas.fa-paper-plane
-        = link_to add_to_shared_list_or_folder_document_path(document), class: "btn", data: { toggle: "modal", target: "#addDocumentToSharedListOrFolder" }, remote: true do
-          i.fas.fa-plus
+    .card-content.d-flex-column-between.h-50
+      .card-infos
+        p.cut-text.font-weight-bold = document.title
+        p.cut-text.mb-0 Date de validation:
+        - if document.validated?
+          p.cut-text.color-gray = display_date_for(document.validation_at)
+        - else
+          p.cut-text.color-gray Non validé
+        p.cut-text.mb-0 Langue:
+        p.cut-text.color-gray = document.display_language
+      .card-actions
+        = link_to document_path(document), class: "btn" do
+          i.fas.fa-search
+        = link_to rails_blob_path(document.attachment, disposition: "attachment"), class: "btn" do
+          i.fas.fa-file-download
+        - if document.validated? && (params[:controller] == "documents" && params[:action] == "index")
+          = link_to new_shared_document_path(document), class: "btn", data: { toggle: "modal", target: "#addDocumentToSharedDocument" }, remote: true do
+            i.fas.fa-paper-plane
+          = link_to add_to_shared_list_or_folder_document_path(document), class: "btn", data: { toggle: "modal", target: "#addDocumentToSharedListOrFolder" }, remote: true do
+            i.fas.fa-plus
+
+  - if document.inactive?
+    .d-flex.align-items-center.justify-content-center.w-100.h-75.text-uppercase style="position: absolute; transform: rotate(315deg); color: white; text-shadow: 2px 2px 4px red, -2px -2px 4px red; letter-spacing: 2px; font-size: 3rem; top: 0" Archivé
