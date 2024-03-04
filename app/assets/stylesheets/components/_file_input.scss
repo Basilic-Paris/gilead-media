@@ -9,7 +9,8 @@ input[type="file"] {
 }
 
 input[type="file"]::before, input[type="file"]:hover::before {
-  content: "Choisir un fichier";
+  // display: var(--display);
+  // content: "Choisir un fichier";
   border: thin solid;
   margin: 0.5rem 1rem 0.5rem 0 !important;
   padding: 0.532rem 0.75rem;

@@ -28,7 +28,10 @@ class Admin::DocumentsController < ApplicationController
     if @document.save
       redirect_to document_path(@document)
     else
-      render :new
+      respond_to do |format|
+        format.html { render :new }
+        format.js { render :validation_errors }
+      end
     end
   end
 
@@ -39,7 +42,10 @@ class Admin::DocumentsController < ApplicationController
     if @document.update(document_params)
       redirect_to document_path(@document)
     else
-      render :edit
+      respond_to do |format|
+        format.html { render :edit }
+        format.js { render :validation_errors }
+      end
     end
   end
 
@@ -64,7 +70,7 @@ class Admin::DocumentsController < ApplicationController
   private
 
   def document_params
-    params.require(:document).permit(:title, :aasm_state, :language, :theme, :usage, :attachment, :tag_list)
+    params.require(:document).permit(:title, :aasm_state, :language, :theme, :usage, :tag_list, attachments: [])
   end
 
   def folder_params

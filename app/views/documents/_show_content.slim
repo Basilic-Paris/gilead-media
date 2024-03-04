@@ -1,6 +1,12 @@
 .cards-one-element
   .card-one-element-illustration.d-flex-default
-    .h-100.d-flex-default = document.preview_icon(with_video_controls: true, class: 'p-0', picto_class: 'p-4')
+    .d-flex-default.flex-wrap
+      - document.attachments.includes(:blob).each do |attachment|
+        - if attachment.persisted?
+          .d-flex.flex-no-wrap.my-3.mx-2
+            = document.preview_icon(attachment: attachment, with_video_controls: true, width: '13rem', height: '7rem', 'object-fit' => 'cover')
+            = link_to rails_blob_path(attachment, disposition: "attachment"), class: "btn p-0", style: "height: fit-content; position: relative; right: 1.6rem; margin-right: -1.6rem;" do
+              i.fas.fa-file-download
 
   .card-one-element-content
     .mb-4
@@ -18,7 +24,7 @@
       p.mb-0 Date de création:
       p.mb-2.color-gray = display_date_for(document.created_at)
       p.mb-0 Format:
-      p.mb-2.color-gray = Document::FORMATS[@document.format.to_sym]
+      p.mb-2.color-gray = document.format
     .mb-2
       p.mb-0 Droits d'utilisation:
       - if document.usage.present?
@@ -35,8 +41,6 @@
       - if policy([:admin, document]).edit?
         = link_to edit_admin_document_path(document), class: "btn" do
           i.fas.fa-cog
-      = link_to rails_blob_path(document.attachment, disposition: "attachment"), class: "btn" do
-        i.fas.fa-file-download
       - if document.validated?
         = link_to new_shared_document_path(document), class: "btn", data: { toggle: "modal", target: "#addDocumentToSharedDocument" }, remote: true do
           i.fas.fa-paper-plane

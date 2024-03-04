@@ -16,7 +16,7 @@ fr:
         usage: Droits d'utilisation
         validation_at: Mise en ligne
         format: Format
-        attachment: Pièce jointe
+        attachments: Pièces jointes
         tag_list: "Tag(s): utilisez une virgule comme séparateur"
         theme: Thème
         aasm_state: Statut
@@ -49,3 +49,5 @@ fr:
           taken: contient déjà ce document
         folder_shared_list:
           taken: contient déjà ce dossier
+        document:
+          no_duplicate_filename: ne peut pas contenir 2 fichiers avec le même nom.

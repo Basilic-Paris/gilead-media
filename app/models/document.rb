@@ -7,7 +7,8 @@ class Document < ApplicationRecord
 
   acts_as_taggable_on :tags
 
-  has_one_attached :attachment
+  # has_one_attached :attachment
+  has_many_attached :attachments
   has_many :document_folders, dependent: :destroy
   has_many :shared_documents, dependent: :destroy
   has_many :folders, through: :document_folders
@@ -27,18 +28,13 @@ class Document < ApplicationRecord
 
   LANGUAGES = {
     "FR": "Français",
-    "EN": "Anglais"
+    "EN": "Anglais",
+    "FR, EN": "Français, Anglais"
   }
 
-  FORMATS = {
-    "image": "Image",
-    "video": "Vidéo",
-    "pdf": "Pdf",
-    "ppt": "Power-Point",
-    "xls": "Excel",
-    "word": "Word",
-    "other": "Autres"
-  }
+  FORMATS = [
+    "Image", "Vidéo", "Pdf", "Power-Point", "Excel", "Word", "Autres"
+  ]
 
   THEMES = [
     "VIH",
@@ -53,7 +49,8 @@ class Document < ApplicationRecord
   validates :title, presence: true, uniqueness: true
   validates :language, presence: true, inclusion: { in: LANGUAGES.stringify_keys.keys }
   validates :theme, presence: true, inclusion: { in: THEMES }
-  validates :attachment, presence: true
+  validates :attachments, presence: true
+  validate :no_duplicate_filename
 
   scope :validated, -> { where.not(validation_at: nil) }
   # scope :created_in_day, ->(datetime) { where('created_at > ? AND created_at < ?', datetime.beginning_of_day, datetime.end_of_day) }
@@ -95,32 +92,33 @@ class Document < ApplicationRecord
     end
   end
 
-  def attachment_extension
-    attachment.blob.filename.to_s.split(".").last
-  end
+  # def attachment_extension
+  #   attachment.blob.filename.to_s.split(".").last
+  # end
 
   def preview_icon(attrs = {})
-    return false if attachment.blank?
-    case format
+    attachment = attrs[:attachment]
+    return false if attachment.blank? && attachment.new_record? && attachment.blob.blank?
+    case attachment.blob.content_type.split("/").first
     when "image"
-      image_tag(attachment, class: attrs[:class], style: "max-height: 100%; max-width: 100%")
+      image_tag(attachment, class: attrs[:class], style: "max-height: 100%; max-width: 100%; width: #{attrs[:width] if attrs[:width].present?}; height: #{attrs[:height] if attrs[:height].present?}; object-fit: #{attrs['object-fit'] if attrs['object-fit'].present?};")
     when "video"
-      video_tag(attachment.service_url + "#t=0.5", controls: attrs[:with_video_controls], class: attrs[:class], style: "max-height: 100%; max-width: 100%")
+      video_tag(attachment.service_url + "#t=0.5", controls: attrs[:with_video_controls], class: attrs[:class], style: "max-height: 100%; max-width: 100%; width: #{attrs[:width] if attrs[:width].present?}; height: #{attrs[:height] if attrs[:height].present?}; object-fit: #{attrs['object-fit'] if attrs['object-fit'].present?};")
     else
       if attachment.previewable?
-        image_tag(attachment.preview(resize_to_limit: [400, 400]), class: attrs[:class])
+        image_tag(attachment.preview(resize_to_limit: [400, 400]), class: attrs[:class], style: "max-height: 100%; max-width: 100%; width: #{attrs[:width] if attrs[:width].present?}; height: #{attrs[:height] if attrs[:height].present?}; object-fit: #{attrs['object-fit'] if attrs['object-fit'].present?};")
       else
-        case format
-        when "pdf"
-          ActionController::Base.helpers.image_tag("Picto_pdf.png", class: attrs[:picto_class])
-        when "xls"
-          ActionController::Base.helpers.image_tag("Picto_excel.png", class: attrs[:picto_class])
-        when "ppt"
-          ActionController::Base.helpers.image_tag("Picto_ppt.png", class: attrs[:picto_class])
-        when "word"
-          ActionController::Base.helpers.image_tag("Picto_word.png", class: attrs[:picto_class])
+        case attachment.blob.content_type
+        when "application/pdf"
+          ActionController::Base.helpers.image_tag("Picto_pdf.png", class: attrs[:picto_class], style: "max-height: 100%; max-width: 100%; width: #{attrs[:width] if attrs[:width].present?}; height: #{attrs[:height] if attrs[:height].present?}; object-fit: #{attrs['object-fit'] if attrs['object-fit'].present?};")
+        when "application/vnd.ms-powerpoint", "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+          ActionController::Base.helpers.image_tag("Picto_ppt.png", class: attrs[:picto_class], style: "max-height: 100%; max-width: 100%; width: #{attrs[:width] if attrs[:width].present?}; height: #{attrs[:height] if attrs[:height].present?}; object-fit: #{attrs['object-fit'] if attrs['object-fit'].present?};")
+        when "application/vnd.ms-excel", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+          ActionController::Base.helpers.image_tag("Picto_excel.png", class: attrs[:picto_class], style: "max-height: 100%; max-width: 100%; width: #{attrs[:width] if attrs[:width].present?}; height: #{attrs[:height] if attrs[:height].present?}; object-fit: #{attrs['object-fit'] if attrs['object-fit'].present?};")
+        when "application/msword", "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+          ActionController::Base.helpers.image_tag("Picto_word.png", class: attrs[:picto_class], style: "max-height: 100%; max-width: 100%; width: #{attrs[:width] if attrs[:width].present?}; height: #{attrs[:height] if attrs[:height].present?}; object-fit: #{attrs['object-fit'] if attrs['object-fit'].present?};")
         else
-          ActionController::Base.helpers.image_tag("Picto_generique.png", class: attrs[:picto_class])
+          ActionController::Base.helpers.image_tag("Picto_generique.png", class: attrs[:picto_class], style: "max-height: 100%; max-width: 100%; width: #{attrs[:width] if attrs[:width].present?}; height: #{attrs[:height] if attrs[:height].present?}; object-fit: #{attrs['object-fit'] if attrs['object-fit'].present?};")
         end
       end
     end
@@ -132,51 +130,38 @@ class Document < ApplicationRecord
     Rails.application.config.action_mailer.default_url_options
   end
 
-  def content_type
-    self.attachment.blob.content_type
-  end
+  # def content_type
+  #   self.attachment.blob.content_type
+  # end
 
-  def main_content_type
-    content_type.split("/").first
-  end
+  # def main_content_type
+  #   content_type.split("/").first
+  # end
 
   def set_format
-    case main_content_type
-    when "image"
+    self.format = attachments.map(&:content_type).map { |content_type|
       case content_type
-      when "image/gif"
-        self.format = "image"
-      when "image/png"
-        self.format = "image"
-      when "image/jpeg"
-        self.format = "image"
-      else
-        self.format = "other"
-      end
-    when "video"
-      case content_type
-      when "video/mp4"
-        self.format = "video"
-      when "video/quicktime"
-        self.format = "video"
-      else
-        self.format = "other"
-      end
-    when "application"
-      case content_type
+      when "image/gif", "image/png", "image/jpeg"
+        "Image"
+      when "video/mp4", "video/quicktime"
+        "Vidéo"
       when "application/pdf"
-        self.format = "pdf"
+        "Pdf"
       when "application/vnd.ms-powerpoint", "application/vnd.openxmlformats-officedocument.presentationml.presentation"
-        self.format = "ppt"
+        "Power-Point"
       when "application/vnd.ms-excel", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-        self.format = "xls"
+        "Excel"
       when "application/msword", "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-        self.format = "word"
+        "Word"
       else
-        self.format = "other"
+        "Autre"
       end
-    else
-      self.format = "other"
-    end
+    }.uniq.sort.reverse.join(', ')
+  end
+
+  def no_duplicate_filename
+    return false if attachments.blank?
+    return false if attachments.count == attachments.map{ |attachment| attachment.filename.to_s }.uniq.count
+    errors.add(:attachments, :no_duplicate_filename)
   end
 end
