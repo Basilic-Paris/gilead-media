@@ -16,6 +16,8 @@ div style="position: relative"
       .card-actions
         = link_to document_path(document), class: "btn" do
           i.fas.fa-search
+        = link_to download_document_path(document), method: :patch, class: "btn" do
+          i.fas.fa-file-download
         - if document.validated? && (params[:controller] == "documents" && params[:action] == "index")
           = link_to new_shared_document_path(document), class: "btn", data: { toggle: "modal", target: "#addDocumentToSharedDocument" }, remote: true do
             i.fas.fa-paper-plane

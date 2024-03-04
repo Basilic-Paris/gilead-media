@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   resources :documents, only: %i[index show] do
     # TO KEEP: initial version to add folders or documents to shared list directly
     # patch :add_to_shared_list, on: :member
+    patch :download, on: :member
     member do
       resources :shared_documents, only: %i[new create]
     end

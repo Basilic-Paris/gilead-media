@@ -1,7 +1,11 @@
 class DocumentsController < ApplicationController
+  require 'zip'
+  require 'tempfile'
+
   include ListHelper
 
-  before_action :find_document, only: %i[show add_to_shared_list_or_folder attach_to_new_shared_list attach_to_existing_shared_list]
+  skip_before_action :authenticate_user!, only: :download
+  before_action :find_document, only: %i[show add_to_shared_list_or_folder attach_to_new_shared_list attach_to_existing_shared_list download]
   before_action :disable_turbolinks_cache, only: %i[index]
 
   def show
@@ -11,7 +15,8 @@ class DocumentsController < ApplicationController
   end
 
   def index
-    @documents = policy_scope(Document).includes(:folders, attachment_attachment: :blob, document_folders: :folder)
+    ordered_aasm_states = Document.aasm.states.map(&:name).map(&:to_s)
+    @documents = policy_scope(Document).includes(:folders, document_folders: :folder)
     @shared_document = SharedDocument.new
     @shared_list = SharedList.new
     @document_shared_list = DocumentSharedList.new
@@ -29,11 +34,12 @@ class DocumentsController < ApplicationController
       end
     elsif params[:theme].present?
       if params[:theme] == "no"
-        @documents = @documents.where(theme: nil).order(:title)
+        @documents = @documents.where(theme: nil)
       else
-        @documents = @documents.advanced_search(:theme, params[:theme]).order(:title)
+        @documents = @documents.advanced_search(:theme, params[:theme])
       end
     end
+    @documents = @documents.sort_by { |document| ordered_aasm_states.index(document.aasm_state) }
   end
 
   def add_to_shared_list_or_folder
@@ -65,6 +71,49 @@ class DocumentsController < ApplicationController
       end
     else
       render :add_to_shared_list_or_folder
+    end
+  end
+
+  def download
+    # create folder that will contain documents
+    zip_filename = "#{@document.title}.zip"
+    zip_temp_file = Tempfile.new(zip_filename, Rails.root.join('tmp'))
+    temp_document_files = []
+
+    begin
+      # initialize zip_temp_file // seems working without it
+      # Zip::OutputStream.open(zip_temp_file) { |zos| }
+
+      #Add files to the zip
+      Zip::File.open(zip_temp_file.path, Zip::File::CREATE) do |zip|
+        @document.attachments.each do |attachment|
+          temp_document_file = Tempfile.new(attachment.filename.to_s, Rails.root.join('tmp'))
+
+          temp_document_files << temp_document_file
+          temp_document_file.binmode
+          temp_document_file.write(attachment.download)
+          temp_document_file.close
+          # temp_document_file.path
+
+          zip.add("#{attachment.filename.to_s}", File.join(temp_document_file.path))
+        end
+      end
+
+      #Read the binary data from the file
+      zip_data = File.read(zip_temp_file.path)
+
+      #Send the data to the browser as an attachment
+      #We do not send the file directly because it will get deleted before rails actually starts sending it
+      send_data(File.read(zip_temp_file.path), type: 'application/zip', disposition: 'attachment', filename: zip_filename)
+
+    ensure
+      zip_temp_file.close
+      zip_temp_file.unlink
+    end
+
+    # unlink the temp_document_files to delete them from folder Temp
+    temp_document_files.each do |temp_document_file|
+      temp_document_file.unlink
     end
   end
 

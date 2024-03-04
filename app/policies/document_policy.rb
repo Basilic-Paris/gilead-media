@@ -20,6 +20,10 @@ class DocumentPolicy < ApplicationPolicy
     !attach_to_new_shared_list?
   end
 
+  def download?
+    true
+  end
+
   class Scope < Scope
     def resolve
       user.admin? == true ? scope.all : scope.all.validated
