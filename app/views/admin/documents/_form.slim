@@ -1,44 +1,34 @@
-= simple_form_for [:admin, document], remote: true do |f|
+= simple_form_for [:admin, document], data: { controller: "attachments" }, remote: true do |f|
   .cards-one-element
-    label.card-one-element-illustration.d-flex-default.flex-column style="cursor: pointer"
-      .d-none = f.input :attachment, as: :file, label: false
-      - if document.attachment.present? && document.attachment.persisted?
-        .h-100.d-flex-default
-          = document.preview_icon(with_video_controls: true, class: 'p-0', picto_class: 'p-4')
-      - else
-        .h-100.d-flex-default
-          i.fas.fa-download.fa-10x.color-burgundy.w-100
-
-      - if document.errors[:attachment].present?
-        .invalid-feedback.d-block.text-center.mb-5 = document.errors.full_messages_for(:attachment).join(",")
-      - elsif document.attachment.present? && !document.attachment.persisted?
-        .invalid-feedback.d-block.text-center.mb-5 Pièce jointe doit être rempli(e)
+    .card-one-element-illustration
+      .d-flex.flex-column.justify-content-end
+        i.fas.fa-download.fa-3x.mb-3.color-burgundy.align-self-end style="cursor: pointer; width: max-content" data-action="click->attachments#attach"
+      .d-flex.flex-column.justify-content-end
+        .d-none.align-items-center.justify-content-end.flex-no-wrap
+          = f.file_field :attachments, multiple: true, label: false, style: "direction: rtl;"
+          span &nbsp
+          i.fas.fa-minus.btn.p-0. style="height: fit-content" data-action="click->attachments#removeAttachmentInput"
+      .attachments.invalid-feedback.d-block style="margin-bottom: 2rem"
+      .d-flex.justify-content-between.flex-wrap
+        - document.attachments.includes(:blob).each do |attachment|
+          - if attachment.persisted?
+            .d-flex.flex-no-wrap.my-3
+              = document.preview_icon(attachment: attachment, with_video_controls: true, width: '13rem', height: '7rem', 'object-fit' => 'cover')
+              = link_to admin_document_attachment_path(document, attachment), method: :delete, class: "btn p-0", style: "height: fit-content; position: relative; right: 1.6rem; margin-right: -1.6rem;", remote: true, data: {confirm: "<p class='text-center mt-n-3'>Vous êtes sur le point de supprimer une pièce jointe.<br>Souhaitez-vous confirmer?</p>".html_safe } do
+                i.fas.fa-minus
 
     .card-one-element-content
       .mb-4
-        = f.input :title
-        = f.input :aasm_state, collection: Document.aasm.states.map { |state| [state.default_display_name, state.name] }, include_blank: false
-        = f.input :tag_list, value: document.tag_list.join(", ")
-        = f.input :language, as: :select, collection: Document::LANGUAGES.map { |k,v| [v,k] }, prompt: "Sélectionnez une langue"
-        = f.input :theme, as: :select, collection: Document::THEMES, prompt: "Sélectionnez un thème"
-        = f.input :usage
-        //= f.input :attachment, as: :file
-        //label.d-flex.align-items-center.mb-5.pb-5
-          - if document.attachment.present?
-            span.btn.mr-3 Choisir un autre document
-          - else
-            span.btn.mr-3 Choisir un autre document
-          .d-none = f.input :attachment, as: :file, label: false
-          //- if document.attachment.present?
-            span = document.attachment_blob[:filename]
-          //- else
-            span Aucun fichier choisi
+        = f.input :title, wrapper_html: {  class: 'mb-0' }
+        .title.invalid-feedback.d-block style="margin-bottom: 2rem"
+        = f.input :aasm_state, collection: Document.aasm.states.map { |state| [state.default_display_name, state.name] }, include_blank: false, wrapper_html: {  class: 'mb-0' }
+        .aasm_state.invalid-feedback.d-block style="margin-bottom: 2rem"
+        = f.input :tag_list, value: document.tag_list.join(", "), wrapper_html: {  class: 'mb-0' }
+        .tag_list.invalid-feedback.d-block style="margin-bottom: 2rem"
+        = f.input :language, as: :select, collection: Document::LANGUAGES.to_a, prompt: "Sélectionnez une langue", label_method: :second, value_method: :first, wrapper_html: {  class: 'mb-0' }
+        .language.invalid-feedback.d-block style="margin-bottom: 2rem"
+        = f.input :theme, as: :select, collection: Document::THEMES, prompt: "Sélectionnez un thème", selected: "VIH", wrapper_html: {  class: 'mb-0' }
+        .theme.invalid-feedback.d-block style="margin-bottom: 2rem"
+        = f.input :usage, wrapper_html: {  class: 'mb-0' }
+        .usage.invalid-feedback.d-block style="margin-bottom: 2rem"
         .text-center = f.submit class: "btn", data: { disable_with: 'Chargement...' }
-
-  //.text-center
-    - if params[:action] == "new"
-      = f.submit "Créer", class: "btn"
-    - elsif params[:action] == "edit"
-      = f.submit "Modifier", class: "btn"
-    - else params[:action] == "edit"
-      = f.submit class: "btn"

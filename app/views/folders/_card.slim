@@ -15,7 +15,8 @@
       = link_to download_folder_path(folder), method: :patch, class: "btn" do
         i.fas.fa-file-download
       - if (params[:controller] == "folders" && params[:action] == "index")
-        = link_to new_shared_folder_path(folder), class: "btn", data: { toggle: "modal", target: "#addFolderToSharedFolder" }, remote: true do
-          i.fas.fa-paper-plane
-        = link_to add_to_shared_list_folder_path(folder), data: { toggle: "modal", target: "#addFolderToSharedList" }, class: "btn", remote: true do
-          i.fas.fa-plus
+        - if folder.documents.validated.present?
+          = link_to new_shared_folder_path(folder), class: "btn", data: { toggle: "modal", target: "#addFolderToSharedFolder" }, remote: true do
+            i.fas.fa-paper-plane
+          = link_to add_to_shared_list_folder_path(folder), data: { toggle: "modal", target: "#addFolderToSharedList" }, class: "btn", remote: true do
+            i.fas.fa-plus

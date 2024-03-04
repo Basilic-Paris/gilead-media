@@ -74,15 +74,18 @@ class FoldersController < ApplicationController
       #Add files to the zip
       Zip::File.open(zip_temp_file.path, Zip::File::CREATE) do |zip|
         @documents.each do |document|
-          temp_document_file = Tempfile.new([document.title, document.attachment_extension], Rails.root.join('tmp'))
+          document.attachments.each do |attachment|
+            # temp_document_file = Tempfile.new([document.title, document.attachment_extension], Rails.root.join('tmp'))
+            temp_document_file = Tempfile.new("#{document.title}_#{attachment.filename}", Rails.root.join('tmp'))
 
-          temp_document_files << temp_document_file
-          temp_document_file.binmode
-          temp_document_file.write(document.attachment.download)
-          temp_document_file.close
-          # temp_document_file.path
+            temp_document_files << temp_document_file
+            temp_document_file.binmode
+            temp_document_file.write(attachment.download)
+            temp_document_file.close
+            # temp_document_file.path
 
-          zip.add("#{document.title}.#{document.attachment_extension}", File.join(temp_document_file.path))
+            zip.add("#{document.title}_#{attachment.filename}", File.join(temp_document_file.path))
+          end
         end
       end
 
@@ -112,7 +115,12 @@ class FoldersController < ApplicationController
   end
 
   def find_documents
-    current_user.present? && current_user.admin? ? @documents = DocumentDecorator.decorate_collection(@folder.documents.includes(attachment_attachment: :blob)) : @documents = DocumentDecorator.decorate_collection(@folder.documents.validated.includes(attachment_attachment: :blob))
+    ordered_aasm_states = Document.aasm.states.map(&:name).map(&:to_s)
+    if current_user.present? && current_user.admin?
+      @documents = DocumentDecorator.decorate_collection(@folder.documents.sort_by { |document| ordered_aasm_states.index(document.aasm_state) })
+    else
+      @documents = DocumentDecorator.decorate_collection(@folder.documents.validated.sort_by { |document| ordered_aasm_states.index(document.aasm_state) })
+    end
   end
 
   def folder_shared_list_params
