@@ -1,7 +1,12 @@
 .cards-one-element
   .card-one-element-illustration.d-flex-default
-    .h-100.d-flex-default = document.preview_icon(with_video_controls: true, class: 'p-0', picto_class: 'p-4')
-
+    .d-flex-default.flex-wrap
+      - document.attachments.includes(:blob).each do |attachment|
+        .d-flex.flex-no-wrap.my-3.mx-2
+          = document.preview_icon(attachment: attachment, with_video_controls: true, width: '13rem', height: '7rem', 'object-fit' => 'cover')
+          - if shared_object.download?
+            = link_to rails_blob_path(attachment, disposition: "attachment"), class: "btn p-0", style: "height: fit-content; position: relative; right: 1.6rem; margin-right: -1.6rem;" do
+              i.fas.fa-file-download
   .card-one-element-content
     .mb-4
       p.mb-2.font-weight-bold = document.title
@@ -12,9 +17,9 @@
       p.mb-0 Langue:
       p.mb-2.color-gray = document.display_language
       p.mb-0 Format:
-      p.mb-2.color-gray = Document::FORMATS[@document.format.to_sym]
+      p.mb-2.color-gray = document.format
 
     .btn-container
       - if shared_object.download?
-        = link_to rails_blob_path(document.attachment, disposition: "attachment"), class: "btn" do
+        = link_to download_document_path(document), method: :patch, class: "btn" do
           i.fas.fa-file-download

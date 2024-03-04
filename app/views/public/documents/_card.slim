@@ -1,5 +1,6 @@
 .card
-  .card-illustration = document.preview_icon(with_video_controls: false, class: 'p-0', picto_class: 'p-4')
+  .card-illustration
+    = document.preview_icon(attachment: document.attachments.first, with_video_controls: false, class: 'p-0', picto_class: 'p-4', width: '100%', height: '100%')
 
   .card-content.d-flex-column-between.h-50
     .card-infos
@@ -11,7 +12,7 @@
         = link_to public_shared_list_document_path(shared_object.code, document), class: "btn" do
           i.fas.fa-search
       - if shared_object.download?
-        = link_to rails_blob_path(document.attachment, disposition: "attachment"), class: "btn" do
+        = link_to download_document_path(document), method: :patch, class: "btn" do
           i.fas.fa-file-download
       - if shared_object.class == SharedFolder
         = link_to public_shared_folder_document_path(shared_object.code, document), class: "btn" do
