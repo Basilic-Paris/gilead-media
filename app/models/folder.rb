@@ -10,7 +10,7 @@ class Folder < ApplicationRecord
   scope :ordered_by_title, -> { order('lower(title)') }
   scope :with_documents, -> { joins(document_folders: :document).distinct }
   # scope :with_validated_documents, -> { joins(document_folders: :document).where.not({ documents: { validation_at: nil } }).distinct }
-  scope :with_validated_documents, -> { with_documents.where.not({ documents: { validation_at: nil } }) }
+  scope :with_active_documents, -> { with_documents.where(documents: {aasm_state: "active"})}
 
   # TO KEEP: initial version to add folders or documents to shared list directly
   # def shared_lists_attributes=(shared_list_attributes)

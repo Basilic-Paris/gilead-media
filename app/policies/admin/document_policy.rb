@@ -1,6 +1,14 @@
 class Admin::DocumentPolicy < ApplicationPolicy
-  def validate?
-    user.admin? && record.valid? && !record.validated?
+  def unactive?
+    user.admin? && record.active?
+  end
+
+  def active?
+    user.admin? && record.inactive?
+  end
+
+  def archive?
+    user.admin? && record.active?
   end
 
   def create?

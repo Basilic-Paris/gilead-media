@@ -10,7 +10,7 @@ class SharedDocumentsController < ApplicationController
   end
 
   def create
-    @documents = policy_scope(Document).validated
+    @documents = policy_scope(Document).active
     @shared_list = SharedList.new
     @document_shared_list = DocumentSharedList.new
 

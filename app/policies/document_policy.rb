@@ -26,7 +26,7 @@ class DocumentPolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
-      user.admin? == true ? scope.all : scope.all.validated
+      user.admin? ? scope.all : scope.active
     end
   end
 end

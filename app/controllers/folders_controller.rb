@@ -4,6 +4,7 @@ class FoldersController < ApplicationController
 
   skip_before_action :authenticate_user!, only: :download
   before_action :find_folder, only: %i[show download add_to_shared_list attach_to_new_shared_list attach_to_existing_shared_list]
+  before_action :find_shared_list, only: %i[show download]
   before_action :find_documents, only: %i[show download]
   before_action :disable_turbolinks_cache, only: %i[index show]
 
@@ -15,9 +16,11 @@ class FoldersController < ApplicationController
   end
 
   def show
-    @shared_list = SharedList.new
-    @folder_shared_list = FolderSharedList.new
-    @shared_folder = SharedFolder.new
+    unless @shared_list.present?
+      @shared_list = SharedList.new
+      @folder_shared_list = FolderSharedList.new
+      @shared_folder = SharedFolder.new
+    end
   end
 
   def add_to_shared_list
@@ -116,11 +119,15 @@ class FoldersController < ApplicationController
 
   def find_documents
     ordered_aasm_states = Document.aasm.states.map(&:name).map(&:to_s)
-    if current_user.present? && current_user.admin?
-      @documents = DocumentDecorator.decorate_collection(@folder.documents.sort_by { |document| ordered_aasm_states.index(document.aasm_state) })
+    if @shared_list.present? || current_user.blank? || (current_user.present? && !current_user.admin?)
+      @documents = DocumentDecorator.decorate_collection(@folder.documents.active).sort_by { |document| ordered_aasm_states.index(document.aasm_state) }
     else
-      @documents = DocumentDecorator.decorate_collection(@folder.documents.validated.sort_by { |document| ordered_aasm_states.index(document.aasm_state) })
+      @documents = DocumentDecorator.decorate_collection(@folder.documents).sort_by { |document| ordered_aasm_states.index(document.aasm_state) }
     end
+  end
+
+  def find_shared_list
+    @shared_list = SharedList.find(params[:shared_list_id]) if params[:shared_list_id].present?
   end
 
   def folder_shared_list_params

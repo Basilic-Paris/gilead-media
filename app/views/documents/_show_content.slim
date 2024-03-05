@@ -13,7 +13,7 @@
       p.mb-2.font-weight-bold = document.title
       - if document.tag_list.present?
         p.mb-2.color-gray = document.tag_list.map{|tag| tag.upcase}.join("; ")
-      - if document.validated?
+      - if document.active?
         p.mb-2.color-gray Mis en ligne le: #{display_date_for(document.validation_at)}
     .mb-4
       - if document.theme.present?
@@ -36,15 +36,20 @@
       - if policy([:admin, document]).destroy?
         = link_to admin_document_path(document), method: :delete, data: {confirm: "<p class='text-center mt-n-3'>Vous êtes sur le point de supprimer un document.<br>Souhaitez-vous confirmer?</p>".html_safe }, class: "btn" do
           i.fas.fa-minus
-      - if policy([:admin, document]).validate?
-        = link_to 'Mettre en ligne', admin_document_validate_path(document), method: :patch, class: "btn"
       - if policy([:admin, document]).edit?
         = link_to edit_admin_document_path(document), class: "btn" do
           i.fas.fa-cog
       = link_to download_document_path(document), method: :patch, class: "btn" do
         i.fas.fa-file-download
-      - if document.validated?
+      - if document.active?
         = link_to new_shared_document_path(document), class: "btn", data: { toggle: "modal", target: "#addDocumentToSharedDocument" }, remote: true do
           i.fas.fa-paper-plane
-        = link_to add_to_shared_list_or_folder_document_path(document), class: "btn", data: { toggle: "modal", target: "#addDocumentToSharedListOrFolder" }, remote: true do
-          i.fas.fa-plus
+      = link_to add_to_shared_list_or_folder_document_path(document), class: "btn", data: { toggle: "modal", target: "#addDocumentToSharedListOrFolder" }, remote: true do
+        i.fas.fa-plus
+    .btn-container.mt-3
+      - if policy([:admin, document]).active?
+        = link_to 'Mettre en ligne', active_admin_document_path(document), method: :patch, class: "btn"
+      - if policy([:admin, document]).unactive?
+        = link_to 'Marquer comme inactif', unactive_admin_document_path(document), method: :patch, class: "btn"
+      - if policy([:admin, document]).unactive?
+        = link_to 'Archiver', archive_admin_document_path(document), method: :patch, class: "btn"

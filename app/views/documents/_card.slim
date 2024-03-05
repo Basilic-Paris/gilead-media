@@ -7,7 +7,7 @@ div style="position: relative"
       .card-infos
         p.cut-text.font-weight-bold = document.title
         p.cut-text.mb-0 Date de validation:
-        - if document.validated?
+        - if document.active?
           p.cut-text.color-gray = display_date_for(document.validation_at)
         - else
           p.cut-text.color-gray Non validé
@@ -18,11 +18,12 @@ div style="position: relative"
           i.fas.fa-search
         = link_to download_document_path(document), method: :patch, class: "btn" do
           i.fas.fa-file-download
-        - if document.validated? && (params[:controller] == "documents" && params[:action] == "index")
-          = link_to new_shared_document_path(document), class: "btn", data: { toggle: "modal", target: "#addDocumentToSharedDocument" }, remote: true do
-            i.fas.fa-paper-plane
-        = link_to add_to_shared_list_or_folder_document_path(document), class: "btn", data: { toggle: "modal", target: "#addDocumentToSharedListOrFolder" }, remote: true do
-          i.fas.fa-plus
+        - if params[:controller] == "documents" && params[:action] == "index"
+          - if document.active?
+            = link_to new_shared_document_path(document), class: "btn", data: { toggle: "modal", target: "#addDocumentToSharedDocument" }, remote: true do
+              i.fas.fa-paper-plane
+          = link_to add_to_shared_list_or_folder_document_path(document), class: "btn", data: { toggle: "modal", target: "#addDocumentToSharedListOrFolder" }, remote: true do
+            i.fas.fa-plus
 
   - if document.archived?
     .d-flex.align-items-center.justify-content-center.w-100.h-75.text-uppercase style="position: absolute; transform: rotate(315deg); color: white; text-shadow: 2px 2px 4px red, -2px -2px 4px red; letter-spacing: 2px; font-size: 3rem; top: 0" Archivé
