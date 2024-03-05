@@ -1,13 +1,18 @@
 <%= simple_form_for [document, shared_list], url: attach_to_new_shared_list_document_path(document), data: { controller: "flatpickr" }, html: { id: "add_document_to_new_shared_list", class: "label-input-in-line-equal-space" }, remote: true do |f| %>
+  <% if document.active? %>
+    <% if shared_list.errors.messages[:code].present? %>
+      <p class="alert-warning p-3">
+        Une erreur s'est produite dans la génération du code associé à la liste de partage. Veuillez valider à nouveau votre saisie.
+      </p>
+    <% end %>
 
-  <% if shared_list.errors.messages[:code].present? %>
+    <%= f.input :title, label: false, placeholder: "Nommez votre liste de partage", input_html: { style: "grid-column: 1 / span 2" } %>
+    <%= f.input :validity, as: :string, placeholder: "Date", input_html: { data: { target: "flatpickr.dateSelection" } } %>
+    <%= f.input :download, as: :select, prompt: "Sélectionnez" %>
+    <%= f.submit "Valider", class: "btn" %>
+  <% else %>
     <p class="alert-warning p-3">
-      Une erreur s'est produite dans la génération du code associé à la liste de partage. Veuillez valider à nouveau votre saisie.
+      Le document doit être validé pour l'ajouter à une liste de partage.
     </p>
   <% end %>
-
-  <%= f.input :title, label: false, placeholder: "Nommez votre liste de partage", input_html: { style: "grid-column: 1 / span 2" } %>
-  <%= f.input :validity, as: :string, placeholder: "Date", input_html: { data: { target: "flatpickr.dateSelection" } } %>
-  <%= f.input :download, as: :select, prompt: "Sélectionnez" %>
-  <%= f.submit "Valider", class: "btn" %>
 <% end %>

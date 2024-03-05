@@ -1,14 +1,38 @@
 class Admin::DocumentsController < ApplicationController
-  before_action :find_document, only: %i[edit update destroy attach_to_folder]
-  before_action :find_document_with_document_id, only: %i[validate]
+  before_action :find_document, only: %i[edit update destroy attach_to_folder unactive active archive]
   before_action :disable_turbolinks_cache, only: %i[create update destroy]
 
-  def validate
-    @document.validation_at = DateTime.now
-    if @document.save
+  def unactive
+    if @document.unactive!
+      redirect_to document_path(@document)
+    else
+      flash.now.alert = "Une erreur est survenue; ce document ne peut pas être désactivé."
+      @document = @document.decorate
+      @shared_document = SharedDocument.new
+      @shared_list = SharedList.new
+      @document_shared_list = DocumentSharedList.new
+      render "documents/show"
+    end
+  end
+
+  def active
+    if @document.active!
       redirect_to document_path(@document)
     else
       flash.now.alert = "Une erreur est survenue; ce document ne peut pas être mis en ligne."
+      @document = @document.decorate
+      @shared_document = SharedDocument.new
+      @shared_list = SharedList.new
+      @document_shared_list = DocumentSharedList.new
+      render "documents/show"
+    end
+  end
+
+  def archive
+    if @document.archive!
+      redirect_to document_path(@document)
+    else
+      flash.now.alert = "Une erreur est survenue; ce document ne peut pas être archivé."
       @document = @document.decorate
       @shared_document = SharedDocument.new
       @shared_list = SharedList.new
@@ -70,7 +94,7 @@ class Admin::DocumentsController < ApplicationController
   private
 
   def document_params
-    params.require(:document).permit(:title, :aasm_state, :language, :theme, :usage, :tag_list, attachments: [])
+    params.require(:document).permit(:title, :language, :theme, :usage, :tag_list, attachments: [])
   end
 
   def folder_params

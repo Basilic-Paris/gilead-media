@@ -4,8 +4,8 @@ class Public::SharedListsController < ApplicationController
   layout "public"
 
   def show
-    @documents = DocumentDecorator.decorate_collection(@shared_list.documents.validated)
-    @folders = @shared_list.folders.with_validated_documents
+    @documents = DocumentDecorator.decorate_collection(@shared_list.documents.active)
+    @folders = @shared_list.folders.with_active_documents
   end
 
   private

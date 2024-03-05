@@ -44,6 +44,9 @@ Rails.application.routes.draw do
   end
   resources :shared_lists, only: %i[index show] do
     patch :add_contacts, on: :member
+    resources :folders, only: :show do
+      patch :download, on: :member
+    end
   end
 
   # -------- ADMIN ROUTES ---------
@@ -51,8 +54,10 @@ Rails.application.routes.draw do
     namespace :admin do
       resources :users, only: %i[index create destroy]
       resources :documents, only: %i[new create edit update destroy] do
-        patch :validate
         member do
+          patch :unactive
+          patch :active
+          patch :archive
           post :attach_to_folder
         end
         resources :attachments, only: %i[destroy]

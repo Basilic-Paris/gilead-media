@@ -52,7 +52,6 @@ class Document < ApplicationRecord
   validates :attachments, presence: true
   validate :no_duplicate_filename
 
-  scope :validated, -> { where.not(validation_at: nil) }
   # scope :created_in_day, ->(datetime) { where('created_at > ? AND created_at < ?', datetime.beginning_of_day, datetime.end_of_day) }
   scope :created_in_days_range, ->(start_datetime, end_datetime) { where('created_at > ? AND created_at < ?', start_datetime.beginning_of_day, end_datetime.end_of_day) }
 
@@ -68,10 +67,6 @@ class Document < ApplicationRecord
       query: query
     }
   }
-
-  def validated?
-    validation_at.present?
-  end
 
   # TO KEEP: initial version to add folders or documents to shared list directly
   # def shared_lists_attributes=(shared_list_attributes)

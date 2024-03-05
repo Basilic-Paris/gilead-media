@@ -16,7 +16,7 @@ class DocumentsController < ApplicationController
 
   def index
     ordered_aasm_states = Document.aasm.states.map(&:name).map(&:to_s)
-    @documents = policy_scope(Document).includes(:folders, document_folders: :folder)
+    @documents = policy_scope(Document).eager_load(:folders, document_folders: :folder)
     @shared_document = SharedDocument.new
     @shared_list = SharedList.new
     @document_shared_list = DocumentSharedList.new

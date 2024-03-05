@@ -26,7 +26,7 @@ class FolderPolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
-      user.admin? == true ? scope.all.with_documents : scope.all.with_validated_documents
+      user.admin? ? scope.with_documents : scope.with_active_documents
     end
   end
 end

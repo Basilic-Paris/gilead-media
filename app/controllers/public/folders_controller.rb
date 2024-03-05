@@ -4,7 +4,7 @@ class Public::FoldersController < ApplicationController
   layout "public"
 
   def show
-    @documents = DocumentDecorator.decorate_collection(@folder.documents.validated)
+    @documents = DocumentDecorator.decorate_collection(@folder.documents.active)
   end
 
   private

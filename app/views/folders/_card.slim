@@ -8,15 +8,23 @@
       p.cut-text.mb-0 Date de création:
       p.cut-text.color-gray #{display_date_for(folder.created_at)}
       p.cut-text.mb-0 Contenu:
-      p.cut-text.color-gray #{policy_scope(folder.documents).count} élément(s)
+      - if current_user.admin? && !@shared_list.persisted?
+        p.cut-text.color-gray #{policy_scope(folder.documents).count} élément(s)
+      - else
+        p.cut-text.color-gray #{policy_scope(folder.documents.active).count} élément(s)
     .card-actions
-      = link_to folder_path(folder), class: "btn" do
-        i.fas.fa-search
-      = link_to download_folder_path(folder), method: :patch, class: "btn" do
-        i.fas.fa-file-download
-      - if (params[:controller] == "folders" && params[:action] == "index")
-        - if folder.documents.validated.present?
-          = link_to new_shared_folder_path(folder), class: "btn", data: { toggle: "modal", target: "#addFolderToSharedFolder" }, remote: true do
-            i.fas.fa-paper-plane
-          = link_to add_to_shared_list_folder_path(folder), data: { toggle: "modal", target: "#addFolderToSharedList" }, class: "btn", remote: true do
-            i.fas.fa-plus
+      - if @shared_list.persisted?
+        = link_to shared_list_folder_path(@shared_list, folder), class: "btn" do
+          i.fas.fa-search
+        = link_to download_shared_list_folder_path(@shared_list, folder), method: :patch, class: "btn" do
+          i.fas.fa-file-download
+      - else
+        = link_to folder_path(folder), class: "btn" do
+          i.fas.fa-search
+        = link_to download_folder_path(folder), method: :patch, class: "btn" do
+          i.fas.fa-file-download
+          - if folder.documents.active.present?
+            = link_to new_shared_folder_path(folder), class: "btn", data: { toggle: "modal", target: "#addFolderToSharedFolder" }, remote: true do
+              i.fas.fa-paper-plane
+            = link_to add_to_shared_list_folder_path(folder), data: { toggle: "modal", target: "#addFolderToSharedList" }, class: "btn", remote: true do
+              i.fas.fa-plus
