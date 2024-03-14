@@ -60,6 +60,7 @@ class Admin::DocumentsController < ApplicationController
   end
 
   def edit
+    @document.theme = nil if @document.theme == "Sans thème"
   end
 
   def update
