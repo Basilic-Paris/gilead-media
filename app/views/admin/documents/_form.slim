@@ -25,7 +25,7 @@
         .tag_list.invalid-feedback.d-block style="margin-bottom: 2rem"
         = f.input :language, as: :select, collection: Document::LANGUAGES.to_a, prompt: "Sélectionnez une langue", label_method: :second, value_method: :first, wrapper_html: {  class: 'mb-0' }
         .language.invalid-feedback.d-block style="margin-bottom: 2rem"
-        = f.input :theme, as: :select, collection: Document::THEMES, prompt: "Sélectionnez un thème", wrapper_html: {  class: 'mb-0' }
+        = f.input :theme, as: :select, collection: Document::THEMES.reject { |theme| theme == "Sans thème" }, prompt: "Sélectionnez un thème", wrapper_html: {  class: 'mb-0' }
         .theme.invalid-feedback.d-block style="margin-bottom: 2rem"
         = f.input :usage, wrapper_html: {  class: 'mb-0' }
         .usage.invalid-feedback.d-block style="margin-bottom: 2rem"

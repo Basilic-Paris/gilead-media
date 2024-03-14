@@ -1,6 +1,6 @@
 class PagesController < ApplicationController
   def home
-    @themes = Document::THEMES.sort
+    @themes = Document::THEMES
   end
 
   def tree_diagram

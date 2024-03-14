@@ -37,13 +37,14 @@ class Document < ApplicationRecord
   ]
 
   THEMES = [
-    "VIH",
-    "Hépatite virale",
     "CAR-T",
+    "Empreinte",
+    "Hépatite virale",
     "Oncologie",
     "Policies",
     "RSE",
-    "Empreinte",
+    "VIH",
+    "Sans thème"
   ]
 
   validates :title, presence: true, uniqueness: true
