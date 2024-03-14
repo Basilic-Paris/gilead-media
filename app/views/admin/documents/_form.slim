@@ -13,7 +13,7 @@
         - document.attachments.includes(:blob).each do |attachment|
           - if attachment.persisted?
             .d-flex.flex-no-wrap.my-3
-              = document.preview_icon(attachment: attachment, with_video_controls: true, width: '13rem', height: '7rem', 'object-fit' => 'cover')
+              = document.preview_icon(attachment: attachment, with_video_controls: true, width: '13rem', 'object-fit' => 'contain')
               = link_to admin_document_attachment_path(document, attachment), method: :delete, class: "btn p-0", style: "height: fit-content; position: relative; right: 1.6rem; margin-right: -1.6rem;", remote: true, data: {confirm: "<p class='text-center mt-n-3'>Vous êtes sur le point de supprimer une pièce jointe.<br>Souhaitez-vous confirmer?</p>".html_safe } do
                 i.fas.fa-minus
 
