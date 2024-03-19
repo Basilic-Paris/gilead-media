@@ -1,15 +1,7 @@
 = simple_form_for [:admin, document], data: { controller: "attachments" }, remote: true do |f|
   .cards-one-element
     .card-one-element-illustration
-      .d-flex.flex-column.justify-content-end
-        i.fas.fa-download.fa-3x.mb-3.color-burgundy.align-self-end style="cursor: pointer; width: max-content" data-action="click->attachments#attach"
-      .d-flex.flex-column.justify-content-end
-        .d-none.align-items-center.justify-content-end.flex-no-wrap
-          = f.file_field :attachments, multiple: true, label: false, style: "direction: rtl;"
-          span &nbsp
-          i.fas.fa-minus.btn.p-0. style="height: fit-content" data-action="click->attachments#removeAttachmentInput"
-      .attachments.invalid-feedback.d-block style="margin-bottom: 2rem"
-      .d-flex.justify-content-between.flex-wrap
+      .d-flex.flex-column.align-items-center
         - document.attachments.includes(:blob).each do |attachment|
           - if attachment.persisted?
             .d-flex.flex-no-wrap.my-3
@@ -29,4 +21,11 @@
         .theme.invalid-feedback.d-block style="margin-bottom: 2rem"
         = f.input :usage, wrapper_html: {  class: 'mb-0' }
         .usage.invalid-feedback.d-block style="margin-bottom: 2rem"
-        .text-center = f.submit class: "btn", data: { disable_with: 'Chargement...' }
+        .btn.btn-secondary.w-100 data-action="click->attachments#attach" Ajouter une pièce jointe
+        .d-flex.flex-column.justify-content-end
+          .d-none.align-items-center.justify-content-end.flex-no-wrap
+            = f.file_field :attachments, multiple: true, label: false, style: "direction: rtl;"
+            span &nbsp
+            i.fas.fa-minus.btn.p-0. style="height: fit-content" data-action="click->attachments#removeAttachmentInput"
+        .attachments.invalid-feedback.d-block
+        .text-center.pt-5 = f.submit class: "btn w-100 mt-3", data: { disable_with: 'Chargement...' }

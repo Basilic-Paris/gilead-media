@@ -56,3 +56,12 @@
   background-color: #C73442 !important;
   opacity: 0.65 !important;
 }
+
+.btn-secondary {
+  background-color: transparent !important;
+  color: #C73442 !important;
+  &:hover {
+    background-color: white !important;
+    border-color: #C73442;
+  }
+}
