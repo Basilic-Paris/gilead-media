@@ -3,14 +3,14 @@
   <head>
     <title>GileadMedia</title>
     <%= csrf_meta_tags %>
-    <%= turbolinks_cache_control_meta_tag %>
     <%= csp_meta_tag %>
     <%= favicon_link_tag %>
 
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag "application", media: "all", "data-turbo-track": "reload" %>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload', defer: true %>
+    <%= javascript_importmap_tags %>
   </head>
 
   <body>
@@ -23,5 +23,24 @@
     </div>
 
     <%= yield %>
+
+    <dialog id="turbo-confirm">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <form method="dialog">
+            <div class="modal-header">
+              <button class="cancel btn-close" value="cancel"></button>
+            </div>
+            <div class="modal-body">
+              <p>Etes-vous sûr?</p>
+            </div>
+            <div class="modal-footer">
+              <button class="btn cancel btn-default" value="cancel">Annuler</button>
+              <button class="btn commit btn-danger" value="confirm">Valider</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </dialog>
   </body>
 </html>
