@@ -1,0 +1,30 @@
+dialog {
+  // @extend .modal;
+  padding: 0;
+  margin: 1.75rem auto;
+  border: unset;
+  // border: var(--bs-modal-border-width) solid var(--bs-modal-border-color);
+  // border-radius: var(--bs-modal-border-radius);
+  .modal-footer {
+    padding: 0.75rem;
+    & > * {
+      margin: 0.25rem;
+    }
+  }
+  .btn-close {
+    margin-left: auto !important;
+    &:focus {
+      box-shadow: unset;
+      opacity: 0.5;
+    }
+  }
+  &::backdrop {
+    background-color: #000;
+    opacity: 0.5;
+  }
+  --bs-modal-width: 500px;
+  --bs-modal-bg: #F4F4F4;
+  // --bs-modal-border-color: var(--bs-border-color-translucent);
+  // --bs-modal-border-width: var(--bs-border-width);
+  // --bs-modal-border-radius: var(--bs-border-radius-lg);
+}
