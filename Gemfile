@@ -1,20 +1,23 @@
 source 'https://rubygems.org'
-git_source(:github) { |repo| "https://github.com/#{repo}.git" }
+# git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.6.6'
+ruby "3.3.5"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 6.0.3', '>= 6.0.3.4'
+# gem 'rails', '~> 6.0.3', '>= 6.0.3.4'
+gem "rails", "~> 7.1.5", ">= 7.1.5.1"
 # Use postgresql as the database for Active Record
 gem 'pg', '>= 0.18', '< 2.0'
 # Use Puma as the app server
 gem 'puma', '~> 4.1'
 # Use SCSS for stylesheets
 gem 'sass-rails', '>= 6'
-# Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
-gem 'webpacker'
-# Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
-gem 'turbolinks', '~> 5'
+# Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
+gem "importmap-rails"
+# Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
+gem "turbo-rails"
+# Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
+gem "stimulus-rails"
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.7'
 # Use Redis adapter to run Action Cable in production
@@ -25,16 +28,18 @@ gem 'redis', '~> 4.0'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 # Reduces boot times through caching; required in config/boot.rb
-gem 'bootsnap', '>= 1.4.2', require: false
+gem "bootsnap", require: false
 
 gem 'devise'
 
+gem "bootstrap", "~> 5.2"
+gem "jquery-rails"
 gem 'autoprefixer-rails'
 gem 'font-awesome-sass'
 gem 'simple_form'
 gem 'pundit'
 gem 'slim-rails'
-gem 'turbolinks_render'
+# gem 'turbolinks_render'
 gem 'rails-i18n'
 gem 'devise-i18n'
 gem 'devise-security'
@@ -45,7 +50,7 @@ gem 'draper'
 gem 'email_validator', require: 'email_validator/strict'
 gem 'aasm'
 gem 'postmark-rails'
-gem 'acts-as-taggable-on', '~> 6.0'
+gem 'acts-as-taggable-on'
 gem 'active_link_to'
 
 # gem 'libreconv'
@@ -61,7 +66,7 @@ group :development, :test do  gem 'pry-byebug'
 
   gem 'factory_bot_rails'
   gem 'rspec-rails'
-  gem 'bullet'
+  # gem 'bullet'
   gem 'letter_opener'
 end
 
@@ -70,8 +75,8 @@ group :development do
   gem 'web-console', '>= 3.3.0'
   gem 'listen', '~> 3.2'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring'
-  gem 'spring-watcher-listen', '~> 2.0.0'
+  # gem 'spring'
+  # gem 'spring-watcher-listen', '~> 2.0.0'
 end
 
 group :test do
