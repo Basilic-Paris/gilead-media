@@ -29,3 +29,48 @@
   padding-top: -2rem;
   padding-bottom: 2rem;
 }
+
+.form-check {
+  position: relative;
+  padding-left: 1.25rem;
+}
+
+.form-check-input[type="radio"] {
+  border-radius: 4px;
+}
+
+.form-check .form-check-input {
+  margin-left: -1.25rem;
+}
+
+.form-check-input:checked {
+  border-color: #ccc;
+}
+
+.form-check-input:focus {
+  box-shadow: none;
+}
+
+.form-check-input:active {
+  filter: none;
+}
+
+.was-validated .form-check-input:invalid:checked, .form-check-input.is-invalid:checked {
+  background: #C73442;
+}
+
+.form-check-input {
+  border: none;
+}
+
+.was-validated .form-check-input:valid:checked, .form-check-input.is-valid:checked {
+  background-color: #C73442;
+}
+
+.was-validated .form-check-input:valid, .form-check-input.is-valid {
+  border-color: #ccc;
+}
+
+.was-validated .form-check-input:valid:focus, .form-check-input.is-valid:focus {
+  box-shadow: none;
+}
