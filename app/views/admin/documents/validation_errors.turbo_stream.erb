@@ -1,0 +1,5 @@
+<%= turbo_stream.remove_validation_errors %>
+
+<% @document.errors.messages.each do |attribute, messages| %>
+  <%= turbo_stream.set_validation_errors({elementId: "#document_#{attribute}", invalidFeedbackElement: ".#{attribute}.invalid-feedback", message: messages.map { |message| "#{Document.human_attribute_name(attribute)} #{message}" }.join(', ')}) %>
+<% end %>

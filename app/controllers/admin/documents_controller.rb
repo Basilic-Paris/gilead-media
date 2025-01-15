@@ -1,6 +1,5 @@
 class Admin::DocumentsController < ApplicationController
   before_action :find_document, only: %i[edit update destroy attach_to_folder unactive active archive]
-  before_action :disable_turbolinks_cache, only: %i[create update destroy]
 
   def unactive
     if @document.unactive!
@@ -54,7 +53,7 @@ class Admin::DocumentsController < ApplicationController
     else
       respond_to do |format|
         format.html { render :new }
-        format.js { render :validation_errors }
+        format.turbo_stream { render :validation_errors }
       end
     end
   end
@@ -69,14 +68,23 @@ class Admin::DocumentsController < ApplicationController
     else
       respond_to do |format|
         format.html { render :edit }
-        format.js { render :validation_errors }
+        format.turbo_stream { render :validation_errors }
       end
     end
   end
 
   def destroy
     @document.destroy
-    redirect_to documents_path, { flash: { validation_message: true, message: "Le document a bien été supprimé." } }
+    respond_to do |format|
+      format.html {
+        redirect_to documents_path, { flash: { validation_message: true, message: "Le document a bien été supprimé." } }
+      }
+      format.turbo_stream {
+        flash[:validation_message] = true
+        flash[:message] = "Le document a bien été supprimé."
+        render turbo_stream: turbo_stream.action(:redirect, documents_path)
+      }
+    end
   end
 
   def attach_to_folder
@@ -85,10 +93,15 @@ class Admin::DocumentsController < ApplicationController
     if @document.update(folder_params)
       respond_to do |format|
         format.html { redirect_to document_path(@document), flash: { validation_message: true, message: "Votre document a bien été ajouté au(x) dossier(s)." } }
-        format.js { @message = "Votre document a bien été ajouté au(x) dossier(s)." }
+        format.turbo_stream { @message = "Votre document a bien été ajouté au(x) dossier(s)." }
       end
     else
-      render 'documents/add_to_shared_list_or_folder'
+      respond_to do |format|
+        format.html { render 'documents/add_to_shared_list_or_folder' }
+        format.turbo_stream { render turbo_stream: [
+          turbo_stream.replace("add_document_to_folder", partial: "admin/documents/attach_to_folder_form", locals: {document: @document}),
+        ]}
+      end
     end
   end
 
