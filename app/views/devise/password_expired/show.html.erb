@@ -3,7 +3,7 @@
 
   <div class="border p-5">
     <%#= form_for(resource, as: resource_name, url: [resource_name, :password_expired], html: { method: :put }) do |f| %>
-    <%= simple_form_for(resource, as: resource_name, url: [resource_name, :password_expired], html: { method: :put }) do |f| %>
+    <%= simple_form_for(resource, as: resource_name, url: [resource_name, :password_expired], html: { method: :put }, data: { turbo: false }) do |f| %>
       <%= render partial: 'devise/shared/error_messages' %>
 
       <div class="form-inputs">
