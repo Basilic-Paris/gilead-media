@@ -11,8 +11,8 @@
       <div class="d-flex align-items-center"><%= user.email %></div>
       <!-- <div><%#= user.encrypted_password %></div> -->
       <div></div>
-      <%= link_to admin_user_path(user), method: :delete, data: {confirm: "<p class='text-center mt-n-3'>Vous êtes sur le point de supprimer un utilisateur ainsi que l'ensemble des liens qu'il aurait pu envoyer.<br>Souhaitez-vous confirmer?</p>".html_safe }, class: "btn #{ 'disabled' if user == current_user }" do %>
-          <i class="fas fa-minus"></i>
+      <%= link_to admin_user_path(user), data: { turbo_method: :delete, turbo_confirm: "<p class='text-center mt-n-3'>Vous êtes sur le point de supprimer un utilisateur ainsi que l'ensemble des liens qu'il aurait pu envoyer.<br>Souhaitez-vous confirmer?</p>".html_safe }, class: "btn #{ 'disabled' if user == current_user }" do %>
+        <i class="fas fa-minus"></i>
       <% end %>
     <% end %>
 
