@@ -1,11 +1,11 @@
 <div class="pb-5">
-  <%= simple_form_for :search, url: documents_path, method: "get", data: { controller: "search" }, remote: true do |f| %>
+  <%= simple_form_for :search, url: documents_path, method: "get", data: { controller: "search", turbo_stream: true } do |f| %>
     <div class="d-flex">
       <%= f.input :title, label: false, placeholder: "Votre recherche: titre du document, mots clés, thème...", input_html: { data: { target: "search.title" } } %>
       <div class="btn d-flex" data-action="click->search#toggle">
         <i data-target="search.dropdownIcon" class="fas fa-lg fa-sort-down"></i>
       </div>
-      <%= link_to documents_path, class: "btn", remote: true, 'data-action': "click->search#clearSearchValues" do %>
+      <%= link_to documents_path, class: "btn", 'data-action': "click->search#clearSearchValues" do %>
         <i class="fas fa-times"></i>
       <% end %>
       <%= button_tag :submit, class: "btn d-md-none", data: { target: "search.firstSubmitButton" } do %>

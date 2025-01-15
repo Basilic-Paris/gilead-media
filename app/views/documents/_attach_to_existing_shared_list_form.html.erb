@@ -1,6 +1,6 @@
-<%= simple_form_for [document, document_shared_list], url: attach_to_existing_shared_list_document_path(document), html: { id: "add_document_to_existing_shared_list" }, remote: true do |f| %>
+<%= simple_form_for [document, document_shared_list], url: attach_to_existing_shared_list_document_path(document), html: { id: "add_document_to_existing_shared_list" } do |f| %>
   <% if document.active? %>
-    <%= f.association :shared_list, collection: current_user.shared_lists.initial, as: :radio_buttons, required: false, legend_tag: false %>
+    <%= f.association :shared_list, collection: current_user.shared_lists.initial, as: :radio_buttons, required: false, legend_tag: false, input_html: { checked: false } %>
     <%#= f.association :shared_list, collection: current_user.shared_lists.initial, as: :radio_buttons, required: false, legend_tag: false, input_html: { class: "tag-selector" }, item_wrapper_class: 'tag-item' %>
     <%= f.submit "Valider", class: "btn" %>
   <% else %>
