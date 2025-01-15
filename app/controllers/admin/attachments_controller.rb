@@ -9,7 +9,10 @@ module Admin
         format.html {
           redirect_to edit_admin_document_path(@document), { flash: { validation_message: true, message: "La pièce jointe a bien été supprimée." } }
         }
-        format.js
+        format.turbo_stream { render turbo_stream: [
+          turbo_stream.remove_parent("[href='#{admin_document_attachment_path(@document, @attachment)}']"),
+          turbo_stream.remove_element("input[value=#{@attachment.signed_id}]")
+        ]}
       end
     end
 
