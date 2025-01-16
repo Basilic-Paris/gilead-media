@@ -7,6 +7,15 @@ class SharedFoldersController < ApplicationController
     @shared_folder = @folder.shared_folders.new(user: current_user)
     authorize @shared_folder
     @shared_folder.build_custom_mail
+    respond_to do |format|
+      format.html
+      format.turbo_stream do
+        render turbo_stream: [
+          turbo_stream.update("add_folder_to_shared_folder", partial: "folders/add_to_shared_folder_modal", locals: {folder: @folder, shared_folder: @shared_folder}),
+          turbo_stream.action(:open_modal, ".modal#addFolderToSharedFolder")
+        ]
+      end
+    end
   end
 
   def create
@@ -27,12 +36,20 @@ class SharedFoldersController < ApplicationController
     if @shared_folder.save
       @shared_folder.add_contacts!
       @shared_folder.notify_contacts
+      @message = "Votre dossier a bien été envoyé."
       respond_to do |format|
-        format.html { redirect_to folder_path(@folder), flash: { validation_message: true, message: "Votre dossier a bien été envoyé." } }
-        format.js { @message = "Votre dossier a bien été envoyé." }
+        format.html { redirect_to folder_path(@folder), flash: { validation_message: true, message: @message } }
+        format.turbo_stream
       end
     else
-      render :new
+      respond_to do |format|
+        format.html { render :new }
+        format.turbo_stream do
+          render turbo_stream: [
+            turbo_stream.replace("new_shared_folder", partial: "shared_folders/form", locals: {folder: @folder, shared_folder: @shared_folder}),
+          ]
+        end
+      end
     end
   end
 

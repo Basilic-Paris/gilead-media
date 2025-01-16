@@ -1,0 +1,25 @@
+<!-- Modal -->
+<div class="modal fade" id="addFolderToSharedFolder" tabindex="-1" aria-labelledby="addFolderToSharedFolderTitle" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header" style="border-bottom: 1px solid #dee2e6;">
+        <div class="modal-title" id="addFolderToSharedFolderTitle">
+          <h4 class="color-burgundy mb-0">Envoyer</h4>
+          <h5 class="mb-0"><%= folder.title %></h5>
+          <h4 class="color-burgundy mb-0">à...</h4>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <% if policy(shared_folder).create? %>
+          <% if shared_folder.errors.messages[:code].present? %>
+            <p class="alert-warning p-3">
+              Une erreur s'est produite dans la génération du code associé à la liste de partage. Veuillez valider à nouveau votre saisie.
+            </p>
+          <% end %>
+          <%= render 'shared_folders/form', folder: folder, shared_folder: shared_folder %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
