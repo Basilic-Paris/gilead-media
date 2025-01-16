@@ -4,8 +4,8 @@ import "controllers"
 import "@popperjs/core"
 import "jquery"
 import "bootstrap"
-// import "./plugins/jquery"
-window.$ = window.jQuery
+import "./plugins/jquery"
+import flatpickr from "./plugins/flatpickr";
 
 // document.addEventListener('turbo:load', () => {
 //   // Call your functions here, e.g:
