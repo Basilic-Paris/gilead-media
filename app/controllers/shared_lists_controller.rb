@@ -1,7 +1,6 @@
 class SharedListsController < ApplicationController
   include ListHelper
   before_action :find_shared_list, only: %i[show add_contacts]
-  before_action :disable_turbolinks_cache, only: %i[show]
 
   def index
     @shared_lists = policy_scope(SharedList)
@@ -23,7 +22,16 @@ class SharedListsController < ApplicationController
     if @shared_list.save
       @shared_list.add_contacts!
       @shared_list.notify_contacts
-      redirect_to shared_list_path(@shared_list), flash: { validation_message: true, message: "Votre liste de partage a bien été envoyée." }
+      @message = "Votre liste de partage a bien été envoyée."
+      respond_to do |format|
+        format.html { redirect_to shared_list_path(@shared_list), flash: { validation_message: true, message: @message } }
+        format.turbo_stream { render turbo_stream: [
+          turbo_stream.replace("edit_shared_list_#{@shared_list.id}", partial: "shared_lists/add_contacts_form", locals: { shared_list: @shared_list }),
+          turbo_stream.replace("validationModal", partial: "shared/validation_modal", locals: { message: @message }),
+          turbo_stream.action(:open_modal, ".modal#validationModal"),
+          turbo_stream.replace_element_attribute({ element: "#shared-list-nav-item a", attribute: "href", newAttributeValue: shared_lists_path })
+        ]}
+      end
     else
       render :show
     end
