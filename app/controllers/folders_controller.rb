@@ -6,7 +6,6 @@ class FoldersController < ApplicationController
   before_action :find_folder, only: %i[show download add_to_shared_list attach_to_new_shared_list attach_to_existing_shared_list]
   before_action :find_shared_list, only: %i[show download]
   before_action :find_documents, only: %i[show download]
-  before_action :disable_turbolinks_cache, only: %i[index show]
 
   def index
     @folders = policy_scope(Folder)
@@ -34,11 +33,17 @@ class FoldersController < ApplicationController
     @folder_shared_list = @shared_list.folder_shared_lists.new(folder: @folder)
     if @shared_list.save
       respond_to do |format|
-        format.html { redirect_to folders_path, flash: { validation_message: true, message: "Votre liste de partage a bien été créée et votre dossier a bien été ajouté à celle-ci." } }
-        format.js { @message = "Votre liste de partage a bien été créée et votre dossier a bien été ajouté à celle-ci." }
+        @message = "Votre liste de partage a bien été créée et votre dossier a bien été ajouté à celle-ci."
+        format.html { redirect_to folders_path, flash: { validation_message: true, message: @message } }
+        format.turbo_stream
       end
     else
-      render :add_to_shared_list
+      respond_to do |format|
+        format.html { render :add_to_shared_list }
+        format.turbo_stream { render turbo_stream: [
+          turbo_stream.replace("add_folder_to_new_shared_list", partial: "folders/attach_to_new_shared_list_form", locals: { folder: @folder, shared_list: @shared_list })
+        ]}
+      end
     end
   end
 
@@ -47,11 +52,17 @@ class FoldersController < ApplicationController
     @folder_shared_list = @folder.folder_shared_lists.new(folder_shared_list_params)
     if @folder_shared_list.save
       respond_to do |format|
-        format.html { redirect_to folders_path, flash: { validation_message: true, message: "Votre dossier a bien été ajouté à la liste de partage." } }
-        format.js { @message = "Votre dossier a bien été ajouté à la liste de partage." }
+        @message = "Votre dossier a bien été ajouté à la liste de partage."
+        format.html { redirect_to folders_path, flash: { validation_message: true, message: @message } }
+        format.turbo_stream
       end
     else
-      render :add_to_shared_list
+      respond_to do |format|
+        format.html { render :add_to_shared_list }
+        format.turbo_stream { render turbo_stream: [
+          turbo_stream.replace("add_folder_to_existing_shared_list", partial: "folders/attach_to_existing_shared_list_form", locals: { folder: @folder, folder_shared_list: @folder_shared_list })
+        ]}
+      end
     end
   end
 

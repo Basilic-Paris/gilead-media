@@ -1,0 +1,4 @@
+<%= turbo_stream.replace "validationModal", partial: "shared/validation_modal", locals: { message: @message } %>
+<%= turbo_stream.action :close_modal, ".modal#addFolderToSharedList" %>
+<%= turbo_stream.action :open_modal, ".modal#validationModal" %>
+<%= turbo_stream.replace "add_folder_to_existing_shared_list", partial: "folders/attach_to_existing_shared_list_form", locals: { folder: @folder, folder_shared_list: @shared_list.folder_shared_lists.new(folder: @folder) } %>
