@@ -1,5 +1,4 @@
 import { Controller } from "@hotwired/stimulus";
-// import flatpickr from "../plugins/flatpickr";
 
 export default class extends Controller {
   static targets = [ "dropdownIcon", "moreOptions", "datesSelection", "title", "format", "language", "firstSubmitButton" ]
