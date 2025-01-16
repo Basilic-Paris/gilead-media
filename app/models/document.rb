@@ -100,7 +100,8 @@ class Document < ApplicationRecord
     when "image"
       image_tag(attachment, class: attrs[:class], style: "max-height: 100%; max-width: 100%; width: #{attrs[:width] if attrs[:width].present?}; height: #{attrs[:height] if attrs[:height].present?}; object-fit: #{attrs['object-fit'] if attrs['object-fit'].present?};")
     when "video"
-      video_tag(attachment.service_url + "#t=0.5", controls: attrs[:with_video_controls], class: attrs[:class], style: "max-height: 100%; max-width: 100%; width: #{attrs[:width] if attrs[:width].present?}; height: #{attrs[:height] if attrs[:height].present?}; object-fit: #{attrs['object-fit'] if attrs['object-fit'].present?};")
+      # video_tag(attachment.service_url + "#t=0.5", controls: attrs[:with_video_controls], class: attrs[:class], style: "max-height: 100%; max-width: 100%; width: #{attrs[:width] if attrs[:width].present?}; height: #{attrs[:height] if attrs[:height].present?}; object-fit: #{attrs['object-fit'] if attrs['object-fit'].present?};")
+      video_tag(rails_blob_url(attachment) + "#t=0.5", controls: attrs[:with_video_controls], class: attrs[:class], style: "max-height: 100%; max-width: 100%; width: #{attrs[:width] if attrs[:width].present?}; height: #{attrs[:height] if attrs[:height].present?}; object-fit: #{attrs['object-fit'] if attrs['object-fit'].present?};")
     else
       if attachment.previewable?
         image_tag(attachment.preview(resize_to_limit: [400, 400]), class: attrs[:class], style: "max-height: 100%; max-width: 100%; width: #{attrs[:width] if attrs[:width].present?}; height: #{attrs[:height] if attrs[:height].present?}; object-fit: #{attrs['object-fit'] if attrs['object-fit'].present?};")
