@@ -9,7 +9,7 @@
     <div>
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <%= link_to "Me déconnecter", destroy_user_session_path, method: :delete, class: "nav-link" %>
+          <%= button_to "Me déconnecter", destroy_user_session_path, method: :delete, class: "nav-link", data: { turbo: false } %>
         </li>
       </ul>
     </div>
