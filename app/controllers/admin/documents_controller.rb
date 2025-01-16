@@ -6,7 +6,7 @@ class Admin::DocumentsController < ApplicationController
     if @document.unactive!
       redirect_to document_path(@document)
     else
-      flash.now.alert = "Une erreur est survenue; ce document ne peut pas être désactivé."
+      flash.alert = "Une erreur est survenue; ce document ne peut pas être désactivé."
       @document = @document.decorate
       @shared_document = SharedDocument.new
       @shared_list = SharedList.new
@@ -19,7 +19,7 @@ class Admin::DocumentsController < ApplicationController
     if @document.active!
       redirect_to document_path(@document)
     else
-      flash.now.alert = "Une erreur est survenue; ce document ne peut pas être mis en ligne."
+      flash.alert = "Une erreur est survenue; ce document ne peut pas être mis en ligne."
       @document = @document.decorate
       @shared_document = SharedDocument.new
       @shared_list = SharedList.new
@@ -32,7 +32,7 @@ class Admin::DocumentsController < ApplicationController
     if @document.archive!
       redirect_to document_path(@document)
     else
-      flash.now.alert = "Une erreur est survenue; ce document ne peut pas être archivé."
+      flash.alert = "Une erreur est survenue; ce document ne peut pas être archivé."
       @document = @document.decorate
       @shared_document = SharedDocument.new
       @shared_list = SharedList.new

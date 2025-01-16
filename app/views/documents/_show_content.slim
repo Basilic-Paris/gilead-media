@@ -1,4 +1,4 @@
-.cards-one-element#document
+.cards-one-element
   .card-one-element-illustration.d-flex-default
     .d-flex.flex-column.align-items-center
       - document.attachments.includes(:blob).each do |attachment|
@@ -48,8 +48,8 @@
         i.fas.fa-plus
     .btn-container.mt-3
       - if policy([:admin, document]).active?
-        = button_to 'Mettre en ligne', active_admin_document_path(document), method: :patch, class: "btn"
+        = button_to 'Mettre en ligne', active_admin_document_path(document), method: :patch, data: { turbo: false }, class: "btn"
       - if policy([:admin, document]).unactive?
-        = button_to 'Marquer comme inactif', unactive_admin_document_path(document), method: :patch, class: "btn"
+        = button_to 'Marquer comme inactif', unactive_admin_document_path(document), method: :patch, data: { turbo: false }, class: "btn"
       - if policy([:admin, document]).archive?
-        = button_to 'Archiver', archive_admin_document_path(document), method: :patch, class: "btn"
+        = button_to 'Archiver', archive_admin_document_path(document), method: :patch, data: { turbo: false }, class: "btn"
