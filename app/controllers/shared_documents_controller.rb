@@ -7,6 +7,15 @@ class SharedDocumentsController < ApplicationController
     @shared_document = @document.shared_documents.new(user: current_user)
     authorize @shared_document
     @shared_document.build_custom_mail
+    respond_to do |format|
+      format.html
+      format.turbo_stream do
+        render turbo_stream: [
+          turbo_stream.update("add_document_to_shared_document", partial: "documents/add_to_shared_document_modal", locals: {document: @document, shared_document: @shared_document}),
+          turbo_stream.action(:open_modal, ".modal#addDocumentToSharedDocument")
+        ]
+      end
+    end
   end
 
   def create
@@ -27,12 +36,20 @@ class SharedDocumentsController < ApplicationController
     if @shared_document.save
       @shared_document.add_contacts!
       @shared_document.notify_contacts
+      @message = "Votre document a bien été envoyé."
       respond_to do |format|
-        format.html { redirect_to document_path(@document), flash: { validation_message: true, message: "Votre document a bien été envoyé." } }
-        format.js { @message = "Votre document a bien été envoyé." }
+        format.html { redirect_to document_path(@document), flash: { validation_message: true, message: @message } }
+        format.turbo_stream
       end
     else
-      render :new
+      respond_to do |format|
+        format.html { render :new }
+        format.turbo_stream do
+          render turbo_stream: [
+            turbo_stream.replace("new_shared_document", partial: "shared_documents/form", locals: {document: @document, shared_document: @shared_document}),
+          ]
+        end
+      end
     end
   end
 

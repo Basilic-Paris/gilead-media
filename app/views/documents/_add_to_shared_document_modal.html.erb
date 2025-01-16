@@ -1,6 +1,6 @@
 <!-- Modal -->
-<div class="modal fade" id="addDocumentToSharedDocument" tabindex="-1" role="dialog" aria-labelledby="addDocumentToSharedDocumentTitle" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+<div class="modal fade" id="addDocumentToSharedDocument" tabindex="-1" aria-labelledby="addDocumentToSharedDocumentTitle" aria-hidden="true">
+  <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header" style="border-bottom: 1px solid #dee2e6;">
         <div class="modal-title" id="addDocumentToSharedDocumentTitle">
@@ -8,9 +8,7 @@
           <h5 class="mb-0"><%= document.title %></h5>
           <h4 class="color-burgundy mb-0">à...</h4>
         </div>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <% if policy(shared_document).create? %>

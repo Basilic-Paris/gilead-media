@@ -1,0 +1,19 @@
+<%= turbo_stream.replace "validationModal", partial: "shared/validation_modal", locals: {message: @message} %>
+<%= turbo_stream.action :close_modal, ".modal#addDocumentToSharedDocument" %>
+<%= turbo_stream.action :open_modal, ".modal#validationModal" %>
+<%= turbo_stream.remove "new_shared_document" %>
+
+<%#= turbo_stream.replace "validationModal" do %>
+  <%#= render partial: "shared/validation_modal", locals: { message: @message } %>
+  <%# <script> %>
+    <%# $(".modal#addDocumentToSharedDocument").modal("hide") %>
+    <%# $(".modal#validationModal").modal("show") %>
+  <%# </script> %>
+<%# end %>
+
+<%#= turbo_stream.after "validationModal" do %>
+  <%# <script>
+    $(".modal#addDocumentToSharedDocument").modal("hide")
+    $(".modal#validationModal").modal("show")
+  </script> %>
+<%# end %>
