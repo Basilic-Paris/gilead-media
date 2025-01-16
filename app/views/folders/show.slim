@@ -3,23 +3,27 @@
     h1 = @folder.title
     h1.card-actions
       - if @shared_list.persisted?
-        = link_to download_shared_list_folder_path(@shared_list, @folder), method: :patch, class: "btn" do
+        = button_to download_shared_list_folder_path(@shared_list, @folder), method: :patch, data: { turbo: false }, class: "btn" do
           i.fas.fa-file-download
       - else
         - if policy([:admin, @folder]).destroy?
-          = link_to admin_folder_path(@folder), method: :delete, data: {confirm: "<p class='text-center mt-n-3'>Vous êtes sur le point de supprimer un dossier.<br>Souhaitez-vous confirmer?</p>".html_safe }, class: "btn" do
+          = link_to admin_folder_path(@folder), data: { turbo_method: :delete, turbo_confirm: "<p class='text-center mt-n-3'>Vous êtes sur le point de supprimer un dossier.<br>Souhaitez-vous confirmer?</p>".html_safe }, class: "btn" do
             i.fas.fa-minus
-        = link_to download_folder_path(@folder), method: :patch, class: "btn" do
+        = button_to download_folder_path(@folder), method: :patch, data: { turbo: false }, form_class: "d-inline", class: "btn" do
           i.fas.fa-file-download
         - if @folder.documents.active.present?
-          = link_to new_shared_folder_path(@folder), class: "btn", data: { toggle: "modal", target: "#addFolderToSharedFolder" }, remote: true do
+          = link_to new_shared_folder_path(@folder), data: { turbo_stream: true }, class: "btn" do
             i.fas.fa-paper-plane
-          = link_to add_to_shared_list_folder_path(@folder), data: { toggle: "modal", target: "#addFolderToSharedList" }, class: "btn" do
+          = link_to add_to_shared_list_folder_path(@folder), data: { turbo_stream: true }, class: "btn" do
             i.fas.fa-plus
-        = render 'folders/add_to_shared_list_modal', folder: @folder, shared_list: @shared_list, folder_shared_list: @folder_shared_list
-        = render 'folders/add_to_shared_folder_modal', folder: @folder, shared_folder: @shared_folder
-        = render 'shared/validation_modal', message: ""
+
   .card.rounded.p-4
     .cards
       - @documents.each do |document|
         = render 'documents/card', document: document
+
+- if !@shared_list.persisted?
+  = render 'folders/add_to_shared_list_modal', folder: @folder, shared_list: @shared_list, folder_shared_list: @folder_shared_list
+  = turbo_frame_tag "add_folder_to_shared_folder" do
+    = render 'folders/add_to_shared_folder_modal', folder: @folder, shared_folder: @shared_folder
+  = render 'shared/validation_modal', message: ""

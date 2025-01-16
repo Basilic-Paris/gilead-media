@@ -2,7 +2,7 @@
   <div class="cards">
     <% if current_user.admin? %>
       <div class="card d-flex-default bg-grey">
-        <%= link_to "+", new_admin_document_path, style: "font-size: 6rem", class: "font-weight-light btn-white-hover-red" %>
+        <%= link_to "+", new_admin_document_path, data: { turbo: false }, style: "font-size: 6rem", class: "font-weight-light btn-white-hover-red" %>
       </div>
     <% end %>
     <% unless documents.blank? %>

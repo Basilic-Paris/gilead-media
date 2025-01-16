@@ -1,11 +1,11 @@
 .container
   - @folders.each do |folder|
-    button.btn.btn-inverse.text-uppercase.w-100.my-3 type="button" data-toggle="collapse" data-target="#folder-#{folder.id}" aria-expanded="false" aria-controls="collapseExample" = folder.title
+    button.btn.btn-inverse.text-uppercase.w-100.my-3 type="button" data-bs-toggle="collapse" data-bs-target="#folder-#{folder.id}" aria-expanded="false" aria-controls="collapseExample" = folder.title
     .collapse id="folder-#{folder.id}"
       - policy_scope(folder.documents).order(:title).each do |document|
         p = link_to document.title, document_path(document), class: 'link-primary', target: :_blank
   - if @documents_not_classified.present?
-    button.btn.btn-inverse.text-uppercase.w-100.my-3 type="button" data-toggle="collapse" data-target="#not-classified" aria-expanded="false" aria-controls="collapseExample" Non répertorié
+    button.btn.btn-inverse.text-uppercase.w-100.my-3 type="button" data-bs-toggle="collapse" data-bs-target="#not-classified" aria-expanded="false" aria-controls="collapseExample" Non répertorié
     .collapse id="not-classified"
       - @documents_not_classified.order(:title).each do |document|
           p = link_to document.title, document_path(document), class: 'link-primary', target: :_blank

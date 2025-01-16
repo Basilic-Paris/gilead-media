@@ -1,4 +1,4 @@
-.cards-one-element
+.cards-one-element#document
   .card-one-element-illustration.d-flex-default
     .d-flex.flex-column.align-items-center
       - document.attachments.includes(:blob).each do |attachment|
@@ -34,22 +34,22 @@
 
     .btn-container
       - if policy([:admin, document]).destroy?
-        = link_to admin_document_path(document), method: :delete, data: {confirm: "<p class='text-center mt-n-3'>Vous êtes sur le point de supprimer un document.<br>Souhaitez-vous confirmer?</p>".html_safe }, class: "btn" do
+        = link_to admin_document_path(document), data: { turbo_method: :delete, turbo_confirm: "<p class='text-center mt-n-3'>Vous êtes sur le point de supprimer un document.<br>Souhaitez-vous confirmer?</p>".html_safe }, class: "btn" do
           i.fas.fa-minus
       - if policy([:admin, document]).edit?
         = link_to edit_admin_document_path(document), class: "btn" do
           i.fas.fa-cog
-      = link_to download_document_path(document), method: :patch, class: "btn" do
+      = button_to download_document_path(document), method: :patch, data: { turbo: false }, class: "btn" do
         i.fas.fa-file-download
       - if document.active?
-        = link_to new_shared_document_path(document), class: "btn", data: { toggle: "modal", target: "#addDocumentToSharedDocument" }, remote: true do
+        = link_to new_shared_document_path(document), class: "btn", data: { turbo_stream: true } do
           i.fas.fa-paper-plane
-      = link_to add_to_shared_list_or_folder_document_path(document), class: "btn", data: { toggle: "modal", target: "#addDocumentToSharedListOrFolder" }, remote: true do
+      = link_to add_to_shared_list_or_folder_document_path(document), class: "btn", data: { turbo_stream: true } do
         i.fas.fa-plus
     .btn-container.mt-3
       - if policy([:admin, document]).active?
-        = link_to 'Mettre en ligne', active_admin_document_path(document), method: :patch, class: "btn"
+        = button_to 'Mettre en ligne', active_admin_document_path(document), method: :patch, class: "btn"
       - if policy([:admin, document]).unactive?
-        = link_to 'Marquer comme inactif', unactive_admin_document_path(document), method: :patch, class: "btn"
-      - if policy([:admin, document]).unactive?
-        = link_to 'Archiver', archive_admin_document_path(document), method: :patch, class: "btn"
+        = button_to 'Marquer comme inactif', unactive_admin_document_path(document), method: :patch, class: "btn"
+      - if policy([:admin, document]).archive?
+        = button_to 'Archiver', archive_admin_document_path(document), method: :patch, class: "btn"

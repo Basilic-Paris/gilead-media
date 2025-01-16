@@ -12,7 +12,7 @@
         = link_to public_shared_list_document_path(shared_object.code, document), class: "btn" do
           i.fas.fa-search
       - if shared_object.download?
-        = link_to download_document_path(document), method: :patch, class: "btn" do
+        = button_to download_document_path(document), method: :patch, data: { turbo: false }, class: "btn" do
           i.fas.fa-file-download
       - if shared_object.class == SharedFolder
         = link_to public_shared_folder_document_path(shared_object.code, document), class: "btn" do

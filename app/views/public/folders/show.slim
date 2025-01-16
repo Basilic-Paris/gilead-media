@@ -3,7 +3,7 @@
     h1 = @folder.title
     .card-actions
       - if @shared_object.download?
-        = link_to download_folder_path(@folder), method: :patch, class: "btn" do
+        = button_to download_folder_path(@folder), method: :patch, data: { turbo: false }, class: "btn" do
           i.fas.fa-file-download
   .card.rounded.p-4
     = render 'public/folders/show_content', documents: @documents, shared_object: @shared_object
