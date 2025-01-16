@@ -1,0 +1,2 @@
+<%= turbo_stream.replace "addFolderToSharedList", partial: "folders/add_to_shared_list_modal", locals: { folder: @folder, shared_list: @shared_list, folder_shared_list: @folder_shared_list } %>
+<%= turbo_stream.action :open_modal, ".modal#addFolderToSharedList" %>

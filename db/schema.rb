@@ -2,16 +2,15 @@
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
 #
-# This file is the source Rails uses to define your schema when running `rails
-# db:schema:load`. When creating a new database, `rails db:schema:load` tends to
+# This file is the source Rails uses to define your schema when running `bin/rails
+# db:schema:load`. When creating a new database, `bin/rails db:schema:load` tends to
 # be faster and is potentially less error prone than running all of your
 # migrations from scratch. Old migrations may fail to apply correctly if those
 # migrations use external dependencies or application code.
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_10_20_142714) do
-
+ActiveRecord::Schema[7.1].define(version: 2024_12_17_134824) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "unaccent"
@@ -21,7 +20,7 @@ ActiveRecord::Schema.define(version: 2023_10_20_142714) do
     t.string "record_type", null: false
     t.bigint "record_id", null: false
     t.bigint "blob_id", null: false
-    t.datetime "created_at", null: false
+    t.datetime "created_at", precision: nil, null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
   end
@@ -32,15 +31,22 @@ ActiveRecord::Schema.define(version: 2023_10_20_142714) do
     t.string "content_type"
     t.text "metadata"
     t.bigint "byte_size", null: false
-    t.string "checksum", null: false
-    t.datetime "created_at", null: false
+    t.string "checksum"
+    t.datetime "created_at", precision: nil, null: false
+    t.string "service_name", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "active_storage_variant_records", force: :cascade do |t|
+    t.bigint "blob_id", null: false
+    t.string "variation_digest", null: false
+    t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
   create_table "contacts", force: :cascade do |t|
     t.string "email"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "contactable_type"
     t.bigint "contactable_id"
     t.index ["contactable_type", "contactable_id"], name: "index_contacts_on_contactable_type_and_contactable_id"
@@ -50,8 +56,8 @@ ActiveRecord::Schema.define(version: 2023_10_20_142714) do
     t.text "body"
     t.string "mailable_type"
     t.bigint "mailable_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "subject"
     t.text "signature"
     t.index ["mailable_type", "mailable_id"], name: "index_custom_mails_on_mailable_type_and_mailable_id"
@@ -60,8 +66,8 @@ ActiveRecord::Schema.define(version: 2023_10_20_142714) do
   create_table "document_folders", force: :cascade do |t|
     t.bigint "document_id", null: false
     t.bigint "folder_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["document_id"], name: "index_document_folders_on_document_id"
     t.index ["folder_id"], name: "index_document_folders_on_folder_id"
   end
@@ -69,8 +75,8 @@ ActiveRecord::Schema.define(version: 2023_10_20_142714) do
   create_table "document_shared_lists", force: :cascade do |t|
     t.bigint "document_id", null: false
     t.bigint "shared_list_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["document_id"], name: "index_document_shared_lists_on_document_id"
     t.index ["shared_list_id"], name: "index_document_shared_lists_on_shared_list_id"
   end
@@ -79,10 +85,10 @@ ActiveRecord::Schema.define(version: 2023_10_20_142714) do
     t.string "title"
     t.string "language"
     t.text "usage"
-    t.datetime "validation_at"
+    t.datetime "validation_at", precision: nil
     t.string "format"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "theme"
     t.string "aasm_state"
   end
@@ -90,16 +96,16 @@ ActiveRecord::Schema.define(version: 2023_10_20_142714) do
   create_table "folder_shared_lists", force: :cascade do |t|
     t.bigint "folder_id", null: false
     t.bigint "shared_list_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["folder_id"], name: "index_folder_shared_lists_on_folder_id"
     t.index ["shared_list_id"], name: "index_folder_shared_lists_on_shared_list_id"
   end
 
   create_table "folders", force: :cascade do |t|
     t.string "title"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "old_passwords", force: :cascade do |t|
@@ -107,14 +113,14 @@ ActiveRecord::Schema.define(version: 2023_10_20_142714) do
     t.string "password_archivable_type", null: false
     t.integer "password_archivable_id", null: false
     t.string "password_salt"
-    t.datetime "created_at"
+    t.datetime "created_at", precision: nil
     t.index ["password_archivable_type", "password_archivable_id"], name: "index_password_archivable"
   end
 
   create_table "shared_documents", force: :cascade do |t|
     t.bigint "document_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "aasm_state"
     t.bigint "user_id", null: false
     t.date "validity"
@@ -126,8 +132,8 @@ ActiveRecord::Schema.define(version: 2023_10_20_142714) do
 
   create_table "shared_folders", force: :cascade do |t|
     t.bigint "folder_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "aasm_state"
     t.bigint "user_id", null: false
     t.date "validity"
@@ -140,8 +146,8 @@ ActiveRecord::Schema.define(version: 2023_10_20_142714) do
   create_table "shared_lists", force: :cascade do |t|
     t.string "title"
     t.bigint "user_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "aasm_state"
     t.date "validity"
     t.boolean "download"
@@ -156,7 +162,7 @@ ActiveRecord::Schema.define(version: 2023_10_20_142714) do
     t.string "tagger_type"
     t.integer "tagger_id"
     t.string "context", limit: 128
-    t.datetime "created_at"
+    t.datetime "created_at", precision: nil
     t.index ["context"], name: "index_taggings_on_context"
     t.index ["tag_id", "taggable_id", "taggable_type", "context", "tagger_id", "tagger_type"], name: "taggings_idx", unique: true
     t.index ["tag_id"], name: "index_taggings_on_tag_id"
@@ -170,8 +176,8 @@ ActiveRecord::Schema.define(version: 2023_10_20_142714) do
 
   create_table "tags", id: :serial, force: :cascade do |t|
     t.string "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.integer "taggings_count", default: 0
     t.index ["name"], name: "index_tags_on_name", unique: true
   end
@@ -180,20 +186,21 @@ ActiveRecord::Schema.define(version: 2023_10_20_142714) do
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "reset_password_sent_at", precision: nil
+    t.datetime "remember_created_at", precision: nil
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "first_name"
     t.string "last_name"
     t.boolean "admin", default: false
-    t.datetime "password_changed_at"
+    t.datetime "password_changed_at", precision: nil
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["password_changed_at"], name: "index_users_on_password_changed_at"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "document_folders", "documents"
   add_foreign_key "document_folders", "folders"
   add_foreign_key "document_shared_lists", "documents"

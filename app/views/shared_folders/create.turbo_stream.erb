@@ -1,0 +1,4 @@
+<%= turbo_stream.replace "validationModal", partial: "shared/validation_modal", locals: {message: @message} %>
+<%= turbo_stream.action :close_modal, ".modal#addFolderToSharedFolder" %>
+<%= turbo_stream.action :open_modal, ".modal#validationModal" %>
+<%= turbo_stream.remove "new_shared_folder" %>

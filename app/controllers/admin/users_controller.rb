@@ -1,5 +1,5 @@
 class Admin::UsersController < ApplicationController
-  before_action :disable_turbolinks_cache, only: %i[index create destroy]
+  before_action :disable_turbo_cache, only: %i[index create destroy]
 
   def index
     @users = policy_scope([:admin, User])
@@ -14,7 +14,12 @@ class Admin::UsersController < ApplicationController
       @user.need_change_password! # thanks to gem devise-security
       redirect_to admin_users_path
     else
-      render :index
+      respond_to do |format|
+        format.html { render :index }
+        format.turbo_stream { render turbo_stream: [
+          turbo_stream.replace("new_user", partial: "admin/users/form", locals: { user: @user })
+        ]}
+      end
     end
   end
 

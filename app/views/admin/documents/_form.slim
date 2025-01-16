@@ -1,12 +1,12 @@
-= simple_form_for [:admin, document], data: { controller: "attachments" }, remote: true do |f|
+= simple_form_for [:admin, document], data: { controller: "attachments" } do |f|
   .cards-one-element
     .card-one-element-illustration
       .d-flex.flex-column.align-items-center
-        - document.attachments.includes(:blob).each do |attachment|
+        - document.attachments.each do |attachment|
           - if attachment.persisted?
             .d-flex.flex-no-wrap.my-3
               = document.preview_icon(attachment: attachment, with_video_controls: true, width: '13rem', 'object-fit' => 'contain')
-              = link_to admin_document_attachment_path(document, attachment), method: :delete, class: "btn p-0", style: "height: fit-content; position: relative; right: 1.6rem; margin-right: -1.6rem;", remote: true, data: {confirm: "<p class='text-center mt-n-3'>Vous êtes sur le point de supprimer une pièce jointe.<br>Souhaitez-vous confirmer?</p>".html_safe } do
+              = link_to admin_document_attachment_path(document, attachment), data: { turbo_method: :delete, turbo_confirm: "<p class='text-center mt-n-3'>Vous êtes sur le point de supprimer une pièce jointe.<br>Souhaitez-vous confirmer?</p>".html_safe }, method: :delete, class: "btn p-0", style: "height: fit-content; position: relative; right: 1.6rem; margin-right: -1.6rem;" do
                 i.fas.fa-minus
 
     .card-one-element-content
@@ -27,5 +27,7 @@
             = f.file_field :attachments, multiple: true, label: false, style: "direction: rtl;"
             span &nbsp
             i.fas.fa-minus.btn.p-0. style="height: fit-content" data-action="click->attachments#removeAttachmentInput"
+        - document.attachments.select(&:persisted?).each do |attachment|
+          = f.hidden_field :attachments, multiple: true, value: attachment.signed_id
         .attachments.invalid-feedback.d-block
         .text-center.pt-5 = f.submit class: "btn w-100 mt-3", data: { disable_with: 'Chargement...' }

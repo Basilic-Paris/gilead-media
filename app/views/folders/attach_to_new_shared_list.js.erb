@@ -1,8 +1,0 @@
-$('.modal#addFolderToSharedList').modal("hide")
-
-$('.modal#validationModal').replaceWith("<%= j render('shared/validation_modal', message: @message) %>")
-$('.modal#validationModal').modal("show");
-
-$('#shared-list-nav-item a').attr("href", "<%=shared_list_path(current_user.shared_lists.initial.first)%>")
-
-$("form#add_folder_to_new_shared_list").replaceWith("<%= j render('folders/attach_to_existing_shared_list_form', folder: @folder, folder_shared_list: FolderSharedList.new) %>");

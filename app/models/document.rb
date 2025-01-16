@@ -54,7 +54,8 @@ class Document < ApplicationRecord
   validate :no_duplicate_filename
 
   # scope :created_in_day, ->(datetime) { where('created_at > ? AND created_at < ?', datetime.beginning_of_day, datetime.end_of_day) }
-  scope :created_in_days_range, ->(start_datetime, end_datetime) { where('created_at > ? AND created_at < ?', start_datetime.beginning_of_day, end_datetime.end_of_day) }
+  # scope :created_in_days_range, ->(start_datetime, end_datetime) { where('created_at > ? AND created_at < ?', start_datetime.beginning_of_day, end_datetime.end_of_day) }
+  scope :created_in_days_range, ->(start_datetime, end_datetime) { where(created_at: start_datetime.beginning_of_day..end_datetime.end_of_day) }
 
   before_save :set_format
 

@@ -14,15 +14,15 @@ div style="position: relative"
         p.cut-text.mb-0 Langue:
         p.cut-text.color-gray = document.display_language
       .card-actions
-        = link_to document_path(document), class: "btn" do
+        = link_to document_path(document), data: { turbo: false }, class: "btn" do
           i.fas.fa-search
-        = link_to download_document_path(document), method: :patch, class: "btn" do
+        = button_to download_document_path(document), method: :patch, data: { turbo: false }, class: "btn" do
           i.fas.fa-file-download
         - if params[:controller] == "documents" && params[:action] == "index"
           - if document.active?
-            = link_to new_shared_document_path(document), class: "btn", data: { toggle: "modal", target: "#addDocumentToSharedDocument" }, remote: true do
+            = link_to new_shared_document_path(document), data: { turbo_stream: true }, class: "btn" do
               i.fas.fa-paper-plane
-          = link_to add_to_shared_list_or_folder_document_path(document), class: "btn", data: { toggle: "modal", target: "#addDocumentToSharedListOrFolder" }, remote: true do
+          = link_to add_to_shared_list_or_folder_document_path(document), data: { turbo_stream: true }, class: "btn" do
             i.fas.fa-plus
 
   - if document.archived?

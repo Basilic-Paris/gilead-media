@@ -1,4 +1,4 @@
-<%= simple_form_for [document, shared_list], url: attach_to_new_shared_list_document_path(document), data: { controller: "flatpickr" }, html: { id: "add_document_to_new_shared_list", class: "label-input-in-line-equal-space" }, remote: true do |f| %>
+<%= simple_form_for [document, shared_list], url: attach_to_new_shared_list_document_path(document), data: { controller: "flatpickr" }, html: { id: "add_document_to_new_shared_list", class: "label-input-in-line-equal-space" } do |f| %>
   <% if document.active? %>
     <% if shared_list.errors.messages[:code].present? %>
       <p class="alert-warning p-3">

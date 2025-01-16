@@ -1,4 +1,4 @@
-= simple_form_for shared_list, url: add_contacts_shared_list_path(shared_list), html: { class: "label-input-in-line", data: { controller: "autogrow-text-area" } }, remote: true do |f|
+= simple_form_for shared_list, url: add_contacts_shared_list_path(shared_list), html: { class: "label-input-in-line", data: { controller: "autogrow-text-area" } } do |f|
   .pb-5
     = f.input :title, label: "Nom de la liste", required: false, disabled: true
     = f.association :contacts do |c|
@@ -11,6 +11,4 @@
         = custom_mail.input :body, input_html: { value: "#{shared_list.custom_mail.body.blank? && shared_list.errors.messages[:"custom_mail.body"].blank? ? shared_list.custom_mail.body_default_value : shared_list.custom_mail.body}", data: {target: "autogrow-text-area.area"} }
         = custom_mail.input :signature, input_html: { value: "#{shared_list.custom_mail.signature.blank? && shared_list.errors.messages[:"custom_mail.signature"].blank? ? shared_list.custom_mail.signature_default_value : shared_list.custom_mail.signature}", data: {target: "autogrow-text-area.area"} }
     - if shared_list.initial?
-      .text-right = f.button :submit, "Envoyer", class: "btn", data: {confirm: "<p class='text-center mt-n-3'>Vous êtes sur le point d'envoyer votre liste de partage.<br>Souhaitez-vous confirmer?</p>".html_safe}
-
-      //.text-right = f.submit "Envoyer", class: "btn", data: {confirm: "Vous êtes sur le point d'envoyer votre liste de partage.\nSouhaitez-vous confirmer?", verify: 'Valider', verify_text: 'Tapez "Valider" pour confirmer'}
+      .text-right = f.button :submit, "Envoyer", class: "btn", data: {turbo_confirm: "<p class='text-center mt-n-3'>Vous êtes sur le point d'envoyer votre liste de partage.<br>Souhaitez-vous confirmer?</p>".html_safe}

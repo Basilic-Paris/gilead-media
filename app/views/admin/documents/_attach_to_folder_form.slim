@@ -1,4 +1,4 @@
-= simple_form_for [:admin, document], url: attach_to_folder_admin_document_path(document), method: :post, html: { id: "add_document_to_folder" }, remote: true do |f|
+= simple_form_for [:admin, document], url: attach_to_folder_admin_document_path(document), method: :post, html: { id: "add_document_to_folder" } do |f|
   = f.association :folders, as: :check_boxes, legend_tag: false
   //= f.association :folders, as: :check_boxes, legend_tag: false, input_html: { class: "tag-selector" }, item_wrapper_class: 'tag-item'
   .mb-3.mt-n3 data-controller="toggle" style="color: #495057; cursor: pointer;"

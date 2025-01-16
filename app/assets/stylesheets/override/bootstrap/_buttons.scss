@@ -1,3 +1,17 @@
 .btn:focus, .btn.focus {
   box-shadow: none;
 }
+
+button {
+  i.fas.fa-check {
+    background-color: transparent;
+    padding: 0;
+    color: white;
+  }
+}
+
+button:hover {
+  i.fas.fa-check {
+    color: #C73442;
+  }
+}

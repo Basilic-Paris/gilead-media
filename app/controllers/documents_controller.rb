@@ -6,7 +6,7 @@ class DocumentsController < ApplicationController
 
   skip_before_action :authenticate_user!, only: :download
   before_action :find_document, only: %i[show add_to_shared_list_or_folder attach_to_new_shared_list attach_to_existing_shared_list download]
-  before_action :disable_turbolinks_cache, only: %i[index]
+  before_action :disable_turbo_cache, only: %i[index]
 
   def show
     @shared_document = SharedDocument.new
@@ -53,12 +53,18 @@ class DocumentsController < ApplicationController
     @shared_list.code = SecureRandom.alphanumeric(16)
     @document_shared_list = @shared_list.document_shared_lists.new(document: @document)
     if @shared_list.save
+      @message = "Votre liste de partage a bien été créée et votre document a bien été ajouté à celle-ci."
       respond_to do |format|
-        format.html { redirect_to document_path(@document), flash: { validation_message: true, message: "Votre liste de partage a bien été créée et votre document a bien été ajouté à celle-ci." } }
-        format.js { @message = "Votre liste de partage a bien été créée et votre document a bien été ajouté à celle-ci." }
+        format.html { redirect_to document_path(@document), flash: { validation_message: true, message: @message } }
+        format.turbo_stream
       end
     else
-      render :add_to_shared_list_or_folder
+      respond_to do |format|
+        format.html { render :add_to_shared_list_or_folder }
+        format.turbo_stream { render turbo_stream: [
+          turbo_stream.replace("add_document_to_new_shared_list", partial: "documents/attach_to_new_shared_list_form", locals: { document: @document, shared_list: @shared_list })
+        ]}
+      end
     end
   end
 
@@ -66,12 +72,18 @@ class DocumentsController < ApplicationController
     @shared_list = current_user.shared_lists.initial.first
     @document_shared_list = @document.document_shared_lists.new(document_shared_list_params)
     if @document_shared_list.save
+      @message = "Votre document a bien été ajouté à la liste de partage."
       respond_to do |format|
-        format.html { redirect_to document_path(@document), flash: { validation_message: true, message: "Votre document a bien été ajouté à la liste de partage." } }
-        format.js { @message = "Votre document a bien été ajouté à la liste de partage." }
+        format.html { redirect_to document_path(@document), flash: { validation_message: true, message: @message } }
+        format.turbo_stream
       end
     else
-      render :add_to_shared_list_or_folder
+      respond_to do |format|
+        format.html { render :add_to_shared_list_or_folder }
+        format.turbo_stream { render turbo_stream: [
+          turbo_stream.replace("add_document_to_existing_shared_list", partial: "documents/attach_to_existing_shared_list_form", locals: { document: @document, document_shared_list: @document_shared_list })
+        ]}
+      end
     end
   end
 

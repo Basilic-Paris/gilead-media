@@ -1,11 +1,11 @@
-<%= simple_form_for user, url: admin_users_path, method: :post, html: { class: "table-users-inputs" }, remote: true do |f| %>
+<%= simple_form_for user, url: admin_users_path, method: :post, html: { class: "table-users-inputs" } do |f| %>
   <%= f.input :first_name, label: false, wrapper_html: { class: "table-users-new-line" } %>
   <%= f.input :last_name, label: false %>
   <%= f.input :email, label: false %>
   <%= f.input :password, label: false %>
   <!-- Replace <%#= f.submit %> to allow using font-awesome icon -->
   <!-- <button type="submit" class="btn" data-confirm = "<p class='text-center mt-n-3'>Vous êtes sur le point de créer un nouvel utilisateur.<br>Souhaitez-vous confirmer?</p>".html_safe><i class="fas fa-check"></i></button> -->
-  <%= button_tag :submit, class: "btn", 'data-confirm': "<p class='text-center mt-n-3'>Vous êtes sur le point de créer un nouvel utilisateur.<br>Souhaitez-vous confirmer?</p>".html_safe do %>
+  <%= button_tag :submit, class: "btn", data: {'turbo-confirm': "<p class='text-center mt-n-3'>Vous êtes sur le point de créer un nouvel utilisateur.<br>Souhaitez-vous confirmer?</p>".html_safe } do %>
     <i class='fas fa-check'></i>
   <% end %>
 <% end %>
