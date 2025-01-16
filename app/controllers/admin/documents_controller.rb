@@ -1,5 +1,6 @@
 class Admin::DocumentsController < ApplicationController
   before_action :find_document, only: %i[edit update destroy attach_to_folder unactive active archive]
+  before_action :disable_turbo_cache, only: %i[create update destroy]
 
   def unactive
     if @document.unactive!
@@ -91,9 +92,10 @@ class Admin::DocumentsController < ApplicationController
     @shared_list = SharedList.new
     @document_shared_list = DocumentSharedList.new
     if @document.update(folder_params)
+      @message = "Votre document a bien été ajouté au(x) dossier(s)."
       respond_to do |format|
-        format.html { redirect_to document_path(@document), flash: { validation_message: true, message: "Votre document a bien été ajouté au(x) dossier(s)." } }
-        format.turbo_stream { @message = "Votre document a bien été ajouté au(x) dossier(s)." }
+        format.html { redirect_to document_path(@document), flash: { validation_message: true, message: @message } }
+        format.turbo_stream
       end
     else
       respond_to do |format|

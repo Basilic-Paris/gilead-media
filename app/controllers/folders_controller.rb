@@ -6,6 +6,7 @@ class FoldersController < ApplicationController
   before_action :find_folder, only: %i[show download add_to_shared_list attach_to_new_shared_list attach_to_existing_shared_list]
   before_action :find_shared_list, only: %i[show download]
   before_action :find_documents, only: %i[show download]
+  before_action :disable_turbo_cache, only: %i[index show]
 
   def index
     @folders = policy_scope(Folder)
@@ -32,8 +33,8 @@ class FoldersController < ApplicationController
     @shared_list.code = SecureRandom.alphanumeric(16)
     @folder_shared_list = @shared_list.folder_shared_lists.new(folder: @folder)
     if @shared_list.save
+      @message = "Votre liste de partage a bien été créée et votre dossier a bien été ajouté à celle-ci."
       respond_to do |format|
-        @message = "Votre liste de partage a bien été créée et votre dossier a bien été ajouté à celle-ci."
         format.html { redirect_to folders_path, flash: { validation_message: true, message: @message } }
         format.turbo_stream
       end
@@ -51,8 +52,8 @@ class FoldersController < ApplicationController
     @shared_list = current_user.shared_lists.initial.first
     @folder_shared_list = @folder.folder_shared_lists.new(folder_shared_list_params)
     if @folder_shared_list.save
+      @message = "Votre dossier a bien été ajouté à la liste de partage."
       respond_to do |format|
-        @message = "Votre dossier a bien été ajouté à la liste de partage."
         format.html { redirect_to folders_path, flash: { validation_message: true, message: @message } }
         format.turbo_stream
       end

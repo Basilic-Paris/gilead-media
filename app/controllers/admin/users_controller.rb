@@ -1,4 +1,6 @@
 class Admin::UsersController < ApplicationController
+  before_action :disable_turbo_cache, only: %i[index create destroy]
+
   def index
     @users = policy_scope([:admin, User])
     @user = User.new

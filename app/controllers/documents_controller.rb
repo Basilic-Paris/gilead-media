@@ -6,6 +6,7 @@ class DocumentsController < ApplicationController
 
   skip_before_action :authenticate_user!, only: :download
   before_action :find_document, only: %i[show add_to_shared_list_or_folder attach_to_new_shared_list attach_to_existing_shared_list download]
+  before_action :disable_turbo_cache, only: %i[index]
 
   def show
     @shared_document = SharedDocument.new
@@ -71,8 +72,8 @@ class DocumentsController < ApplicationController
     @shared_list = current_user.shared_lists.initial.first
     @document_shared_list = @document.document_shared_lists.new(document_shared_list_params)
     if @document_shared_list.save
+      @message = "Votre document a bien été ajouté à la liste de partage."
       respond_to do |format|
-        @message = "Votre document a bien été ajouté à la liste de partage."
         format.html { redirect_to document_path(@document), flash: { validation_message: true, message: @message } }
         format.turbo_stream
       end
