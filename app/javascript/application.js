@@ -4,7 +4,8 @@ import "controllers"
 import "@popperjs/core"
 import "jquery"
 import "bootstrap"
-import "./plugins/jquery"
+// import "./plugins/jquery"
+window.$ = window.jQuery
 
 // document.addEventListener('turbo:load', () => {
 //   // Call your functions here, e.g:
