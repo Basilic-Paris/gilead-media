@@ -16,7 +16,7 @@
       - if @shared_list.persisted?
         = link_to shared_list_folder_path(@shared_list, folder), class: "btn" do
           i.fas.fa-search
-        = link_to download_shared_list_folder_path(@shared_list, folder), method: :patch, class: "btn" do
+        = button_to download_shared_list_folder_path(@shared_list, folder), method: :patch, data: { turbo: false }, class: "btn" do
           i.fas.fa-file-download
       - else
         = link_to folder_path(folder), class: "btn" do
